@@ -1,0 +1,326 @@
+/* =============================================
+   HUBLE — Main Stylesheet
+   Variables, Reset, Typography, Base Layout
+   ============================================= */
+
+:root {
+  /* Colors — primary green #A2DBB6 */
+  --mint: #A2DBB6;
+  --mint-light: #C8ECDA;
+  --mint-lighter: #E5F5EC;
+  --mint-dark: #7BC99A;
+  --mint-darker: #5AB87E;
+  --mint-glow: rgba(162, 219, 182, 0.25);
+  --mint-glow-strong: rgba(162, 219, 182, 0.45);
+  --black: #1A1A1A;
+  --dark: #2D2D2D;
+  --gray: #6B7280;
+  --gray-light: #F3F4F6;
+  --gray-border: rgba(255, 255, 255, 0.2);
+  --white: #FFFFFF;
+  --white-off: #FAFFFE;
+  --danger: #E74C3C;
+
+  /* Glass */
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-bg-strong: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  --glass-blur: blur(16px);
+
+  /* Typography */
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Spacing */
+  --section-padding: clamp(3rem, 6vw, 5rem);
+  --container-width: 1200px;
+  --container-padding: clamp(1.25rem, 4vw, 2rem);
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Border radius */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scrollbar-width: none; /* Firefox */
+}
+
+::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Edge */
+}
+
+/* Custom scrollbar */
+.custom-scrollbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 100vh;
+  z-index: 9999;
+  pointer-events: auto;
+}
+
+.custom-scrollbar-thumb {
+  position: absolute;
+  right: 4px;
+  width: 8px;
+  border-radius: var(--radius-full);
+  background: rgba(122, 201, 154, 0.5);
+  transition: width 0.2s ease, background 0.2s ease, right 0.2s ease;
+  cursor: grab;
+  min-height: 40px;
+}
+
+.custom-scrollbar-thumb:active {
+  cursor: grabbing;
+}
+
+.custom-scrollbar.scrolling .custom-scrollbar-thumb {
+  width: 10px;
+  right: 3px;
+  background: rgba(90, 184, 126, 0.7);
+}
+
+.custom-scrollbar:hover .custom-scrollbar-thumb,
+.custom-scrollbar.dragging .custom-scrollbar-thumb {
+  width: 12px;
+  right: 3px;
+  background: rgba(90, 184, 126, 0.85);
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--black);
+  background-color: var(--white);
+  overflow-x: hidden;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--black);
+}
+
+h1 {
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  letter-spacing: -0.03em;
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: -0.02em;
+}
+
+h3 {
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
+  font-weight: 600;
+}
+
+p {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--gray);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color var(--transition-fast);
+}
+
+ul, ol {
+  list-style: none;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-size: inherit;
+}
+
+input, textarea, select {
+  font-family: var(--font-body);
+  font-size: 1rem;
+}
+
+/* Layout */
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.section {
+  padding: var(--section-padding) 0;
+  position: relative;
+}
+
+/* Glass card utility */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-strong {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.9rem 2.2rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all var(--transition-base);
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--mint) 0%, var(--mint-dark) 100%);
+  color: var(--black);
+  box-shadow: 0 4px 15px var(--mint-glow);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px var(--mint-glow-strong);
+}
+
+.btn-secondary {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  color: var(--black);
+  border: 1.5px solid rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary:hover {
+  background: var(--black);
+  color: var(--white);
+  border-color: var(--black);
+  transform: translateY(-3px);
+}
+
+/* Section titles */
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--mint-darker);
+  margin-bottom: 1rem;
+}
+
+.section-label::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: var(--mint);
+  border-radius: 50%;
+}
+
+.section-title {
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  color: var(--gray);
+  font-size: 1.1rem;
+  max-width: 550px;
+  margin-bottom: 3.5rem;
+  line-height: 1.7;
+}
+
+.section-subtitle.centered {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.section-header .section-label {
+  justify-content: center;
+}
+
+/* Utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+::selection {
+  background-color: var(--mint);
+  color: var(--black);
+}
+
+/* Gradient backgrounds */
+.bg-gradient-1 {
+  background: linear-gradient(135deg, var(--mint-lighter) 0%, var(--white) 50%, rgba(162, 219, 182, 0.05) 100%);
+}
+
+.bg-gradient-2 {
+  background: linear-gradient(180deg, var(--white) 0%, var(--mint-lighter) 50%, var(--white) 100%);
+}

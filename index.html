@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Huble | Agence web française — Création de sites, Réseaux sociaux & IA</title>
+  <meta name="description" content="Huble est une agence web française spécialisée en création de sites, identité réseaux sociaux et automatisations IA. On simplifie. Vous brillez.">
+  <meta property="og:title" content="Huble | Agence web française">
+  <meta property="og:description" content="Création de sites web, identité réseaux sociaux et automatisations intelligentes.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <link rel="icon" href="assets/images/huble.png" type="image/png">
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- GSAP -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+  <!-- Custom Scrollbar -->
+  <div class="custom-scrollbar" id="customScrollbar">
+    <div class="custom-scrollbar-thumb" id="customScrollbarThumb"></div>
+  </div>
+
+  <!-- ======== NAVIGATION ======== -->
+  <nav class="nav" role="navigation" aria-label="Navigation principale">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo" aria-label="Huble - Accueil">
+        <img src="assets/images/huble.png" alt="Huble" height="44">
+      </a>
+
+      <div class="nav-links">
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#process" class="nav-link">Notre approche</a>
+        <a href="#about" class="nav-link">À propos</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+        <a href="#contact" class="nav-link nav-cta btn btn-primary">Nous contacter</a>
+      </div>
+
+      <button class="nav-hamburger" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Mobile overlay -->
+    <div class="nav-mobile" aria-hidden="true">
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#process" class="nav-link">Notre approche</a>
+      <a href="#about" class="nav-link">À propos</a>
+      <a href="#faq" class="nav-link">FAQ</a>
+      <a href="#contact" class="nav-link nav-cta btn btn-primary">Nous contacter</a>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ======== HERO ======== -->
+    <section id="hero" class="hero">
+      <!-- Background blobs -->
+      <div class="hero-bg" aria-hidden="true">
+        <div class="hero-blob hero-blob-1"></div>
+        <div class="hero-blob hero-blob-2"></div>
+        <div class="hero-blob hero-blob-3"></div>
+      </div>
+
+      <!-- Floating glass shapes -->
+      <div class="hero-glass-shape hero-glass-1" aria-hidden="true"></div>
+      <div class="hero-glass-shape hero-glass-2" aria-hidden="true"></div>
+      <div class="hero-glass-shape hero-glass-3" aria-hidden="true"></div>
+      <div class="hero-glass-shape hero-glass-4" aria-hidden="true"></div>
+      <div class="hero-glass-shape hero-glass-5" aria-hidden="true"></div>
+
+      <div class="hero-content">
+        <h1 class="hero-title">On simplifie. Vous brillez.</h1>
+        <p class="hero-subtitle">Agence web française spécialisée en création digitale, identité sur les réseaux sociaux et automatisations intelligentes.</p>
+        <div class="hero-ctas">
+          <a href="#services" class="btn btn-primary">Découvrir nos services</a>
+          <a href="#contact" class="btn btn-secondary">Nous contacter</a>
+        </div>
+      </div>
+
+      <div class="hero-scroll-indicator" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="7 13 12 18 17 13"></polyline>
+          <polyline points="7 6 12 11 17 6"></polyline>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ======== SERVICES ======== -->
+    <section id="services" class="section services">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">Ce qu'on fait</span>
+          <h2 class="section-title">Nos services</h2>
+          <p class="section-subtitle centered">Des solutions digitales complètes pour propulser votre entreprise vers le succès.</p>
+        </div>
+
+        <div class="services-grid">
+          <!-- Service 1 -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24">
+                <rect x="2" y="3" width="20" height="14" rx="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+                <polyline points="7 8 10 11 7 14"></polyline>
+                <line x1="13" y1="14" x2="17" y2="14"></line>
+              </svg>
+            </div>
+            <h3>Création & amélioration de sites web</h3>
+            <p>Sites vitrines, e-commerce ou sur-mesure. On crée des expériences web performantes, esthétiques et pensées pour convertir vos visiteurs en clients.</p>
+            <ul class="service-features">
+              <li>Design responsive sur tous les écrans</li>
+              <li>SEO optimisé pour Google</li>
+              <li>Performance et temps de chargement rapide</li>
+            </ul>
+          </div>
+
+          <!-- Service 2 -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24">
+                <circle cx="18" cy="5" r="3"></circle>
+                <circle cx="6" cy="12" r="3"></circle>
+                <circle cx="18" cy="19" r="3"></circle>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+              </svg>
+            </div>
+            <h3>Identité réseaux sociaux</h3>
+            <p>On construit votre présence en ligne de A à Z : charte visuelle, stratégie de contenu et templates prêts à publier pour marquer les esprits.</p>
+            <ul class="service-features">
+              <li>Charte graphique complète</li>
+              <li>Templates personnalisés et réutilisables</li>
+              <li>Stratégie éditoriale et calendrier</li>
+            </ul>
+          </div>
+
+          <!-- Service 3 -->
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+              </svg>
+            </div>
+            <h3>Automatisations & IA</h3>
+            <p>On audite vos processus pour identifier les tâches répétitives et mettre en place des automatisations intelligentes. Plus de productivité, moins de friction.</p>
+            <ul class="service-features">
+              <li>Audit complet de vos processus</li>
+              <li>Chatbots & assistants IA sur-mesure</li>
+              <li>Workflows automatisés et intégrations</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== PROCESS ======== -->
+    <section id="process" class="section process">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">Comment on travaille</span>
+          <h2 class="section-title">Notre approche</h2>
+          <p class="section-subtitle centered">Un processus simple et transparent, du premier échange à la livraison.</p>
+        </div>
+
+        <div class="process-steps">
+          <div class="process-step">
+            <div class="process-number">1</div>
+            <h4>Découverte</h4>
+            <p>On échange pour comprendre votre entreprise, vos objectifs et vos besoins spécifiques.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-number">2</div>
+            <h4>Proposition</h4>
+            <p>On vous présente une solution personnalisée avec un devis clair et détaillé.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-number">3</div>
+            <h4>Création</h4>
+            <p>On conçoit et développe votre projet en vous tenant informé à chaque étape.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-number">4</div>
+            <h4>Livraison</h4>
+            <p>On livre, on forme, et on reste disponible pour le suivi et les ajustements.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== À PROPOS ======== -->
+    <section id="about" class="section about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-text">
+            <span class="section-label">Qui sommes-nous</span>
+            <h2 class="section-title">Une équipe passionnée par le digital</h2>
+            <p><strong>Huble</strong>, c'est une équipe de passionnés du digital basée en France. On croit que la technologie doit <strong>simplifier la vie</strong>, pas la compliquer.</p>
+            <p>Notre approche : écouter, comprendre, puis construire des solutions qui font vraiment la différence. <strong>Pas de jargon, pas de superflu</strong> — juste des résultats concrets et mesurables pour votre entreprise.</p>
+            <p>Que vous soyez une startup ambitieuse, un freelance créatif ou une PME en pleine croissance, on s'adapte à votre réalité pour créer des outils qui vous correspondent.</p>
+
+            <div class="about-values">
+              <div class="value-item">
+                <div class="value-icon">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
+                    <line x1="16" y1="8" x2="2" y2="22"></line>
+                    <line x1="17.5" y1="15" x2="9" y2="15"></line>
+                  </svg>
+                </div>
+                <h4>Simplicité</h4>
+                <p>Des solutions claires, sans complexité inutile</p>
+              </div>
+              <div class="value-item">
+                <div class="value-icon">
+                  <svg viewBox="0 0 24 24">
+                    <line x1="9" y1="18" x2="15" y2="18"></line>
+                    <line x1="10" y1="22" x2="14" y2="22"></line>
+                    <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"></path>
+                  </svg>
+                </div>
+                <h4>Innovation</h4>
+                <p>Les dernières technologies au service de vos projets</p>
+              </div>
+              <div class="value-item">
+                <div class="value-icon">
+                  <svg viewBox="0 0 24 24">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                  </svg>
+                </div>
+                <h4>Résultats</h4>
+                <p>Des solutions qui impactent votre business</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-visual" aria-hidden="true">
+            <div class="about-blob"></div>
+            <div class="about-orbit" id="aboutOrbit">
+              <div class="orbit-ring"></div>
+              <div class="orbit-card" data-angle="0">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                </svg>
+                <span>+150% croissance</span>
+              </div>
+              <div class="orbit-card" data-angle="90">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+                <span>Clients satisfaits</span>
+              </div>
+              <div class="orbit-card" data-angle="180">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+                </svg>
+                <span>Rapide & fiable</span>
+              </div>
+              <div class="orbit-card" data-angle="270">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="8" rx="2"></rect>
+                  <rect x="2" y="14" width="20" height="8" rx="2"></rect>
+                  <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                  <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                </svg>
+                <span>Livraison express</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== PORTFOLIO (hidden) ======== -->
+    <section id="portfolio" class="section portfolio" data-active="false" style="display: none;">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">Nos réalisations</span>
+          <h2 class="section-title">Portfolio</h2>
+          <p class="section-subtitle centered">Découvrez quelques-uns de nos projets récents.</p>
+        </div>
+        <div class="portfolio-grid"></div>
+      </div>
+    </section>
+
+    <!-- ======== FAQ ======== -->
+    <section id="faq" class="section faq">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">FAQ</span>
+          <h2 class="section-title">Questions fréquentes</h2>
+          <p class="section-subtitle centered">Tout ce que vous devez savoir avant de travailler avec nous.</p>
+        </div>
+
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              Quels types de sites web créez-vous ?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer" role="region">
+              <p>Sites vitrines, landing pages, e-commerce, applications web… On s'adapte à votre besoin, qu'il soit simple ou complexe. Chaque site est pensé sur-mesure pour refléter votre identité et atteindre vos objectifs.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              Combien coûte un projet avec Huble ?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer" role="region">
+              <p>Chaque projet est unique. On propose un devis gratuit et personnalisé après un premier échange pour bien comprendre vos objectifs. Pas de surprise, tout est transparent dès le départ.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              Quels sont vos délais de réalisation ?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer" role="region">
+              <p>En général, entre 2 et 6 semaines selon la complexité du projet. On vous tient informé à chaque étape et on s'assure de respecter les deadlines fixées ensemble.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              C'est quoi exactement vos automatisations ?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer" role="region">
+              <p>On analyse vos processus quotidiens pour repérer les tâches répétitives, puis on met en place des outils (IA, workflows, intégrations) qui les font à votre place. Résultat : vous gagnez du temps et vous vous concentrez sur ce qui compte vraiment.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              Comment se passe la collaboration ?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer" role="region">
+              <p>Tout commence par un appel découverte gratuit. Ensuite : brief, proposition, création, retours, livraison. Simple et transparent. On reste disponible à chaque étape pour s'assurer que tout vous convient.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              Vous travaillez avec des entreprises de quelle taille ?
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer" role="region">
+              <p>TPE, PME, freelances, startups… On accompagne toute structure qui veut se digitaliser intelligemment. Que vous soyez seul ou une équipe de 50, on adapte nos solutions à votre réalité.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== CONTACT ======== -->
+    <section id="contact" class="section contact">
+      <div class="container">
+        <div class="contact-grid">
+          <div class="contact-info">
+            <span class="section-label">Contact</span>
+            <h2 class="section-title">Parlons de votre projet</h2>
+            <p>Un café virtuel ? On est là pour discuter de vos idées et trouver la solution qui vous correspond.</p>
+
+            <div class="contact-details">
+              <a href="mailto:contacthuble@gmail.com" class="contact-detail">
+                <span class="contact-detail-icon">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                  </svg>
+                </span>
+                contacthuble@gmail.com
+              </a>
+            </div>
+          </div>
+
+          <form id="contact-form" class="contact-form" action="https://formspree.io/f/xpwdjqkl" method="POST">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contact-name">Nom complet</label>
+                <input type="text" id="contact-name" name="name" required placeholder="Votre nom">
+                <span class="error-msg">Ce champ est requis.</span>
+              </div>
+              <div class="form-group">
+                <label for="contact-company">Entreprise <span class="optional">(facultatif)</span></label>
+                <input type="text" id="contact-company" name="company" placeholder="Nom de votre entreprise">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contact-email">Email</label>
+                <input type="email" id="contact-email" name="email" required placeholder="votre@email.com">
+                <span class="error-msg">Veuillez entrer une adresse email valide.</span>
+              </div>
+              <div class="form-group">
+                <label for="contact-phone">Téléphone <span class="optional">(facultatif)</span></label>
+                <input type="tel" id="contact-phone" name="phone" placeholder="06 12 34 56 78">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Service concerné</label>
+              <input type="hidden" id="contact-service" name="service" required>
+              <div class="custom-select" id="customSelect">
+                <div class="custom-select-trigger" tabindex="0" role="combobox" aria-expanded="false" aria-haspopup="listbox">
+                  <span class="custom-select-value">Choisissez un service</span>
+                  <svg class="custom-select-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="custom-select-options" role="listbox">
+                  <div class="custom-select-option" data-value="site-web" role="option">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                    Création / amélioration de site web
+                  </div>
+                  <div class="custom-select-option" data-value="reseaux-sociaux" role="option">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                    Identité réseaux sociaux
+                  </div>
+                  <div class="custom-select-option" data-value="automatisations-ia" role="option">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+                    Automatisations & IA
+                  </div>
+                  <div class="custom-select-option" data-value="plusieurs" role="option">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect></svg>
+                    Plusieurs services
+                  </div>
+                  <div class="custom-select-option" data-value="autre" role="option">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    Autre / Je ne sais pas encore
+                  </div>
+                </div>
+              </div>
+              <span class="error-msg">Veuillez sélectionner un service.</span>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-message">Message</label>
+              <textarea id="contact-message" name="message" required placeholder="Décrivez votre projet en quelques mots..."></textarea>
+              <span class="error-msg">Votre message doit contenir au moins 10 caractères.</span>
+            </div>
+
+            <button type="submit" class="btn btn-primary form-submit">Envoyer le message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======== FOOTER ======== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#hero" class="footer-logo" aria-label="Huble - Accueil">
+            <img src="assets/images/logo-huble.svg" alt="Huble" width="130" height="44">
+          </a>
+          <p>Agence web française spécialisée en création digitale, identité sociale et automatisations intelligentes.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <div class="footer-col-links">
+            <a href="#services" class="footer-link">Services</a>
+            <a href="#process" class="footer-link">Notre approche</a>
+            <a href="#about" class="footer-link">À propos</a>
+            <a href="#faq" class="footer-link">FAQ</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <div class="footer-col-links">
+            <a href="mailto:contacthuble@gmail.com" class="footer-link">contacthuble@gmail.com</a>
+            <a href="#contact" class="footer-link">Formulaire de contact</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Huble. Tous droits réservés.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main JS -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
