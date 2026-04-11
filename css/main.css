@@ -187,6 +187,10 @@ input, textarea, select {
 .section {
   padding: var(--section-padding) 0;
   position: relative;
+  min-height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /* Glass card utility */
