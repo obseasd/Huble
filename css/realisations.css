@@ -40,6 +40,11 @@
   font-size: clamp(2.2rem, 5vw, 3.5rem);
 }
 
+/* Center label and back link */
+.page-hero .section-label {
+  justify-content: center;
+}
+
 /* Back link */
 .back-link {
   display: inline-flex;
