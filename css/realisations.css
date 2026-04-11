@@ -40,13 +40,16 @@
   font-size: clamp(2.2rem, 5vw, 3.5rem);
 }
 
-/* Center label and back link */
+/* Center label */
 .page-hero .section-label {
   justify-content: center;
 }
 
-/* Back link */
+/* Back link — top left corner */
 .back-link {
+  position: absolute;
+  top: calc(60px + 1.5rem);
+  left: var(--container-padding);
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -54,8 +57,8 @@
   font-weight: 500;
   font-size: 0.9rem;
   color: var(--gray);
-  margin-bottom: 1.5rem;
   transition: color var(--transition-fast);
+  z-index: 2;
 }
 
 .back-link:hover {
