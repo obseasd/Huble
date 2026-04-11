@@ -10,7 +10,10 @@
   width: 100%;
   z-index: 1000;
   padding: 1rem 0;
-  transition: all var(--transition-base);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  box-shadow: 0 0 0 transparent;
+  transition: padding 0.3s ease, background 0.3s ease, border-bottom 0.3s ease, box-shadow 0.3s ease;
 }
 
 .nav.nav-scrolled {
