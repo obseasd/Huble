@@ -231,16 +231,25 @@
   margin-top: 0.25rem;
 }
 
+/* Footer mobile — compact horizontal layout */
+.footer {
+  padding: 1.5rem 0 1rem;
+}
+
 .footer-top {
   grid-template-columns: 1fr;
   gap: 1.25rem;
   text-align: center;
 }
 
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .footer-brand p {
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 0.78rem;
+  display: none;
 }
 
 .footer-logo {
@@ -248,29 +257,44 @@
   justify-content: center;
 }
 
-.footer-col-links {
-  align-items: center;
+.footer-logo img {
+  height: 28px;
 }
 
+/* Hide column titles on mobile */
 .footer-col h4 {
-  font-size: 0.82rem;
-  margin-bottom: 0.5rem;
+  display: none;
+}
+
+/* Navigation links as horizontal pills */
+.footer-col-links {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
 }
 
 .footer-link {
-  font-size: 0.78rem;
+  font-size: 0.75rem;
+  padding: 0.3rem 0.7rem;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: var(--radius-full);
+  color: var(--dark);
 }
 
-.footer {
-  padding: 1.75rem 0 1rem;
+.footer-link:hover {
+  background: rgba(0, 0, 0, 0.12);
+  transform: none;
 }
 
 .footer-bottom {
   padding-top: 0.75rem;
+  margin-top: 1rem;
 }
 
 .footer-bottom p {
-  font-size: 0.72rem;
+  font-size: 0.7rem;
 }
 
 /* Tablet (>= 768px) */
