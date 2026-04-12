@@ -114,7 +114,7 @@
 
   .about-visual {
     height: 280px;
-    order: -1;
+    order: 1;
   }
 
   .about-orbit {
