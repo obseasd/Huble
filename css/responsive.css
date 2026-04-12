@@ -24,6 +24,85 @@
 .hero-glass-4 { width: 60px; height: 60px; }
 .hero-glass-3, .hero-glass-5 { display: none; }
 
+/* Mobile: disable min-height on sections — let content dictate height */
+.section {
+  min-height: auto;
+}
+
+/* Mobile: 20% smaller text and spacing after hero */
+.section .section-title {
+  font-size: clamp(1.5rem, 4vw, 2.4rem);
+}
+
+.section .section-subtitle {
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+.section-header {
+  margin-bottom: 1.5rem;
+}
+
+.section-label {
+  font-size: 0.72rem;
+}
+
+.section {
+  padding: clamp(2.5rem, 5vw, 4rem) 0;
+}
+
+.service-card {
+  padding: 1.75rem 1.5rem;
+}
+
+.service-card h3 {
+  font-size: 1.05rem;
+  min-height: auto;
+}
+
+.service-card p {
+  font-size: 0.82rem;
+}
+
+.service-features li {
+  font-size: 0.78rem;
+}
+
+.process-step {
+  padding: 1.25rem 1rem;
+}
+
+.process-step h4 {
+  font-size: 0.88rem;
+}
+
+.process-step p {
+  font-size: 0.75rem;
+}
+
+.about-text p {
+  font-size: 0.88rem;
+  text-align: center;
+}
+
+.value-item h4 {
+  font-size: 0.82rem;
+}
+
+.value-item p {
+  font-size: 0.7rem;
+}
+
+.faq-question {
+  font-size: 0.88rem;
+  padding: 1rem 1.25rem;
+}
+
+.faq-answer p {
+  font-size: 0.82rem;
+  padding: 0 1.25rem 1rem;
+}
+
 .services-grid {
   grid-template-columns: 1fr;
   gap: 1.25rem;
@@ -31,27 +110,37 @@
 
 .about-grid {
   grid-template-columns: 1fr;
-  gap: 2.5rem;
+  gap: 2rem;
 }
 
 .about-visual {
-  height: 320px;
+  height: 280px;
   order: -1;
 }
 
 .about-orbit {
-  width: 300px;
-  height: 300px;
+  width: 260px;
+  height: 260px;
 }
 
 .orbit-card {
-  width: 100px;
-  height: 85px;
+  width: 90px;
+  height: 75px;
+  padding: 0.5rem;
+}
+
+.orbit-card svg {
+  width: 18px;
+  height: 18px;
+}
+
+.orbit-card span {
+  font-size: 0.6rem;
 }
 
 .orbit-ring {
-  width: 250px;
-  height: 250px;
+  width: 220px;
+  height: 220px;
 }
 
 .about-text .section-title {
@@ -62,27 +151,28 @@
   justify-content: center;
 }
 
-.about-text p {
-  text-align: center;
-}
-
 .about-values {
   grid-template-columns: 1fr;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .process-steps {
   grid-template-columns: 1fr;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
+/* Contact — compact mobile layout */
 .contact-grid {
   grid-template-columns: 1fr;
-  gap: 2.5rem;
+  gap: 1.25rem;
 }
 
 .contact-info {
   text-align: center;
+}
+
+.contact-info .section-title {
+  font-size: 1.4rem;
 }
 
 .contact-info .section-title,
@@ -91,27 +181,66 @@
   justify-content: center;
 }
 
+.contact-info > p {
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
 .contact-details {
   align-items: center;
 }
 
 .contact-form {
-  padding: 1.75rem;
+  padding: 1.25rem;
 }
 
+/* Keep form rows side-by-side on mobile */
 .form-row {
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.form-group {
+  margin-bottom: 0.75rem;
+}
+
+.form-group label {
+  font-size: 0.78rem;
+  margin-bottom: 0.25rem;
+}
+
+.form-group .optional {
+  font-size: 0.68rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select,
+.custom-select-trigger {
+  padding: 0.6rem 0.75rem;
+  font-size: 0.82rem;
+}
+
+.form-group textarea {
+  min-height: 70px;
+}
+
+.form-submit {
+  padding: 0.75rem;
+  font-size: 0.88rem;
+  margin-top: 0.25rem;
 }
 
 .footer-top {
   grid-template-columns: 1fr;
-  gap: 2rem;
+  gap: 1.25rem;
   text-align: center;
 }
 
 .footer-brand p {
   margin-left: auto;
   margin-right: auto;
+  font-size: 0.78rem;
 }
 
 .footer-logo {
@@ -121,6 +250,27 @@
 
 .footer-col-links {
   align-items: center;
+}
+
+.footer-col h4 {
+  font-size: 0.82rem;
+  margin-bottom: 0.5rem;
+}
+
+.footer-link {
+  font-size: 0.78rem;
+}
+
+.footer {
+  padding: 1.75rem 0 1rem;
+}
+
+.footer-bottom {
+  padding-top: 0.75rem;
+}
+
+.footer-bottom p {
+  font-size: 0.72rem;
 }
 
 /* Tablet (>= 768px) */

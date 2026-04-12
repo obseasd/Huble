@@ -8,7 +8,8 @@ export function initOrbit() {
   if (!orbit) return;
 
   const cards = orbit.querySelectorAll('.orbit-card');
-  const radius = 150;
+  const isMobile = window.matchMedia('(max-width: 767px)').matches;
+  const radius = isMobile ? 110 : 150;
   const cardCount = cards.length;
   const speed = 0.12; // degrees per frame — 20% slower than 0.15
 

@@ -4,6 +4,9 @@
    ============================================= */
 
 export function initSectionSnap() {
+  // Disable snap on mobile — sections are too tall
+  if (window.matchMedia('(max-width: 1023px)').matches) return;
+
   const sections = Array.from(document.querySelectorAll('.hero, .section, footer')).filter(
     s => s.style.display !== 'none'
   );
