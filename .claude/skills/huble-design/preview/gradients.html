@@ -1,0 +1,105 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_shared.css">
+<style>
+  body { background: #fff; }
+  .card { padding: 20px; }
+  .grad {
+    position: relative;
+    border-radius: 18px;
+    height: 92px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: var(--font-heading);
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+  .grad .name { font-size: 12px; font-weight: 700; letter-spacing: -0.01em; }
+  .grad .stops { font-family: 'SF Mono','Menlo',monospace; font-size: 10px; font-weight: 500; opacity: 0.75; }
+  .grad .tag {
+    position: absolute; top: 10px; right: 10px;
+    font-size: 9px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 7px; border-radius: 999px;
+    background: rgba(0,0,0,0.08); color: inherit;
+  }
+  .grad.dark { color: #fff; }
+  .grad.dark .tag { background: rgba(255,255,255,0.18); }
+</style></head>
+<body><div class="card">
+  <div class="row" style="margin-bottom:14px;justify-content:space-between">
+    <span class="label">Signature green gradients</span>
+    <span class="mono" style="font-size:10px">linear · radial · conic · mesh</span>
+  </div>
+
+  <div class="grid" style="grid-template-columns:1fr 1fr;gap:10px">
+
+    <div class="grad" style="background:linear-gradient(135deg,#A2DBB6 0%,#7BC99A 100%);color:#1A1A1A">
+      <span class="tag">primary</span>
+      <div class="name">Mint · 135°</div>
+      <div class="stops">A2DBB6 → 7BC99A</div>
+    </div>
+
+    <div class="grad" style="background:linear-gradient(135deg,#C8ECDA 0%,#A2DBB6 100%);color:#1A1A1A">
+      <span class="tag">soft</span>
+      <div class="name">Mint soft · 135°</div>
+      <div class="stops">C8ECDA → A2DBB6</div>
+    </div>
+
+    <div class="grad dark" style="background:linear-gradient(135deg,#7BC99A 0%,#3E9A62 100%)">
+      <span class="tag">deep</span>
+      <div class="name">Forest · 135°</div>
+      <div class="stops">7BC99A → 3E9A62</div>
+    </div>
+
+    <div class="grad" style="background:linear-gradient(135deg,#E5F5EC 0%,#A2DBB6 55%,#5AB87E 100%);color:#1A1A1A">
+      <span class="tag">hero</span>
+      <div class="name">Dawn · 3 stops</div>
+      <div class="stops">E5F5EC → A2DBB6 → 5AB87E</div>
+    </div>
+
+    <div class="grad" style="background:linear-gradient(180deg,#FFFFFF 0%,#E5F5EC 50%,#FFFFFF 100%);color:#1A1A1A;border:1px solid rgba(0,0,0,0.06)">
+      <span class="tag">wash</span>
+      <div class="name">Section wash · 180°</div>
+      <div class="stops">FFF → E5F5EC → FFF</div>
+    </div>
+
+    <div class="grad" style="background:linear-gradient(160deg,#FFFFFF 0%,#E5F5EC 30%,#FFFFFF 55%,rgba(162,219,182,0.25) 80%,#FFFFFF 100%);color:#1A1A1A;border:1px solid rgba(0,0,0,0.06)">
+      <span class="tag">hero bg</span>
+      <div class="name">Atmosphere · 160°</div>
+      <div class="stops">5-stop white / mint drift</div>
+    </div>
+
+    <div class="grad" style="background:radial-gradient(circle at 30% 30%, #C8ECDA 0%, #A2DBB6 55%, #5AB87E 100%);color:#1A1A1A">
+      <span class="tag">radial</span>
+      <div class="name">Orb · top-left</div>
+      <div class="stops">radial · C8ECDA → 5AB87E</div>
+    </div>
+
+    <div class="grad dark" style="background:conic-gradient(from 180deg at 50% 50%, #7BC99A 0%, #A2DBB6 30%, #E5F5EC 55%, #A2DBB6 80%, #7BC99A 100%)">
+      <span class="tag">conic</span>
+      <div class="name">Halo · 180°</div>
+      <div class="stops">conic · 5-stop loop</div>
+    </div>
+
+    <div class="grad" style="background:
+      radial-gradient(at 20% 20%, rgba(162,219,182,0.9) 0%, transparent 50%),
+      radial-gradient(at 80% 10%, rgba(200,236,218,0.9) 0%, transparent 50%),
+      radial-gradient(at 70% 80%, rgba(90,184,126,0.8) 0%, transparent 55%),
+      radial-gradient(at 15% 85%, rgba(229,245,236,1) 0%, transparent 50%),
+      #FFFFFF;
+      color:#1A1A1A">
+      <span class="tag">mesh</span>
+      <div class="name">Garden · mesh</div>
+      <div class="stops">4 radial blobs on white</div>
+    </div>
+
+    <div class="grad dark" style="background:linear-gradient(135deg,#1A1A1A 0%,#2D2D2D 50%,#3E9A62 100%)">
+      <span class="tag">contrast</span>
+      <div class="name">Midnight mint · 135°</div>
+      <div class="stops">1A1A1A → 3E9A62</div>
+    </div>
+
+  </div>
+</div></body></html>

@@ -1,0 +1,153 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_shared.css">
+<style>
+  body {
+    background:
+      radial-gradient(circle at 20% 20%, #F4FBF6 0%, transparent 55%),
+      radial-gradient(circle at 85% 85%, #E5F5EC 0%, transparent 55%),
+      #FAFAFB;
+    min-height: 100vh;
+  }
+  .hd { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:14px; }
+  .sec-title {
+    font-family:'SF Mono',Menlo,monospace;
+    font-size:10px; font-weight:600; letter-spacing:0.14em;
+    color: var(--mint-darker);
+    margin: 18px 0 10px;
+    display:flex; justify-content:space-between; align-items:baseline;
+  }
+  .sec-title span:last-child { color:#888; letter-spacing:0.04em; font-weight:500; }
+
+  /* Elevation ramp */
+  .ramp { display:grid; grid-template-columns: repeat(6,1fr); gap: 10px; }
+  .elev {
+    background: #fff;
+    border-radius: 16px;
+    height: 120px;
+    padding: 12px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    position: relative;
+  }
+  .elev .lvl {
+    font-family: var(--font-heading);
+    font-size: 18px; font-weight: 600;
+    letter-spacing: -0.01em;
+    color: #1A1A1A;
+  }
+  .elev .lvl small { font-size: 10px; color:#888; font-weight:500; font-family:'SF Mono',Menlo,monospace; display:block; margin-top:2px; }
+  .elev .use {
+    font-family:'SF Mono',Menlo,monospace;
+    font-size: 9px; color: var(--mint-darker); font-weight:600;
+    letter-spacing: 0.08em;
+  }
+  .elev .spec {
+    position:absolute; bottom:10px; right:12px;
+    font-family:'SF Mono',Menlo,monospace;
+    font-size: 8px; color: #aaa;
+  }
+
+  .e0 { box-shadow: none; border: 1px solid rgba(0,0,0,0.04); }
+  .e1 { box-shadow: 0 1px 2px rgba(16,24,40,0.04), 0 1px 3px rgba(16,24,40,0.06); }
+  .e2 { box-shadow: 0 2px 4px -1px rgba(16,24,40,0.05), 0 4px 8px -2px rgba(16,24,40,0.06); }
+  .e3 { box-shadow: 0 4px 8px -2px rgba(16,24,40,0.06), 0 10px 20px -6px rgba(16,24,40,0.08); }
+  .e4 { box-shadow: 0 8px 14px -4px rgba(16,24,40,0.08), 0 20px 36px -12px rgba(16,24,40,0.14); }
+  .e5 { box-shadow: 0 14px 22px -6px rgba(16,24,40,0.1), 0 32px 60px -18px rgba(16,24,40,0.2); }
+
+  /* Signature mint glows */
+  .mint-row { display:grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+  .glow {
+    background: #fff;
+    border-radius: 20px;
+    height: 130px;
+    padding: 14px;
+    display:flex; flex-direction: column; justify-content: space-between;
+    position: relative;
+  }
+  .glow .n { font-family: var(--font-heading); font-size: 15px; font-weight: 600; color:#1A1A1A; }
+  .glow .n small { font-size: 10px; color:#888; display:block; margin-top:2px; font-family:'SF Mono',Menlo,monospace; font-weight:500; }
+  .glow .u { font-family:'SF Mono',Menlo,monospace; font-size:9px; color: var(--mint-darker); font-weight:600; letter-spacing:0.1em; }
+
+  .g-rest  { box-shadow: 0 6px 16px -6px rgba(90,184,126,0.25); }
+  .g-hover { box-shadow: 0 12px 26px -8px rgba(90,184,126,0.4), 0 4px 8px -4px rgba(90,184,126,0.2); }
+  .g-lift  { box-shadow: 0 20px 50px -18px rgba(90,184,126,0.55), 0 8px 18px -6px rgba(90,184,126,0.2); }
+  .g-halo  {
+    box-shadow:
+      0 0 0 1px rgba(162,219,182,0.3),
+      0 0 0 8px rgba(162,219,182,0.12),
+      0 20px 40px -16px rgba(90,184,126,0.4);
+  }
+
+  /* Inner + ring shadows */
+  .inner-row { display:grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+  .inner {
+    background: #fff;
+    border-radius: 16px;
+    height: 100px;
+    padding: 12px;
+    display:flex; flex-direction: column; justify-content: space-between;
+  }
+  .inner .n { font-family: var(--font-heading); font-size: 13px; font-weight:600; color:#1A1A1A; }
+  .inner .u { font-family:'SF Mono',Menlo,monospace; font-size:9px; color: var(--mint-darker); font-weight:600; letter-spacing:0.08em; }
+
+  .i-press  { background: #F4FBF6; box-shadow: inset 0 2px 4px rgba(62,154,98,0.18); }
+  .i-well   { background: #F3F4F6; box-shadow: inset 0 1px 2px rgba(0,0,0,0.1), inset 0 -1px 0 rgba(255,255,255,0.7); }
+  .i-focus  { box-shadow: 0 0 0 3px rgba(90,184,126,0.25), 0 0 0 1px #5AB87E; }
+  .i-danger { box-shadow: 0 0 0 3px rgba(196,82,65,0.2), 0 0 0 1px #C45241; }
+
+  /* Token table */
+  .tokens {
+    margin-top: 16px;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(90,184,126,0.15);
+    border-radius: 14px;
+    padding: 14px 16px;
+    font-family:'SF Mono',Menlo,monospace;
+    font-size: 10px;
+    color: #555;
+  }
+  .tokens .k { color:#1A1A1A; font-weight:600; }
+  .tokens .row { display:flex; justify-content:space-between; padding: 3px 0; border-bottom: 1px dashed rgba(90,184,126,0.15); }
+  .tokens .row:last-child { border:0; }
+</style></head>
+<body><div class="card">
+  <div class="hd">
+    <span class="label">Shadow system · v2</span>
+    <span class="mono" style="font-size:10px">6-stop ramp · 4 mint glows · inner + focus rings</span>
+  </div>
+
+  <div class="sec-title"><span>ELEVATION · NEUTRAL RAMP</span><span>double-shadow pairs · natural falloff</span></div>
+
+  <div class="ramp">
+    <div class="elev e0"><div><div class="lvl">0<small>· flat</small></div><div class="use">PAGE BG</div></div><span class="spec">border only</span></div>
+    <div class="elev e1"><div><div class="lvl">1<small>· rest</small></div><div class="use">BUTTONS · CHIPS</div></div><span class="spec">1 / 3</span></div>
+    <div class="elev e2"><div><div class="lvl">2<small>· subtle</small></div><div class="use">CARDS · INPUTS</div></div><span class="spec">4 / 8</span></div>
+    <div class="elev e3"><div><div class="lvl">3<small>· raised</small></div><div class="use">HOVER · DROPDOWN</div></div><span class="spec">10 / 20</span></div>
+    <div class="elev e4"><div><div class="lvl">4<small>· float</small></div><div class="use">POPOVER · TOAST</div></div><span class="spec">20 / 36</span></div>
+    <div class="elev e5"><div><div class="lvl">5<small>· overlay</small></div><div class="use">MODAL · DRAWER</div></div><span class="spec">32 / 60</span></div>
+  </div>
+
+  <div class="sec-title"><span>SIGNATURE MINT GLOWS</span><span>brand bloom · reserved for primary surfaces</span></div>
+
+  <div class="mint-row">
+    <div class="glow g-rest"><div class="u">REST</div><div><div class="n">mint/rest<small>· 6 / 16 · α.25</small></div></div></div>
+    <div class="glow g-hover"><div class="u">HOVER</div><div><div class="n">mint/hover<small>· 12 / 26 · α.40</small></div></div></div>
+    <div class="glow g-lift"><div class="u">LIFT ★</div><div><div class="n">mint/lift<small>· 20 / 50 · α.55</small></div></div></div>
+    <div class="glow g-halo"><div class="u">HALO</div><div><div class="n">mint/halo<small>· layered rings</small></div></div></div>
+  </div>
+
+  <div class="sec-title"><span>INNER &amp; RING</span><span>pressed · well · focus · error</span></div>
+
+  <div class="inner-row">
+    <div class="inner i-press"><div class="u">PRESSED</div><div class="n">inset · mint</div></div>
+    <div class="inner i-well"><div class="u">WELL</div><div class="n">inset · neutral</div></div>
+    <div class="inner i-focus"><div class="u">FOCUS</div><div class="n">ring · mint</div></div>
+    <div class="inner i-danger"><div class="u">ERROR</div><div class="n">ring · danger</div></div>
+  </div>
+
+  <div class="tokens">
+    <div class="row"><span class="k">--shadow-1</span><span>0 1px 2px rgba(16,24,40,.04), 0 1px 3px rgba(16,24,40,.06)</span></div>
+    <div class="row"><span class="k">--shadow-3</span><span>0 4px 8px -2px rgba(16,24,40,.06), 0 10px 20px -6px rgba(16,24,40,.08)</span></div>
+    <div class="row"><span class="k">--shadow-mint-lift ★</span><span>0 20px 50px -18px rgba(90,184,126,.55)</span></div>
+    <div class="row"><span class="k">--ring-focus</span><span>0 0 0 3px rgba(90,184,126,.25), 0 0 0 1px #5AB87E</span></div>
+  </div>
+</div></body></html>

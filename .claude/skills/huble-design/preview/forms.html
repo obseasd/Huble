@@ -1,0 +1,309 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_shared.css">
+<style>
+  body {
+    background:
+      radial-gradient(circle at 15% 10%, #E5F5EC 0%, transparent 55%),
+      radial-gradient(circle at 90% 100%, #C8ECDA 0%, transparent 50%),
+      #FFFFFF;
+    min-height: 100vh;
+  }
+
+  .form-shell {
+    background: rgba(255,255,255,0.72);
+    backdrop-filter: blur(22px) saturate(160%);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+    border: 1px solid rgba(255,255,255,0.6);
+    border-radius: 24px;
+    padding: 26px;
+    box-shadow:
+      0 20px 50px -20px rgba(90,184,126,0.25),
+      0 6px 16px rgba(0,0,0,0.04),
+      inset 0 1px 0 rgba(255,255,255,0.8);
+  }
+
+  .hd {
+    display:flex; justify-content:space-between; align-items:baseline;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px dashed rgba(90,184,126,0.25);
+  }
+  .hd .t { font-family: var(--font-heading); font-size: 18px; font-weight: 600; letter-spacing: -0.01em; color: #1A1A1A; }
+  .hd .t em { color: var(--mint-darker); font-style: italic; font-weight: 500; }
+  .hd .step { font-family: 'SF Mono',Menlo,monospace; font-size: 10px; color: #666; letter-spacing: 0.08em; }
+
+  /* Floating-label field */
+  .field {
+    position: relative;
+    background: rgba(255,255,255,0.6);
+    border: 1.5px solid rgba(90,184,126,0.15);
+    border-radius: 14px;
+    padding: 20px 16px 10px;
+    transition: all .3s var(--ease-smooth);
+    cursor: text;
+  }
+  .field:hover { border-color: rgba(90,184,126,0.35); }
+  .field.focus {
+    background: #fff;
+    border-color: var(--mint-darker);
+    box-shadow: 0 0 0 4px rgba(90,184,126,0.12), 0 6px 20px -8px rgba(90,184,126,0.25);
+  }
+  .field.error {
+    border-color: #D66060;
+    box-shadow: 0 0 0 4px rgba(214,96,96,0.1);
+  }
+  .field.valid {
+    border-color: var(--mint-darker);
+  }
+
+  .field label {
+    position: absolute;
+    left: 46px;
+    top: 18px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: #888;
+    pointer-events: none;
+    transition: all .25s var(--ease-smooth);
+    transform-origin: left center;
+  }
+  .field.focus label,
+  .field.has-value label {
+    transform: translateY(-12px) scale(0.75);
+    color: var(--mint-darker);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+  .field.error label { color: #D66060; }
+
+  .field .lead-icon {
+    position: absolute; left: 16px; top: 50%;
+    transform: translateY(-50%);
+    width: 22px; height: 22px;
+    color: #888;
+    transition: color .25s var(--ease-smooth);
+  }
+  .field.focus .lead-icon,
+  .field.valid .lead-icon { color: var(--mint-darker); }
+
+  .field input,
+  .field textarea {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    outline: none;
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: #1A1A1A;
+    padding-left: 30px;
+    padding-top: 4px;
+  }
+  .field textarea { resize: vertical; min-height: 60px; padding-left: 30px; }
+
+  /* Valid/error indicator */
+  .field .tail {
+    position: absolute; right: 14px; top: 50%;
+    transform: translateY(-50%);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .check, .cross {
+    width: 22px; height: 22px; border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: 11px; font-weight: 700;
+    animation: pop .3s var(--ease-smooth);
+  }
+  .check { background: var(--mint-darker); color: white; }
+  .cross { background: #D66060; color: white; }
+  @keyframes pop { from { transform: scale(0); } }
+
+  /* Hint/helper row */
+  .hint {
+    font-family: var(--font-body);
+    font-size: 11px;
+    color: #888;
+    margin-top: 6px;
+    padding-left: 16px;
+    display: flex; justify-content: space-between;
+  }
+  .hint.err { color: #D66060; }
+  .hint.ok { color: var(--mint-darker); }
+  .hint .count { font-family: 'SF Mono',Menlo,monospace; }
+
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  /* Chip selector for project type */
+  .chip-label {
+    font-family: 'SF Mono',Menlo,monospace;
+    font-size: 10px;
+    color: #1A1A1A;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    margin: 18px 0 10px;
+    display: flex; justify-content: space-between;
+  }
+  .chip-label span:last-child { color: #888; font-weight: 500; }
+
+  .chips { display:flex; flex-wrap:wrap; gap:8px; }
+  .chips label {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 13px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.7);
+    border: 1.5px solid rgba(90,184,126,0.2);
+    font-family: var(--font-body);
+    font-size: 12.5px;
+    color: #1A1A1A;
+    cursor: pointer;
+    transition: all .25s var(--ease-smooth);
+  }
+  .chips label:hover { transform: translateY(-1px); border-color: rgba(90,184,126,0.5); }
+  .chips input { display: none; }
+  .chips input:checked + span {
+    color: #1A1A1A;
+  }
+  .chips label:has(input:checked) {
+    background: linear-gradient(135deg, #A2DBB6, #7BC99A);
+    border-color: var(--mint-darker);
+    box-shadow: 0 6px 16px -4px rgba(90,184,126,0.4);
+  }
+  .chips label .dot { width: 5px; height: 5px; border-radius: 50%; background: #5AB87E; opacity: 0.4; }
+  .chips label:has(input:checked) .dot { background: #1A1A1A; opacity: 1; }
+
+  /* Budget slider */
+  .budget { margin-top: 18px; }
+  .budget .brow { display:flex; justify-content:space-between; font-family: 'SF Mono',Menlo,monospace; font-size: 10px; color:#1A1A1A; letter-spacing: 0.12em; margin-bottom: 10px; }
+  .budget .brow b { font-family: var(--font-heading); font-size: 16px; color:#1A1A1A; font-weight: 600; letter-spacing: -0.01em; }
+  .track {
+    position: relative;
+    height: 6px;
+    background: rgba(90,184,126,0.15);
+    border-radius: 999px;
+  }
+  .track .fill {
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 60%;
+    background: linear-gradient(90deg, #A2DBB6, #5AB87E);
+    border-radius: 999px;
+  }
+  .track .thumb {
+    position: absolute; left: 60%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    border: 3px solid var(--mint-darker);
+    box-shadow: 0 4px 12px rgba(90,184,126,0.4);
+    cursor: grab;
+  }
+  .track .thumb::before {
+    content: '';
+    position: absolute; inset: -8px;
+    border-radius: 50%;
+    background: rgba(90,184,126,0.15);
+  }
+  .ticks { display:flex; justify-content:space-between; margin-top: 8px; font-family: 'SF Mono',Menlo,monospace; font-size: 10px; color:#888; }
+
+  /* Footer */
+  .foot {
+    display:flex; justify-content:space-between; align-items:center;
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px dashed rgba(90,184,126,0.25);
+  }
+  .foot .note {
+    font-family: var(--font-body);
+    font-size: 11px;
+    color: #666;
+    display:flex; align-items:center; gap:6px;
+  }
+  .foot .note::before { content:'🔒'; font-size: 11px; }
+  .btn {
+    font-family: var(--font-heading);
+    font-size: 14px; font-weight: 600;
+    padding: 12px 22px;
+    border-radius: 999px;
+    background: #1A1A1A;
+    color: white;
+    border: 0;
+    cursor: pointer;
+    display: inline-flex; align-items: center; gap: 10px;
+    transition: all .3s var(--ease-smooth);
+  }
+  .btn:hover { background: linear-gradient(135deg, #A2DBB6, #5AB87E); color: #1A1A1A; transform: translateY(-2px); box-shadow: 0 10px 24px -8px rgba(90,184,126,0.5); }
+</style></head>
+<body><div class="card">
+  <div class="row" style="margin-bottom:14px;justify-content:space-between">
+    <span class="label">Form fields · enhanced</span>
+    <span class="mono" style="font-size:10px">floating labels · validation · chips · slider</span>
+  </div>
+
+  <div class="form-shell">
+    <div class="hd">
+      <div class="t">Parlons de votre <em>projet</em></div>
+      <div class="step">ÉTAPE 02 / 03</div>
+    </div>
+
+    <div class="row2">
+      <div class="field valid has-value">
+        <svg class="lead-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <label>Nom complet</label>
+        <input value="Camille Durand">
+        <div class="tail"><div class="check">✓</div></div>
+      </div>
+
+      <div class="field focus has-value">
+        <svg class="lead-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <label>Email professionnel</label>
+        <input value="camille@studio.fr">
+      </div>
+    </div>
+
+    <div class="row2" style="margin-top:12px">
+      <div class="field has-value error">
+        <svg class="lead-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <label>Téléphone</label>
+        <input value="06 12 34">
+        <div class="tail"><div class="cross">!</div></div>
+        <div class="hint err" style="margin-top:6px;margin-bottom:-4px;padding-left:0"><span>Numéro incomplet (10 chiffres attendus)</span><span class="count">7/10</span></div>
+      </div>
+
+      <div class="field has-value">
+        <svg class="lead-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 9h1M9 13h1M14 9h1M14 13h1M9 17h1M14 17h1"/></svg>
+        <label>Entreprise</label>
+        <input value="Studio Lumen">
+      </div>
+    </div>
+
+    <div class="chip-label"><span>TYPE DE PROJET</span><span>choix multiple</span></div>
+    <div class="chips">
+      <label><input type="checkbox" checked><span class="dot"></span><span>Site vitrine</span></label>
+      <label><input type="checkbox" checked><span class="dot"></span><span>E-commerce</span></label>
+      <label><input type="checkbox"><span class="dot"></span><span>Application</span></label>
+      <label><input type="checkbox"><span class="dot"></span><span>Refonte</span></label>
+      <label><input type="checkbox"><span class="dot"></span><span>SEO</span></label>
+      <label><input type="checkbox"><span class="dot"></span><span>Branding</span></label>
+    </div>
+
+    <div class="budget">
+      <div class="brow"><span>BUDGET ESTIMÉ</span><b>8 000 €</b></div>
+      <div class="track">
+        <div class="fill"></div>
+        <div class="thumb"></div>
+      </div>
+      <div class="ticks"><span>2 K</span><span>5 K</span><span>10 K</span><span>20 K+</span></div>
+    </div>
+
+    <div style="margin-top:18px">
+      <div class="field has-value focus" style="padding-bottom:14px">
+        <svg class="lead-icon" style="top:22px;transform:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <label>Décrivez votre projet</label>
+        <textarea>Refonte complète de notre vitrine avec une vraie identité éditoriale, un blog technique et un espace client connecté à notre CRM.</textarea>
+      </div>
+      <div class="hint ok"><span>✓ Assez détaillé — parfait pour un premier brief</span><span class="count">142 / 400</span></div>
+    </div>
+
+    <div class="foot">
+      <div class="note">Vos données restent chiffrées & confidentielles</div>
+      <button class="btn">Envoyer le brief <span>→</span></button>
+    </div>
+  </div>
+</div></body></html>

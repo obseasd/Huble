@@ -1,0 +1,287 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_shared.css">
+<style>
+  body {
+    background:
+      radial-gradient(circle at 25% 15%, #C8ECDA 0%, transparent 50%),
+      radial-gradient(circle at 85% 85%, #A2DBB6 0%, transparent 45%),
+      #F4FBF6;
+    min-height: 100vh;
+  }
+
+  .svc {
+    --x: 50%;
+    --y: 50%;
+    position: relative;
+    border-radius: 28px;
+    padding: 2px; /* gradient-border gutter */
+    background: linear-gradient(135deg, rgba(162,219,182,0.6), rgba(255,255,255,0.2) 40%, rgba(90,184,126,0.4));
+    background-size: 200% 200%;
+    animation: shift 8s ease-in-out infinite alternate;
+    cursor: pointer;
+    transition: transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s cubic-bezier(.2,.8,.2,1);
+    will-change: transform;
+  }
+  @keyframes shift { to { background-position: 100% 100%; } }
+
+  .svc:hover { transform: translateY(-4px); }
+
+  .svc-inner {
+    position: relative;
+    border-radius: 26px;
+    padding: 32px;
+    background: rgba(255,255,255,0.82);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    overflow: hidden;
+    box-shadow:
+      0 30px 60px -20px rgba(90,184,126,0.35),
+      0 12px 24px -8px rgba(0,0,0,0.06),
+      inset 0 1px 0 rgba(255,255,255,0.8);
+    isolation: isolate;
+  }
+
+  /* Spotlight that follows the cursor */
+  .spotlight {
+    position: absolute; inset: 0;
+    background: radial-gradient(
+      420px circle at var(--x) var(--y),
+      rgba(162,219,182,0.35),
+      transparent 45%
+    );
+    opacity: 0;
+    transition: opacity .4s ease;
+    pointer-events: none;
+    z-index: 1;
+    border-radius: inherit;
+  }
+  .svc:hover .spotlight { opacity: 1; }
+
+  /* Aurora blobs drifting behind content */
+  .aurora {
+    position: absolute; inset: -30%;
+    z-index: 0;
+    pointer-events: none;
+    filter: blur(40px);
+    opacity: 0.7;
+  }
+  .aurora span {
+    position: absolute;
+    border-radius: 50%;
+    mix-blend-mode: multiply;
+  }
+  .aurora .a1 { width: 200px; height: 200px; background: #A2DBB6; top: 10%; left: 5%; animation: drift1 12s ease-in-out infinite; }
+  .aurora .a2 { width: 180px; height: 180px; background: #5AB87E; bottom: 5%; right: 10%; animation: drift2 14s ease-in-out infinite; }
+  .aurora .a3 { width: 140px; height: 140px; background: #C8ECDA; top: 40%; right: 30%; animation: drift3 10s ease-in-out infinite; }
+  @keyframes drift1 { 50% { transform: translate(40px,30px) scale(1.15); } }
+  @keyframes drift2 { 50% { transform: translate(-50px,-20px) scale(1.1); } }
+  @keyframes drift3 { 50% { transform: translate(20px,-40px) scale(0.9); } }
+
+  /* Content sits above everything */
+  .svc-body { position: relative; z-index: 2; }
+
+  .svc-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 28px; }
+
+  /* Layered icon frame */
+  .icon-frame {
+    position: relative;
+    width: 72px; height: 72px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #A2DBB6 0%, #5AB87E 100%);
+    box-shadow: 0 12px 30px rgba(90,184,126,0.45), inset 0 1px 0 rgba(255,255,255,0.6);
+    display: grid; place-items: center;
+    transition: transform .6s var(--ease-smooth);
+  }
+  .svc:hover .icon-frame { transform: rotate(-4deg) scale(1.04); }
+  .icon-frame::before {
+    content: '';
+    position: absolute; inset: 6px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(4px);
+  }
+  .icon-frame svg { position: relative; z-index: 1; }
+
+  .badges { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+  .badge {
+    font-family: 'SF Mono',Menlo,monospace;
+    font-size: 10px; font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.6);
+    border: 1px solid rgba(90,184,126,0.25);
+    color: var(--mint-darker);
+    letter-spacing: 0.04em;
+  }
+  .badge.dot::before {
+    content: '';
+    display: inline-block;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #5AB87E;
+    margin-right: 6px;
+    vertical-align: 2px;
+    box-shadow: 0 0 0 3px rgba(90,184,126,0.2);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 50% { box-shadow: 0 0 0 6px rgba(90,184,126,0); } }
+
+  .eyebrow {
+    font-family: 'SF Mono',Menlo,monospace;
+    font-size: 11px;
+    color: var(--mint-darker);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  h2.title {
+    font-family: var(--font-heading);
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: #1A1A1A;
+    line-height: 1.1;
+    margin-bottom: 14px;
+  }
+  h2.title .accent {
+    background: linear-gradient(135deg, #5AB87E 0%, #3E9A62 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-style: italic;
+    font-weight: 500;
+  }
+  p.lede {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.65;
+    color: #555;
+    margin-bottom: 22px;
+    max-width: 42ch;
+  }
+
+  /* Chip list of deliverables */
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
+  .chip {
+    font-family: var(--font-body);
+    font-size: 12px;
+    padding: 6px 11px;
+    border-radius: 999px;
+    background: rgba(162,219,182,0.2);
+    border: 1px solid rgba(90,184,126,0.2);
+    color: #1A1A1A;
+  }
+
+  /* Stats row */
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    padding: 16px 0;
+    border-top: 1px dashed rgba(90,184,126,0.25);
+    border-bottom: 1px dashed rgba(90,184,126,0.25);
+    margin-bottom: 20px;
+  }
+  .stat { text-align: left; padding: 0 14px; }
+  .stat + .stat { border-left: 1px dashed rgba(90,184,126,0.25); }
+  .stat .num {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 600;
+    color: #1A1A1A;
+    letter-spacing: -0.02em;
+  }
+  .stat .num .unit { font-size: 13px; color: var(--mint-darker); font-weight: 500; }
+  .stat .lbl {
+    font-family: var(--font-body);
+    font-size: 11px;
+    color: #777;
+    margin-top: 2px;
+  }
+
+  /* CTA row */
+  .cta-row { display: flex; align-items: center; justify-content: space-between; }
+  .cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 999px;
+    background: #1A1A1A;
+    color: #fff;
+    transition: background .3s ease, transform .3s ease, box-shadow .3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-label, .cta-arrow {
+    position: relative;
+    z-index: 2;
+    color: inherit;
+    transition: transform .3s ease;
+  }
+  .cta:hover {
+    background: #2D2D2D;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px -8px rgba(0,0,0,0.3);
+    color: #fff;
+  }
+  .cta:hover .cta-arrow { transform: translateX(4px); }
+
+  .price { font-family: var(--font-heading); font-size: 13px; color: #777; }
+  .price b { color: #1A1A1A; font-weight: 600; font-size: 16px; }
+</style></head>
+<body><div class="card">
+  <div class="row" style="margin-bottom:16px;justify-content:space-between">
+    <span class="label">Service card · signature</span>
+    <span class="mono" style="font-size:10px">hover-tracked spotlight · aurora · gradient border</span>
+  </div>
+
+  <div class="svc" onmousemove="var r=this.getBoundingClientRect();this.style.setProperty('--x',(event.clientX-r.left)+'px');this.style.setProperty('--y',(event.clientY-r.top)+'px')">
+    <div class="svc-inner">
+      <div class="spotlight"></div>
+      <div class="aurora"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+
+      <div class="svc-body">
+        <div class="svc-top">
+          <div class="icon-frame">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2"/>
+              <line x1="8" y1="21" x2="16" y2="21"/>
+              <line x1="12" y1="17" x2="12" y2="21"/>
+              <polyline points="7 9 10 12 7 15"/>
+              <line x1="13" y1="15" x2="17" y2="15"/>
+            </svg>
+          </div>
+          <div class="badges">
+            <span class="badge dot">Disponible</span>
+            <span class="badge">01 / 04</span>
+          </div>
+        </div>
+
+        <div class="eyebrow">Service · Sites web</div>
+        <h2 class="title">Des sites qui <span class="accent">convertissent</span></h2>
+        <p class="lede">Vitrines, e-commerce ou sur-mesure — on conçoit des expériences rapides, accessibles et pensées pour votre audience.</p>
+
+        <div class="chips">
+          <span class="chip">Next.js</span>
+          <span class="chip">Webflow</span>
+          <span class="chip">Shopify</span>
+          <span class="chip">SEO technique</span>
+          <span class="chip">A11y AA</span>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><div class="num">98<span class="unit">/100</span></div><div class="lbl">Lighthouse moyen</div></div>
+          <div class="stat"><div class="num">6<span class="unit">sem</span></div><div class="lbl">Délai médian</div></div>
+          <div class="stat"><div class="num">+42<span class="unit">%</span></div><div class="lbl">Conversion post-refonte</div></div>
+        </div>
+
+        <div class="cta-row">
+          <div class="price">À partir de <b>4 500 €</b></div>
+          <a class="cta" href="#"><span class="cta-label">Discuter du projet</span><span class="cta-arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></body></html>

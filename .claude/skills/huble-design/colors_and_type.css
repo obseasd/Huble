@@ -1,0 +1,212 @@
+/* =============================================
+   HUBLE — Colors, Type & Foundational Tokens
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  /* ----- Brand Colors — Mint ----- */
+  --mint: #A2DBB6;          /* Primary — doux vert menthe */
+  --mint-light: #C8ECDA;    /* Surfaces, hover tints */
+  --mint-lighter: #E5F5EC;  /* Wash backgrounds */
+  --mint-dark: #7BC99A;     /* Pressed, accents */
+  --mint-darker: #5AB87E;   /* Labels, icons on mint */
+  --mint-glow: rgba(162, 219, 182, 0.25);
+  --mint-glow-strong: rgba(162, 219, 182, 0.45);
+
+  /* ----- Neutrals ----- */
+  --black: #1A1A1A;         /* Primary text */
+  --dark: #2D2D2D;          /* Secondary text */
+  --gray: #6B7280;          /* Meta / muted */
+  --gray-light: #F3F4F6;    /* Muted surface */
+  --white: #FFFFFF;
+  --white-off: #FAFFFE;
+
+  /* ----- Semantic ----- */
+  --danger: #E74C3C;
+
+  /* ----- Glass system ----- */
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-bg-strong: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --glass-border-strong: rgba(255, 255, 255, 0.5);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  --glass-blur: blur(16px);
+  --glass-blur-strong: blur(20px);
+
+  /* Hover on glass card */
+  --glass-shadow-hover: 0 20px 50px rgba(162, 219, 182, 0.2),
+                        0 8px 20px rgba(0, 0, 0, 0.04);
+
+  /* ----- Semantic surfaces ----- */
+  --surface: var(--white);
+  --surface-muted: var(--mint-lighter);
+  --surface-card: var(--glass-bg-strong);
+  --text-primary: var(--black);
+  --text-secondary: var(--dark);
+  --text-muted: var(--gray);
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-mint: rgba(162, 219, 182, 0.3);
+
+  /* ----- Typography ----- */
+  --font-heading: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  /* Type scale (fluid) */
+  --fs-display: clamp(2.8rem, 6vw, 4.5rem);  /* H1 hero */
+  --fs-h1:      clamp(2.4rem, 5vw, 3.5rem);
+  --fs-h2:      clamp(2rem, 4vw, 3rem);
+  --fs-h3:      clamp(1.15rem, 2vw, 1.4rem);
+  --fs-h4:      1rem;
+  --fs-lead:    clamp(1.05rem, 2vw, 1.25rem);
+  --fs-body:    1.05rem;
+  --fs-small:   0.88rem;
+  --fs-micro:   0.78rem;
+
+  /* Weights */
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* Leading */
+  --lh-tight: 1.15;
+  --lh-snug: 1.4;
+  --lh-body: 1.6;
+  --lh-loose: 1.75;
+
+  /* Tracking — Space Grotesk wants negative on large sizes */
+  --tracking-display: -0.03em;
+  --tracking-h2:     -0.02em;
+  --tracking-label:   0.1em;  /* uppercase labels */
+
+  /* ----- Border radius ----- */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+
+  /* ----- Spacing scale ----- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --section-padding: clamp(3rem, 6vw, 5rem);
+  --container-width: 1200px;
+  --container-padding: clamp(1.25rem, 4vw, 2rem);
+
+  /* ----- Shadows ----- */
+  --shadow-xs:  0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm:  0 4px 12px rgba(0, 0, 0, 0.04);
+  --shadow-md:  0 4px 24px rgba(0, 0, 0, 0.06);
+  --shadow-lg:  0 8px 32px rgba(0, 0, 0, 0.08);
+  --shadow-xl:  0 12px 40px rgba(0, 0, 0, 0.1);
+  --shadow-mint-sm: 0 4px 12px var(--mint-glow);
+  --shadow-mint-md: 0 8px 24px var(--mint-glow);
+  --shadow-mint-lg: 0 20px 50px var(--mint-glow-strong);
+
+  /* ----- Transitions ----- */
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ----- Gradients ----- */
+  --grad-mint: linear-gradient(135deg, var(--mint) 0%, var(--mint-dark) 100%);
+  --grad-mint-soft: linear-gradient(135deg, var(--mint-light), var(--mint));
+  --grad-wash-1: linear-gradient(160deg, var(--white) 0%, var(--mint-lighter) 30%,
+                                 var(--white) 55%, rgba(162,219,182,0.15) 80%, var(--white) 100%);
+  --grad-wash-2: linear-gradient(180deg, var(--white) 0%, var(--mint-lighter) 50%, var(--white) 100%);
+  --grad-footer: linear-gradient(135deg, var(--mint) 0%, var(--mint-dark) 100%);
+}
+
+/* ============================================
+   Semantic typography classes
+   ============================================ */
+.h-display,
+.h1 {
+  font-family: var(--font-heading);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-display);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-display);
+  color: var(--text-primary);
+}
+
+.h2 {
+  font-family: var(--font-heading);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-h2);
+  color: var(--text-primary);
+}
+
+.h3 {
+  font-family: var(--font-heading);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-h3);
+  line-height: var(--lh-snug);
+  color: var(--text-primary);
+}
+
+.h4 {
+  font-family: var(--font-heading);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-h4);
+  line-height: var(--lh-snug);
+  color: var(--text-primary);
+}
+
+.lead {
+  font-family: var(--font-body);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-lead);
+  line-height: var(--lh-loose);
+  color: var(--text-muted);
+}
+
+.body {
+  font-family: var(--font-body);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-body);
+  line-height: var(--lh-loose);
+  color: var(--text-muted);
+}
+
+.small {
+  font-family: var(--font-body);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+}
+
+.eyebrow,
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-heading);
+  font-weight: var(--fw-semibold);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--mint-darker);
+}
+.eyebrow::before,
+.section-label::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: var(--mint);
+  border-radius: 50%;
+}

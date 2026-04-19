@@ -1,0 +1,63 @@
+/* Shared styles for preview cards in the Design System tab.
+   Each card is ~700px wide; keep content tight. */
+@import url('../colors_and_type.css');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  font-family: var(--font-body);
+  background: var(--white);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+body.wash { background: var(--grad-wash-2); }
+body.mint-bg { background: var(--mint-lighter); }
+
+.card {
+  padding: 24px;
+  width: 700px;
+  box-sizing: border-box;
+}
+.card.tight { padding: 20px; }
+.row { display: flex; gap: 12px; align-items: center; }
+.col { display: flex; flex-direction: column; gap: 8px; }
+.grid { display: grid; gap: 12px; }
+
+.swatch {
+  flex: 1;
+  border-radius: var(--radius-md);
+  padding: 14px;
+  min-height: 88px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid rgba(0,0,0,0.04);
+  font-family: var(--font-heading);
+}
+.swatch .name {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.swatch .hex {
+  font-family: 'SF Mono', Menlo, monospace;
+  font-size: 11px;
+  opacity: 0.7;
+  font-weight: 500;
+}
+.label {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mint-darker);
+}
+.mono { font-family: 'SF Mono', Menlo, monospace; font-size: 11px; color: var(--gray); }
+
+.glass-card {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.5);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+}

@@ -88,32 +88,6 @@ export function initScrollAnimations() {
     });
   }
 
-  // Stats cards + counter animation
-  const statCards = document.querySelectorAll('.stat-card');
-  if (statCards.length) {
-    gsap.from(statCards, {
-      scrollTrigger: { trigger: '.stats-grid', start: 'top 85%', toggleActions: 'play none none none' },
-      opacity: 0, y: 40, duration: 0.6, stagger: 0.12, ease: 'power2.out',
-      onComplete: () => gsap.set(statCards, { clearProps: 'all' })
-    });
-
-    // Counter animation — number counts up when in view
-    const statNumbers = document.querySelectorAll('.stat-number');
-    statNumbers.forEach(el => {
-      const target = parseInt(el.dataset.target, 10);
-      gsap.to(el, {
-        scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' },
-        innerText: target,
-        duration: 1.8,
-        ease: 'power2.out',
-        snap: { innerText: 1 },
-        onUpdate: function() {
-          el.innerText = Math.floor(this.targets()[0].innerText);
-        }
-      });
-    });
-  }
-
   // Process steps
   const processSteps = document.querySelectorAll('.process-step');
   if (processSteps.length) {

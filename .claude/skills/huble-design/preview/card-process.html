@@ -1,0 +1,252 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_shared.css">
+<style>
+  body {
+    background:
+      radial-gradient(circle at 80% 20%, #E5F5EC 0%, transparent 50%),
+      radial-gradient(circle at 10% 90%, #C8ECDA 0%, transparent 55%),
+      #FFFFFF;
+    min-height: 100vh;
+    padding: 10px 0;
+  }
+
+  /* Layout: 4 steps connected by an animated SVG path */
+  .process {
+    position: relative;
+    padding: 18px 10px 24px;
+  }
+
+  .track {
+    position: absolute;
+    top: 62px; left: 6%; right: 6%;
+    height: 2px;
+    pointer-events: none;
+  }
+  .track svg { width: 100%; height: 60px; overflow: visible; }
+  .track path {
+    stroke: url(#flow);
+    stroke-width: 2;
+    fill: none;
+    stroke-dasharray: 6 8;
+    animation: flow 2.5s linear infinite;
+  }
+  @keyframes flow { to { stroke-dashoffset: -28; } }
+
+  .grid-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    position: relative;
+  }
+
+  .step {
+    position: relative;
+    text-align: center;
+    padding-top: 10px;
+  }
+
+  /* The circular number + ring */
+  .orb {
+    position: relative;
+    width: 88px; height: 88px;
+    margin: 0 auto 18px;
+  }
+  .orb .ring {
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, #A2DBB6, #5AB87E, #C8ECDA, #A2DBB6);
+    padding: 2px;
+    transition: transform .8s var(--ease-smooth);
+  }
+  .step:hover .orb .ring { transform: rotate(180deg); }
+  .orb .ring > div {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 30% 30%, #FFFFFF 0%, #F4FBF6 60%, #E5F5EC 100%);
+    display: grid; place-items: center;
+    box-shadow:
+      inset 0 2px 8px rgba(255,255,255,0.9),
+      inset 0 -6px 14px rgba(90,184,126,0.12),
+      0 10px 24px -6px rgba(90,184,126,0.3);
+  }
+  .orb .num {
+    font-family: var(--font-heading);
+    font-size: 30px;
+    font-weight: 300;
+    color: #1A1A1A;
+    letter-spacing: -0.03em;
+  }
+  .orb .num sup {
+    font-size: 11px;
+    color: var(--mint-darker);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    margin-left: 2px;
+    vertical-align: 14px;
+  }
+  /* Satellite dot sitting on the ring */
+  .orb .sat {
+    position: absolute;
+    top: -4px; right: 6px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: #5AB87E;
+    box-shadow: 0 0 0 3px rgba(90,184,126,0.25), 0 0 0 6px rgba(90,184,126,0.12);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 50% { box-shadow: 0 0 0 5px rgba(90,184,126,0), 0 0 0 10px rgba(90,184,126,0); } }
+
+  /* Active step glow */
+  .step.active .orb::before {
+    content: '';
+    position: absolute; inset: -12px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(90,184,126,0.35) 0%, transparent 65%);
+    animation: glow 2.4s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes glow { 50% { transform: scale(1.1); opacity: 0.7; } }
+
+  .step.done .orb .num::before {
+    content: '✓';
+    color: #1A1A1A;
+  }
+  .step.done .orb .num { font-size: 0; }
+  .step.done .orb .num::before { font-size: 30px; font-weight: 500; }
+  .step.done .orb .ring > div { background: linear-gradient(135deg, #A2DBB6 0%, #5AB87E 100%); }
+
+  .eyebrow {
+    font-family: 'SF Mono',Menlo,monospace;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--mint-darker);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .step h3 {
+    font-family: var(--font-heading);
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: #1A1A1A;
+    margin-bottom: 6px;
+  }
+  .step p {
+    font-family: var(--font-body);
+    font-size: 12px;
+    line-height: 1.55;
+    color: #666;
+    margin-bottom: 10px;
+    padding: 0 4px;
+  }
+  .dur {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-family: 'SF Mono',Menlo,monospace;
+    font-size: 10px;
+    color: #1A1A1A;
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(90,184,126,0.25);
+    padding: 4px 9px;
+    border-radius: 999px;
+  }
+  .dur::before {
+    content: '';
+    width: 5px; height: 5px; border-radius: 50%;
+    background: #5AB87E;
+  }
+
+  /* Header */
+  .hd { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; padding: 0 6px; }
+  .hd .lbl { font-family: 'SF Mono',Menlo,monospace; font-size: 10px; color: #1A1A1A; font-weight: 600; letter-spacing: 0.12em; }
+  .hd .meta { font-family: 'SF Mono',Menlo,monospace; font-size: 10px; color: #888; }
+
+  .foot {
+    margin-top: 18px;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(90,184,126,0.15);
+    border-radius: 14px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'SF Mono',Menlo,monospace;
+    font-size: 11px;
+    color: #555;
+  }
+  .foot b { font-family: var(--font-heading); color: #1A1A1A; font-weight: 600; }
+</style></head>
+<body><div class="card tight">
+  <div class="hd">
+    <span class="lbl">NOTRE PROCESSUS · 04 ÉTAPES</span>
+    <span class="meta">~8 semaines · itératif</span>
+  </div>
+
+  <div class="process">
+
+    <!-- Connecting animated path between orbs -->
+    <div class="track">
+      <svg viewBox="0 0 600 60" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="flow" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#5AB87E"/>
+            <stop offset="50%" stop-color="#A2DBB6"/>
+            <stop offset="100%" stop-color="#C8ECDA"/>
+          </linearGradient>
+        </defs>
+        <path d="M 0 30 C 100 -10, 200 70, 300 30 S 500 -10, 600 30"/>
+      </svg>
+    </div>
+
+    <div class="grid-steps">
+
+      <div class="step done">
+        <div class="orb">
+          <div class="ring"><div><div class="num">01</div></div></div>
+          <div class="sat"></div>
+        </div>
+        <div class="eyebrow">01 · Kickoff</div>
+        <h3>Découverte</h3>
+        <p>Atelier d'immersion, audit de l'existant, objectifs chiffrés.</p>
+        <span class="dur">1 semaine</span>
+      </div>
+
+      <div class="step active">
+        <div class="orb">
+          <div class="ring"><div><div class="num">02</div></div></div>
+          <div class="sat"></div>
+        </div>
+        <div class="eyebrow">02 · En cours</div>
+        <h3>Stratégie</h3>
+        <p>Positionnement, archi info, wireframes low-fi validés.</p>
+        <span class="dur">2 semaines</span>
+      </div>
+
+      <div class="step">
+        <div class="orb">
+          <div class="ring"><div><div class="num">03</div></div></div>
+        </div>
+        <div class="eyebrow">03 · À venir</div>
+        <h3>Design</h3>
+        <p>Direction artistique, UI kit, maquettes haute fidélité.</p>
+        <span class="dur">3 semaines</span>
+      </div>
+
+      <div class="step">
+        <div class="orb">
+          <div class="ring"><div><div class="num">04</div></div></div>
+        </div>
+        <div class="eyebrow">04 · À venir</div>
+        <h3>Livraison</h3>
+        <p>Intégration, tests cross-device, formation &amp; mise en ligne.</p>
+        <span class="dur">2 semaines</span>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>Progression · <b>25%</b> · semaine 3 / 8</span>
+    <span>Prochaine revue → <b>jeudi 14h</b></span>
+  </div>
+</div></body></html>

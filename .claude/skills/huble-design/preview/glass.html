@@ -1,0 +1,149 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_shared.css">
+<style>
+  /* A busy, high-contrast backdrop so each glass tier reads differently */
+  body {
+    background:
+      radial-gradient(circle at 15% 25%, #A2DBB6 0%, transparent 45%),
+      radial-gradient(circle at 85% 15%, #5AB87E 0%, transparent 40%),
+      radial-gradient(circle at 70% 85%, #C8ECDA 0%, transparent 45%),
+      radial-gradient(circle at 20% 90%, #7BC99A 0%, transparent 45%),
+      #E5F5EC;
+  }
+  .card { padding: 22px; }
+  .tier {
+    position: relative;
+    border-radius: 20px;
+    padding: 14px;
+    min-height: 128px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: var(--font-heading);
+    overflow: hidden;
+    transition: transform .3s var(--ease-smooth);
+  }
+  .tier:hover { transform: translateY(-2px); }
+  .tier .tag {
+    position: absolute; top: 10px; right: 10px;
+    font-size: 9px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 8px; border-radius: 999px;
+    background: rgba(26,26,26,0.82); color: #fff;
+  }
+  .tier .name { font-size: 13px; font-weight: 700; color: #1A1A1A; }
+  .tier .hex  { font-family: 'SF Mono','Menlo',monospace; font-size: 10px; opacity: .75; color: #1A1A1A; margin-top: 2px; }
+  .meter {
+    display: flex; gap: 6px; align-items: center;
+    font-family: 'SF Mono','Menlo',monospace;
+    font-size: 9px; color: #1A1A1A;
+  }
+  .bar {
+    flex: 1; height: 4px; border-radius: 2px;
+    background: rgba(26,26,26,0.15);
+    overflow: hidden;
+  }
+  .bar > i { display: block; height: 100%; background: #1A1A1A; border-radius: 2px; }
+
+  /* Tier 1 — Frost: lightest, almost invisible, floating shapes */
+  .t-frost {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(6px) saturate(130%);
+    -webkit-backdrop-filter: blur(6px) saturate(130%);
+    border: 1px solid rgba(255,255,255,0.25);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.35);
+  }
+  /* Tier 2 — Mist: default utility glass */
+  .t-mist {
+    background: rgba(255,255,255,0.45);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border: 1px solid rgba(255,255,255,0.4);
+    box-shadow: 0 4px 18px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.5);
+  }
+  /* Tier 3 — Cream: strong glass — cards / service tiles */
+  .t-cream {
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    border: 1px solid rgba(255,255,255,0.5);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.6);
+  }
+  /* Tier 4 — Solid: near-opaque panel, max readability */
+  .t-solid {
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(28px) saturate(160%);
+    -webkit-backdrop-filter: blur(28px) saturate(160%);
+    border: 1px solid rgba(255,255,255,0.6);
+    box-shadow: 0 10px 36px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.7);
+  }
+  /* Tier 5 — Mint tint: brand-flavoured glass */
+  .t-tint {
+    background: rgba(162,219,182,0.28);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid rgba(162,219,182,0.5);
+    box-shadow: 0 4px 18px rgba(90,184,126,0.18), inset 0 1px 0 rgba(255,255,255,0.45);
+  }
+  /* Tier 6 — Dark glass: on-mint surface, dialogs/tooltips */
+  .t-dark {
+    background: rgba(26,26,26,0.55);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.12);
+  }
+  .t-dark .name, .t-dark .hex, .t-dark .meter { color: #fff; }
+  .t-dark .tag { background: rgba(255,255,255,0.22); }
+  .t-dark .bar { background: rgba(255,255,255,0.2); }
+  .t-dark .bar > i { background: #A2DBB6; }
+</style></head>
+<body><div class="card">
+  <div class="row" style="margin-bottom:14px;justify-content:space-between">
+    <span class="label" style="background:rgba(255,255,255,0.7);padding:4px 10px;border-radius:999px">Glass tiers</span>
+    <span class="mono" style="font-size:10px;background:rgba(255,255,255,0.7);padding:4px 8px;border-radius:999px">6 tiers · α + blur + saturate</span>
+  </div>
+
+  <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:10px">
+
+    <div class="tier t-frost">
+      <span class="tag">01</span>
+      <div><div class="name">Frost</div><div class="hex">#FFF · α 15 · blur 6</div></div>
+      <div class="meter">α<div class="bar"><i style="width:15%"></i></div>blur<div class="bar"><i style="width:20%"></i></div></div>
+    </div>
+
+    <div class="tier t-mist">
+      <span class="tag">02</span>
+      <div><div class="name">Mist</div><div class="hex">#FFF · α 45 · blur 14</div></div>
+      <div class="meter">α<div class="bar"><i style="width:45%"></i></div>blur<div class="bar"><i style="width:45%"></i></div></div>
+    </div>
+
+    <div class="tier t-cream">
+      <span class="tag">03 ★</span>
+      <div><div class="name">Cream</div><div class="hex">#FFF · α 75 · blur 20</div></div>
+      <div class="meter">α<div class="bar"><i style="width:75%"></i></div>blur<div class="bar"><i style="width:66%"></i></div></div>
+    </div>
+
+    <div class="tier t-solid">
+      <span class="tag">04</span>
+      <div><div class="name">Solid</div><div class="hex">#FFF · α 92 · blur 28</div></div>
+      <div class="meter">α<div class="bar"><i style="width:92%"></i></div>blur<div class="bar"><i style="width:92%"></i></div></div>
+    </div>
+
+    <div class="tier t-tint">
+      <span class="tag">tint</span>
+      <div><div class="name">Mint tint</div><div class="hex">#A2DBB6 · α 28 · blur 16</div></div>
+      <div class="meter">α<div class="bar"><i style="width:28%;background:#5AB87E"></i></div>blur<div class="bar"><i style="width:52%;background:#5AB87E"></i></div></div>
+    </div>
+
+    <div class="tier t-dark">
+      <span class="tag">dark</span>
+      <div><div class="name">Ink</div><div class="hex">#1A1A1A · α 55 · blur 18</div></div>
+      <div class="meter">α<div class="bar"><i style="width:55%"></i></div>blur<div class="bar"><i style="width:60%"></i></div></div>
+    </div>
+
+  </div>
+
+  <div class="mono" style="margin-top:12px;font-size:10px;background:rgba(255,255,255,0.7);padding:8px 12px;border-radius:10px;color:#1A1A1A">
+    <b style="font-family:var(--font-heading)">Usage</b> — Frost: hero floating shapes · Mist: nav scrolled · <b>Cream ★</b>: default cards & forms · Solid: modals · Mint tint: highlights · Ink: tooltips on light
+  </div>
+</div></body></html>

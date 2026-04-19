@@ -1,0 +1,488 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_shared.css">
+<style>
+  body {
+    background:
+      radial-gradient(circle at 15% 20%, #E5F5EC 0%, transparent 55%),
+      radial-gradient(circle at 85% 80%, #C8ECDA 0%, transparent 50%),
+      #FFFFFF;
+    min-height: 100vh;
+  }
+  .hd { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:16px; }
+
+  .sec { margin-bottom: 22px; }
+  .sec-title {
+    font-family: 'SF Mono',Menlo,monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: var(--mint-darker);
+    margin-bottom: 10px;
+    display:flex; justify-content:space-between;
+  }
+  .sec-title span:last-child { color:#888; letter-spacing:0.04em; }
+
+  .stage {
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(90,184,126,0.12);
+    border-radius: 16px;
+    padding: 22px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-items: center;
+    justify-content: center;
+  }
+  .stage.ink { background:#1A1A1A; border-color: rgba(255,255,255,0.06); }
+
+  /* ===== 01 — LIQUID / JELLY ===== */
+  .btn-liquid {
+    position: relative;
+    padding: 16px 32px;
+    border: 0;
+    border-radius: 999px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 15px;
+    color: #1A1A1A;
+    background: linear-gradient(135deg, #C8ECDA, #A2DBB6 60%, #5AB87E);
+    box-shadow:
+      inset 0 -6px 14px rgba(62,154,98,0.35),
+      inset 0 3px 6px rgba(255,255,255,0.9),
+      0 14px 30px -10px rgba(90,184,126,0.6);
+    cursor: pointer;
+    transition: transform .25s var(--ease-smooth);
+    overflow: hidden;
+  }
+  .btn-liquid::before {
+    content:'';
+    position:absolute; top:6px; left:14%; right:14%; height: 12px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 999px;
+    filter: blur(4px);
+  }
+  .btn-liquid:hover { transform: translateY(-3px) scale(1.02); }
+  .btn-liquid:active { transform: translateY(1px) scale(0.98); }
+
+  /* ===== 02 — OUTLINE DRAW-ON ===== */
+  .btn-draw {
+    position: relative;
+    padding: 14px 28px;
+    border: 0;
+    background: transparent;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 14px;
+    color: #1A1A1A;
+    cursor: pointer;
+    border-radius: 999px;
+  }
+  .btn-draw svg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    overflow: visible;
+  }
+  .btn-draw rect {
+    stroke: #1A1A1A;
+    stroke-width: 2;
+    fill: transparent;
+    rx: 999;
+    stroke-dasharray: 320;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset .8s var(--ease-smooth), stroke .4s;
+  }
+  .btn-draw:hover rect { stroke: #5AB87E; stroke-dashoffset: -640; }
+
+  /* ===== 03 — SHIMMER / ASPHALT ===== */
+  .btn-shimmer {
+    position: relative;
+    padding: 14px 30px;
+    border: 0;
+    border-radius: 999px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 14px;
+    color: #fff;
+    background: linear-gradient(90deg, #1A1A1A, #2D2D2D, #1A1A1A);
+    cursor: pointer;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .btn-shimmer::after {
+    content:'';
+    position:absolute; inset:0;
+    background: linear-gradient(120deg, transparent 30%, rgba(162,219,182,0.6) 50%, transparent 70%);
+    transform: translateX(-100%);
+    animation: shimmer 2.4s ease-in-out infinite;
+  }
+  @keyframes shimmer { to { transform: translateX(100%); } }
+
+  /* ===== 04 — DOUBLE LAYER OFFSET ===== */
+  .btn-stack {
+    position: relative;
+    padding: 13px 28px;
+    border: 2px solid #1A1A1A;
+    border-radius: 4px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 14px;
+    color: #1A1A1A;
+    background: #A2DBB6;
+    cursor: pointer;
+    transition: transform .2s var(--ease-smooth), box-shadow .2s;
+    box-shadow: 5px 5px 0 #1A1A1A;
+  }
+  .btn-stack:hover { transform: translate(-2px,-2px); box-shadow: 7px 7px 0 #1A1A1A; }
+  .btn-stack:active { transform: translate(4px,4px); box-shadow: 1px 1px 0 #1A1A1A; }
+
+  /* ===== 05 — SEGMENT SPLIT ===== */
+  .btn-split {
+    display:inline-flex;
+    border-radius: 999px;
+    overflow: hidden;
+    border: 1.5px solid rgba(90,184,126,0.4);
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 6px 16px -4px rgba(90,184,126,0.25);
+  }
+  .btn-split button {
+    padding: 12px 22px;
+    border: 0;
+    background: transparent;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 13px;
+    color: #1A1A1A;
+    cursor: pointer;
+    transition: .25s;
+  }
+  .btn-split button + button { border-left: 1.5px solid rgba(90,184,126,0.25); padding: 12px 14px; }
+  .btn-split button:first-child:hover { background: #1A1A1A; color:#fff; }
+  .btn-split .main { padding-right: 18px; }
+
+  /* ===== 06 — TICKET / STAMP ===== */
+  .btn-ticket {
+    position: relative;
+    padding: 14px 32px 14px 40px;
+    border: 0;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 14px;
+    color: #1A1A1A;
+    background: #fff;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 10px 24px -10px rgba(0,0,0,0.2);
+  }
+  .btn-ticket::before,
+  .btn-ticket::after {
+    content:''; position:absolute;
+    width: 16px; height:16px;
+    background: #F4FBF6;
+    border-radius: 50%;
+    top: 50%; transform: translateY(-50%);
+  }
+  .btn-ticket::before { left: -8px; }
+  .btn-ticket::after { right: -8px; }
+  .btn-ticket .stamp {
+    position: absolute; left: 10px; top:50%; transform: translateY(-50%);
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: #A2DBB6;
+    display: grid; place-items: center;
+    font-size: 10px;
+    animation: ticket-pulse 2s ease-in-out infinite;
+  }
+  @keyframes ticket-pulse { 50% { box-shadow: 0 0 0 6px rgba(162,219,182,0.3); } }
+
+  /* ===== 07 — CIRCULAR REVEAL ===== */
+  .btn-reveal {
+    position: relative;
+    padding: 14px 30px;
+    border: 1.5px solid #1A1A1A;
+    border-radius: 999px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 14px;
+    color: #1A1A1A;
+    background: transparent;
+    cursor: pointer;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .btn-reveal::before {
+    content:'';
+    position: absolute;
+    top:50%; left:50%;
+    width: 0; height: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #A2DBB6, #5AB87E);
+    transform: translate(-50%,-50%);
+    transition: width .5s var(--ease-smooth), height .5s var(--ease-smooth);
+    z-index: -1;
+  }
+  .btn-reveal:hover::before { width: 260px; height: 260px; }
+
+  /* ===== 08 — ORBITAL / LOADING ===== */
+  .btn-orbit {
+    position: relative;
+    padding: 14px 34px 14px 44px;
+    border-radius: 999px;
+    border: 0;
+    background: linear-gradient(135deg, #A2DBB6, #7BC99A);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 14px;
+    color: #1A1A1A;
+    cursor: pointer;
+    box-shadow: 0 10px 24px -8px rgba(90,184,126,0.5);
+  }
+  .btn-orbit .loader {
+    position: absolute;
+    left: 14px; top: 50%;
+    width: 18px; height: 18px;
+    transform: translateY(-50%);
+  }
+  .btn-orbit .loader::before {
+    content:'';
+    position: absolute; inset: 0;
+    border: 2px solid rgba(26,26,26,0.2);
+    border-top-color: #1A1A1A;
+    border-radius: 50%;
+    animation: spin 0.9s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ===== 09 — KBD / TERMINAL ===== */
+  .btn-kbd {
+    display:inline-flex; align-items:center; gap:10px;
+    padding: 10px 12px 10px 16px;
+    border: 1.5px solid rgba(90,184,126,0.3);
+    border-radius: 10px;
+    background: rgba(244,251,246,0.8);
+    backdrop-filter: blur(8px);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 13px;
+    color: #1A1A1A;
+    cursor: pointer;
+    transition: .25s;
+  }
+  .btn-kbd:hover { border-color: var(--mint-darker); background:#fff; }
+  .btn-kbd kbd {
+    font-family: 'SF Mono',Menlo,monospace;
+    font-size: 10px;
+    padding: 3px 6px;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-bottom-width: 2px;
+    border-radius: 5px;
+    color: #555;
+  }
+
+  /* ===== 10 — ICON-MAGNET (circular) ===== */
+  .btn-magnet {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    border: 0;
+    background:
+      radial-gradient(circle at 30% 30%, #fff 0%, #A2DBB6 40%, #5AB87E 100%);
+    display: grid; place-items: center;
+    cursor: pointer;
+    box-shadow:
+      inset 0 2px 4px rgba(255,255,255,0.9),
+      inset 0 -6px 12px rgba(62,154,98,0.4),
+      0 12px 30px -8px rgba(90,184,126,0.6);
+    transition: transform .3s var(--ease-smooth);
+  }
+  .btn-magnet:hover { transform: scale(1.08) rotate(8deg); }
+
+  /* ===== 11 — BRUTALIST TAG ===== */
+  .btn-tag {
+    position:relative;
+    padding: 10px 18px 10px 28px;
+    background: #1A1A1A;
+    color: #A2DBB6;
+    font-family: 'SF Mono',Menlo,monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 0;
+    cursor: pointer;
+    clip-path: polygon(10px 0, 100% 0, 100% 100%, 10px 100%, 0 50%);
+  }
+  .btn-tag::before {
+    content:'';
+    position: absolute;
+    left: 10px; top:50%;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: #A2DBB6;
+    transform: translateY(-50%);
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse { 50% { box-shadow: 0 0 0 4px rgba(162,219,182,0.2); } }
+
+  /* ===== 12 — FLIP CARD ===== */
+  .btn-flip {
+    perspective: 500px;
+    background: transparent;
+    border:0;
+    padding:0;
+    cursor: pointer;
+  }
+  .btn-flip .flip-inner {
+    position: relative;
+    width: 180px; height: 46px;
+    transform-style: preserve-3d;
+    transition: transform .6s var(--ease-smooth);
+  }
+  .btn-flip:hover .flip-inner { transform: rotateX(180deg); }
+  .flip-face {
+    position: absolute; inset: 0;
+    backface-visibility: hidden;
+    border-radius: 999px;
+    display: grid; place-items: center;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .flip-face.front { background: #fff; color:#1A1A1A; border: 1.5px solid #1A1A1A; }
+  .flip-face.back  { background: linear-gradient(135deg,#A2DBB6,#5AB87E); color:#1A1A1A; transform: rotateX(180deg); }
+
+  .caption {
+    margin-top: 8px;
+    font-family: 'SF Mono',Menlo,monospace;
+    font-size: 9px;
+    color: #888;
+    letter-spacing: 0.08em;
+    text-align: center;
+    width: 100%;
+    flex-basis: 100%;
+    display: none;
+  }
+
+  .grid-ex {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .ex-cell {
+    background: rgba(255,255,255,0.65);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(90,184,126,0.12);
+    border-radius: 14px;
+    padding: 22px 14px 18px;
+    display: grid;
+    place-items: center;
+    min-height: 120px;
+    position: relative;
+  }
+  .ex-cell.ink { background: #1A1A1A; border-color: rgba(255,255,255,0.08); }
+  .ex-cell .name {
+    position: absolute;
+    top: 8px; left: 12px;
+    font-family: 'SF Mono',Menlo,monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    color: var(--mint-darker);
+    font-weight: 600;
+  }
+  .ex-cell.ink .name { color: #A2DBB6; }
+  .ex-cell .idx {
+    position: absolute;
+    top: 8px; right: 12px;
+    font-family: 'SF Mono',Menlo,monospace;
+    font-size: 9px;
+    color: #aaa;
+  }
+  .ex-cell.ink .idx { color: #666; }
+</style></head>
+<body><div class="card">
+  <div class="hd">
+    <span class="label">Buttons · exotic set</span>
+    <span class="mono" style="font-size:10px">12 variants · hover each one</span>
+  </div>
+
+  <div class="grid-ex">
+
+    <div class="ex-cell">
+      <span class="name">LIQUID</span><span class="idx">01</span>
+      <button class="btn-liquid">Goutte de mint</button>
+    </div>
+
+    <div class="ex-cell">
+      <span class="name">DRAW-ON</span><span class="idx">02</span>
+      <button class="btn-draw">
+        <svg><rect x="1" y="1" width="calc(100% - 2px)" height="calc(100% - 2px)" rx="999"/></svg>
+        <span>Trace la ligne</span>
+      </button>
+    </div>
+
+    <div class="ex-cell ink">
+      <span class="name">SHIMMER</span><span class="idx">03</span>
+      <button class="btn-shimmer">Reflet mint</button>
+    </div>
+
+    <div class="ex-cell">
+      <span class="name">STACK</span><span class="idx">04</span>
+      <button class="btn-stack">Neo-brutal</button>
+    </div>
+
+    <div class="ex-cell">
+      <span class="name">SPLIT</span><span class="idx">05</span>
+      <div class="btn-split">
+        <button class="main">Réserver</button>
+        <button>▼</button>
+      </div>
+    </div>
+
+    <div class="ex-cell">
+      <span class="name">TICKET</span><span class="idx">06</span>
+      <button class="btn-ticket"><span class="stamp"></span>Réserver une place</button>
+    </div>
+
+    <div class="ex-cell">
+      <span class="name">REVEAL</span><span class="idx">07</span>
+      <button class="btn-reveal">Cercle de mint</button>
+    </div>
+
+    <div class="ex-cell">
+      <span class="name">LOADING</span><span class="idx">08</span>
+      <button class="btn-orbit"><span class="loader"></span>Envoi en cours</button>
+    </div>
+
+    <div class="ex-cell">
+      <span class="name">KBD</span><span class="idx">09</span>
+      <button class="btn-kbd">Recherche <kbd>⌘</kbd><kbd>K</kbd></button>
+    </div>
+
+    <div class="ex-cell ink">
+      <span class="name">MAGNET</span><span class="idx">10</span>
+      <button class="btn-magnet" aria-label="Like">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+
+    <div class="ex-cell">
+      <span class="name">TAG</span><span class="idx">11</span>
+      <button class="btn-tag">Disponible · Q1</button>
+    </div>
+
+    <div class="ex-cell">
+      <span class="name">FLIP</span><span class="idx">12</span>
+      <button class="btn-flip">
+        <div class="flip-inner">
+          <div class="flip-face front">Nous contacter</div>
+          <div class="flip-face back">→ Discutons</div>
+        </div>
+      </button>
+    </div>
+
+  </div>
+
+  <div class="mono" style="margin-top:14px;font-size:10px;background:rgba(255,255,255,0.7);padding:10px 14px;border-radius:10px;color:#555">
+    <b style="font-family:var(--font-heading);color:#1A1A1A">Usage</b> — Liquid/Magnet for hero CTAs · Stack/Tag for editorial pages · Shimmer/Reveal for dark sections · Split/Ticket/KBD for utility · Draw/Flip for playful moments
+  </div>
+</div></body></html>

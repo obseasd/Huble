@@ -1,0 +1,75 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_shared.css">
+<style>
+  body { background: linear-gradient(180deg, #fff, var(--mint-lighter)); }
+  .stop {
+    position: relative;
+    height: 120px;
+    border-radius: 18px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: var(--font-heading);
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+    transition: transform .3s var(--ease-smooth), box-shadow .3s var(--ease-smooth);
+  }
+  .stop:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(162,219,182,0.25); }
+  .stop .num { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; opacity: 0.7; }
+  .stop .name { font-size: 14px; font-weight: 700; }
+  .stop .hex { font-family: 'SF Mono','Menlo',monospace; font-size: 11px; font-weight: 500; opacity: 0.8; }
+  .stop.star::after {
+    content: '★'; position: absolute; top: 10px; right: 12px;
+    font-size: 11px; font-weight: 700;
+  }
+  .meta {
+    font-family: 'SF Mono','Menlo',monospace;
+    font-size: 10px;
+    color: var(--gray);
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+</style></head>
+<body><div class="card">
+  <div class="row" style="margin-bottom:14px;justify-content:space-between">
+    <span class="label">Mint scale · primary brand</span>
+    <span class="mono" style="font-size:10px">7 stops · oklch-tuned</span>
+  </div>
+
+  <div class="grid" style="grid-template-columns:repeat(7,1fr);gap:10px">
+    <div class="stop" style="background:#F4FBF6;color:var(--mint-darker);border:1px solid rgba(90,184,126,0.15)">
+      <div class="num">50</div>
+      <div class="col" style="gap:2px"><div class="name">Whisper</div><div class="hex">#F4FBF6</div></div>
+    </div>
+    <div class="stop" style="background:var(--mint-lighter);color:var(--mint-darker)">
+      <div class="num">100</div>
+      <div class="col" style="gap:2px"><div class="name">Lighter</div><div class="hex">#E5F5EC</div></div>
+    </div>
+    <div class="stop" style="background:var(--mint-light);color:#1A1A1A">
+      <div class="num">200</div>
+      <div class="col" style="gap:2px"><div class="name">Light</div><div class="hex">#C8ECDA</div></div>
+    </div>
+    <div class="stop star" style="background:var(--mint);color:#1A1A1A;box-shadow:0 6px 20px rgba(162,219,182,0.45)">
+      <div class="num">400</div>
+      <div class="col" style="gap:2px"><div class="name">Mint</div><div class="hex">#A2DBB6</div></div>
+    </div>
+    <div class="stop" style="background:var(--mint-dark);color:#1A1A1A">
+      <div class="num">500</div>
+      <div class="col" style="gap:2px"><div class="name">Dark</div><div class="hex">#7BC99A</div></div>
+    </div>
+    <div class="stop" style="background:var(--mint-darker);color:#fff">
+      <div class="num">600</div>
+      <div class="col" style="gap:2px"><div class="name">Darker</div><div class="hex">#5AB87E</div></div>
+    </div>
+    <div class="stop" style="background:#3E9A62;color:#fff">
+      <div class="num">700</div>
+      <div class="col" style="gap:2px"><div class="name">Deep</div><div class="hex">#3E9A62</div></div>
+    </div>
+  </div>
+
+  <div class="meta">
+    <span>★ brand anchor · #A2DBB6</span>
+    <span>AA text on 600+ · AA large on 400</span>
+  </div>
+</div></body></html>

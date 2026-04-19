@@ -1,0 +1,348 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_shared.css">
+<style>
+  body { background: #F4FBF6; min-height: 100vh; }
+  .hd { display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 14px; }
+
+  .stage {
+    position: relative;
+    height: 520px;
+    border-radius: 28px;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at 20% 30%, #E5F5EC 0%, transparent 50%),
+      radial-gradient(ellipse at 85% 70%, #C8ECDA 0%, transparent 50%),
+      linear-gradient(180deg, #FFFFFF 0%, #F4FBF6 100%);
+    isolation: isolate;
+    box-shadow: 0 40px 80px -30px rgba(90,184,126,0.3), 0 10px 30px -10px rgba(0,0,0,0.06);
+  }
+
+  /* ============ ANIMATED LAYERS ============ */
+
+  /* Grid backdrop */
+  .grid-bg {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(90,184,126,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(90,184,126,0.08) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+    z-index: 0;
+  }
+
+  /* Aurora blobs */
+  @keyframes drift1 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(40px,-30px) scale(1.1)} }
+  @keyframes drift2 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-50px,25px) scale(1.15)} }
+  @keyframes drift3 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(30px,40px) scale(0.9)} }
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    z-index: 1;
+    mix-blend-mode: multiply;
+  }
+  .b1 { width:320px; height:320px; top:-60px; right:-40px; background:#A2DBB6; opacity:.55; animation: drift1 14s ease-in-out infinite; }
+  .b2 { width:280px; height:280px; bottom:-80px; left:-60px; background:#7BC99A; opacity:.4; animation: drift2 18s ease-in-out infinite; }
+  .b3 { width:200px; height:200px; top:40%; left:40%; background:#5AB87E; opacity:.25; animation: drift3 12s ease-in-out infinite; }
+
+  /* Floating geometric elements */
+  @keyframes float1 { 0%,100%{transform:translateY(0) rotate(12deg)} 50%{transform:translateY(-14px) rotate(18deg)} }
+  @keyframes float2 { 0%,100%{transform:translateY(0) rotate(-8deg)} 50%{transform:translateY(10px) rotate(-14deg)} }
+  @keyframes orbit  { to { transform: rotate(360deg); } }
+  @keyframes spin   { to { transform: rotate(360deg); } }
+
+  .glass {
+    position: absolute;
+    border-radius: 22px;
+    background: rgba(255,255,255,0.55);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border: 1px solid rgba(255,255,255,0.7);
+    box-shadow: 0 20px 40px -16px rgba(90,184,126,0.3), inset 0 1px 0 rgba(255,255,255,0.8);
+    z-index: 3;
+  }
+
+  .disc {
+    position: absolute;
+    z-index: 2;
+    border-radius: 50%;
+  }
+
+  /* Orbiting dashed ring */
+  .ring {
+    position: absolute;
+    top: 52px; right: 56px;
+    width: 140px; height: 140px;
+    border: 1.5px dashed rgba(90,184,126,0.45);
+    border-radius: 50%;
+    z-index: 2;
+    animation: spin 22s linear infinite;
+  }
+  .ring::before {
+    content:''; position:absolute;
+    top:-5px; left:50%; transform:translateX(-50%);
+    width: 10px; height: 10px; border-radius:50%;
+    background:#5AB87E;
+    box-shadow: 0 0 0 4px rgba(90,184,126,0.2);
+  }
+  .ring::after {
+    content:''; position:absolute;
+    bottom:-3px; right:12%;
+    width: 6px; height:6px; border-radius:50%;
+    background:#A2DBB6;
+  }
+
+  /* Stat chip glass */
+  .chip-card {
+    top: 70px; right: 36px;
+    width: 180px;
+    padding: 14px 16px;
+    animation: float1 9s ease-in-out infinite;
+  }
+  .chip-card .k { font-family:'SF Mono',Menlo,monospace; font-size:9px; font-weight:600; letter-spacing:0.14em; color:var(--mint-darker); }
+  .chip-card .v { font-family: var(--font-heading); font-size:28px; font-weight:600; color:#1A1A1A; letter-spacing:-0.02em; line-height:1; margin:6px 0 3px; }
+  .chip-card .v small { font-size:13px; color:var(--mint-darker); font-weight:500; }
+  .chip-card .t { font-family: var(--font-body); font-size:10px; color:#666; }
+  .chip-card .spark {
+    display:flex; align-items:end; gap:2px; height: 22px; margin-top:8px;
+  }
+  .chip-card .spark i {
+    flex:1;
+    background: linear-gradient(180deg,#A2DBB6,#5AB87E);
+    border-radius: 2px;
+  }
+
+  /* Avatar stack card */
+  .avatar-card {
+    bottom: 60px; right: 46px;
+    width: 200px;
+    padding: 12px 14px;
+    animation: float2 11s ease-in-out infinite;
+  }
+  .avatars { display:flex; align-items:center; margin-bottom: 8px; }
+  .avatars .a {
+    width: 28px; height: 28px; border-radius: 50%;
+    border: 2px solid #fff;
+    margin-left: -8px;
+    font-family: var(--font-heading); font-weight:600; font-size:11px;
+    display:grid; place-items:center;
+    color: #fff;
+  }
+  .avatars .a:first-child { margin-left:0; }
+  .avatars .stars { margin-left:auto; font-size:11px; color:#F5B800; }
+  .avatar-card .t { font-family: var(--font-body); font-size:11px; color:#1A1A1A; line-height:1.4; }
+  .avatar-card .t b { color:var(--mint-darker); font-weight:600; }
+
+  /* Floating mini disc */
+  .disc-mint {
+    top: 38%; left: 60px;
+    width: 56px; height: 56px;
+    background: radial-gradient(circle at 30% 30%, #fff 0%, #A2DBB6 45%, #5AB87E 100%);
+    box-shadow: 0 12px 24px -6px rgba(90,184,126,0.5), inset 0 2px 4px rgba(255,255,255,0.7);
+    animation: float1 7s ease-in-out infinite;
+  }
+  .disc-mint::before {
+    content:'✦'; position:absolute; inset:0;
+    display:grid; place-items:center;
+    font-size: 18px; color: #1A1A1A;
+  }
+
+  /* Tiny tag */
+  .mini-tag {
+    position: absolute;
+    bottom: 80px; left: 46px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: #1A1A1A;
+    color: #A2DBB6;
+    font-family: 'SF Mono',Menlo,monospace;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.1em;
+    z-index: 3;
+    display:inline-flex; align-items:center; gap:6px;
+    animation: float2 10s ease-in-out infinite;
+  }
+  .mini-tag::before { content:''; width:6px; height:6px; border-radius:50%; background:#5AB87E; box-shadow: 0 0 0 3px rgba(90,184,126,0.3); }
+
+  /* ============ FOREGROUND COPY ============ */
+  .frame {
+    position: relative;
+    z-index: 5;
+    height: 100%;
+    padding: 56px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 60%;
+  }
+  .eyebrow {
+    font-family: 'SF Mono',Menlo,monospace;
+    font-size: 10px; font-weight: 600; letter-spacing: 0.2em;
+    color: var(--mint-darker);
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 5px 12px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 999px;
+    border: 1px solid rgba(90,184,126,0.3);
+    width: fit-content;
+    margin-bottom: 18px;
+  }
+  .eyebrow::before { content:''; width:6px; height:6px; border-radius:50%; background:#5AB87E; animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 50% { box-shadow: 0 0 0 5px rgba(90,184,126,0); } }
+
+  h1.hero {
+    font-family: var(--font-heading);
+    font-size: 62px; font-weight: 500;
+    letter-spacing: -0.035em;
+    line-height: 0.98;
+    color: #1A1A1A;
+    margin-bottom: 18px;
+    max-width: 12ch;
+  }
+  h1.hero em {
+    font-style: italic; font-weight: 400;
+    background: linear-gradient(135deg,#5AB87E 0%,#3E9A62 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    position: relative;
+    display: inline-block;
+  }
+  h1.hero em::after {
+    content:'';
+    position: absolute;
+    left: 0; right: 0; bottom: 4px;
+    height: 10px;
+    background: rgba(162,219,182,0.4);
+    z-index: -1;
+    border-radius: 4px;
+  }
+
+  p.lede {
+    font-family: var(--font-body);
+    font-size: 16px; line-height: 1.6;
+    color: #555;
+    max-width: 42ch;
+    margin-bottom: 26px;
+  }
+
+  .ctas { display:flex; gap: 10px; align-items: center; }
+  .cta-primary {
+    display: inline-flex; align-items:center; gap:10px;
+    font-family: var(--font-heading);
+    font-size: 14px; font-weight: 600;
+    padding: 14px 22px;
+    border-radius: 999px;
+    background: #1A1A1A;
+    color: #fff;
+    text-decoration: none;
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .cta-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -8px rgba(0,0,0,0.3); }
+  .cta-primary .arr { transition: transform .25s ease; }
+  .cta-primary:hover .arr { transform: translateX(3px); }
+
+  .cta-ghost {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-heading);
+    font-size: 13px; font-weight: 500;
+    color: #1A1A1A;
+    text-decoration: none;
+    padding: 13px 18px;
+    border-radius: 999px;
+    border: 1.5px solid rgba(26,26,26,0.15);
+    background: rgba(255,255,255,0.5);
+    transition: all .25s ease;
+  }
+  .cta-ghost:hover { background:#fff; border-color:#1A1A1A; }
+  .cta-ghost .play {
+    width: 20px; height: 20px; border-radius:50%;
+    background: #A2DBB6;
+    display:grid; place-items:center;
+    font-size: 9px;
+  }
+
+  /* Marquee strip across bottom */
+  .marquee {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 34px;
+    z-index: 4;
+    background: rgba(26,26,26,0.92);
+    backdrop-filter: blur(8px);
+    overflow: hidden;
+    display: flex; align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .marquee-track {
+    display: flex; gap: 44px;
+    animation: slide 28s linear infinite;
+    white-space: nowrap;
+    padding-left: 44px;
+  }
+  @keyframes slide { to { transform: translateX(-50%); } }
+  .marquee span {
+    font-family: 'SF Mono',Menlo,monospace;
+    font-size: 11px;
+    color: #A2DBB6;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .marquee span::before { content:'★ '; color:#5AB87E; }
+</style></head>
+<body><div class="card" style="padding:20px">
+  <div class="hd">
+    <span class="label">Hero · signature composition</span>
+    <span class="mono" style="font-size:10px">aurora + grid + orbit + glass · 8 animated layers</span>
+  </div>
+
+  <div class="stage">
+    <div class="grid-bg"></div>
+
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+
+    <div class="ring"></div>
+
+    <div class="glass disc-mint"></div>
+
+    <div class="glass chip-card">
+      <div class="k">LIGHTHOUSE</div>
+      <div class="v">98<small>/100</small></div>
+      <div class="t">Moyenne · 20 derniers projets</div>
+      <div class="spark">
+        <i style="height:40%"></i><i style="height:60%"></i><i style="height:45%"></i>
+        <i style="height:70%"></i><i style="height:55%"></i><i style="height:80%"></i>
+        <i style="height:65%"></i><i style="height:90%"></i><i style="height:75%"></i>
+        <i style="height:95%"></i>
+      </div>
+    </div>
+
+    <div class="glass avatar-card">
+      <div class="avatars">
+        <div class="a" style="background:linear-gradient(135deg,#A2DBB6,#5AB87E)">CD</div>
+        <div class="a" style="background:linear-gradient(135deg,#FFB86C,#FF7A59)">ML</div>
+        <div class="a" style="background:linear-gradient(135deg,#7BC9FF,#3F76AA)">JK</div>
+        <div class="a" style="background:#1A1A1A;color:#A2DBB6;font-size:9px">+12</div>
+        <div class="stars">★★★★★</div>
+      </div>
+      <div class="t"><b>4,9 / 5</b> · 24 clients satisfaits en 2024</div>
+    </div>
+
+    <div class="frame">
+      <h1 class="hero">On simplifie. <em>Vous brillez.</em></h1>
+      <p class="lede">Sites web, identités visuelles &amp; automatisations IA pensés pour les marques qui refusent le bruit ambiant.</p>
+      <div class="ctas">
+        <a class="cta-primary" href="#">Discutons de votre projet <span class="arr">→</span></a>
+        <a class="cta-ghost" href="#"><span class="play">▶</span>Voir nos cas</a>
+      </div>
+    </div>
+
+    <div class="marquee">
+      <div class="marquee-track">
+        <span>Studio Lumen</span><span>Maison Verte</span><span>Atelier Nord</span><span>Café Prisme</span><span>Édition Korrigan</span><span>Vélo Solaire</span>
+        <span>Studio Lumen</span><span>Maison Verte</span><span>Atelier Nord</span><span>Café Prisme</span><span>Édition Korrigan</span><span>Vélo Solaire</span>
+      </div>
+    </div>
+  </div>
+</div></body></html>

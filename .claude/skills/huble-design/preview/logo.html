@@ -1,0 +1,339 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_shared.css">
+<style>
+  body {
+    background:
+      radial-gradient(circle at 20% 20%, #E5F5EC 0%, transparent 55%),
+      radial-gradient(circle at 80% 80%, #C8ECDA 0%, transparent 50%),
+      #FFFFFF;
+    min-height: 100vh;
+  }
+  .hd { display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 16px; }
+
+  /* Hero mark — wordmark + orbital symbol */
+  .hero {
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(90,184,126,0.15);
+    border-radius: 24px;
+    padding: 40px 30px 34px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(162,219,182,0.4), transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -60px;
+    width: 160px; height: 160px;
+    background: radial-gradient(circle, rgba(90,184,126,0.25), transparent 70%);
+    border-radius: 50%;
+  }
+
+  .logomark {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    z-index: 1;
+  }
+
+  /* The symbol: an 'h' carved out of a mint disc with orbit */
+  .symbol {
+    position: relative;
+    width: 80px; height: 80px;
+  }
+  .symbol svg { display: block; }
+  .symbol .orbit {
+    position: absolute; inset: -8px;
+    border: 1.5px dashed rgba(90,184,126,0.4);
+    border-radius: 50%;
+    animation: spin 12s linear infinite;
+  }
+  .symbol .orbit::before {
+    content: '';
+    position: absolute;
+    top: -4px; left: 50%;
+    transform: translateX(-50%);
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #5AB87E;
+    box-shadow: 0 0 0 3px rgba(90,184,126,0.2);
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .wordmark {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: 64px;
+    color: #1A1A1A;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    display: flex;
+    align-items: baseline;
+  }
+  .wordmark .dot {
+    display: inline-block;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #5AB87E;
+    margin-left: 4px;
+    transform: translateY(-2px);
+  }
+  .wordmark em {
+    font-style: italic;
+    font-weight: 400;
+    background: linear-gradient(135deg, #5AB87E 0%, #3E9A62 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .tagline {
+    margin-top: 14px;
+    font-family: 'SF Mono',Menlo,monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    color: var(--mint-darker);
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Variants grid */
+  .grid3 { display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 14px; }
+  .variant {
+    border-radius: 16px;
+    padding: 22px 16px;
+    display: grid; place-items: center;
+    position: relative;
+    min-height: 110px;
+    transition: transform .3s var(--ease-smooth);
+  }
+  .variant:hover { transform: translateY(-3px); }
+  .variant .tag {
+    position: absolute; top: 8px; left: 10px;
+    font-family: 'SF Mono',Menlo,monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    padding: 3px 7px;
+    border-radius: 999px;
+  }
+  .variant.on-white { background: #fff; border: 1px solid rgba(0,0,0,0.06); }
+  .variant.on-white .tag { background: rgba(0,0,0,0.06); color: #555; }
+  .variant.on-mint { background: var(--mint); }
+  .variant.on-mint .tag { background: rgba(26,26,26,0.15); color: #1A1A1A; }
+  .variant.on-ink { background: #1A1A1A; }
+  .variant.on-ink .tag { background: rgba(255,255,255,0.15); color: #fff; }
+
+  .mini-mark { display:inline-flex; align-items:center; gap:8px; }
+  .mini-mark .wm {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: 32px;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+  }
+  .mini-mark .wm .dot { display:inline-block;width:6px;height:6px;border-radius:50%;margin-left:2px;transform:translateY(-2px); }
+
+  .on-white .wm { color: #1A1A1A; }
+  .on-white .wm .dot { background: #5AB87E; }
+  .on-mint .wm { color: #1A1A1A; }
+  .on-mint .wm .dot { background: #1A1A1A; }
+  .on-ink .wm { color: #fff; }
+  .on-ink .wm .dot { background: #A2DBB6; }
+
+  /* Symbol-only lockup in a circle */
+  .mini-sym {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display:grid; place-items:center;
+    position: relative;
+  }
+  .on-white .mini-sym { background: linear-gradient(135deg, #A2DBB6, #5AB87E); }
+  .on-mint  .mini-sym { background: #1A1A1A; }
+  .on-ink   .mini-sym { background: #A2DBB6; }
+
+  /* Construction tile */
+  .construction {
+    margin-top: 14px;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(90,184,126,0.15);
+    border-radius: 18px;
+    padding: 18px 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    align-items: center;
+  }
+  .const-block .k { font-family: 'SF Mono',Menlo,monospace; font-size: 10px; color: var(--mint-darker); font-weight: 600; letter-spacing: 0.12em; }
+  .const-block .v { font-family: var(--font-heading); font-size: 13px; color: #1A1A1A; font-weight: 600; margin-top: 2px; }
+  .const-block .v small { color: #888; font-weight: 400; font-size: 11px; }
+
+  /* Safe-space diagram */
+  .safe {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px;
+    border: 1px dashed rgba(90,184,126,0.5);
+    border-radius: 12px;
+    background: rgba(229,245,236,0.4);
+  }
+  .safe .wm-tiny { font-family: 'Space Grotesk',sans-serif; font-weight:500; font-size:22px; letter-spacing:-0.04em; color:#1A1A1A; line-height: 0.9; }
+  .safe .wm-tiny .dot { display:inline-block;width:4px;height:4px;border-radius:50%;background:#5AB87E;margin-left:2px;transform:translateY(-2px); }
+  .safe .corner-label {
+    position: absolute;
+    font-family: 'SF Mono',Menlo,monospace;
+    font-size: 9px;
+    color: var(--mint-darker);
+    background: #fff;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+  .safe .tl { top: -8px; left: 8px; }
+  .safe .br { bottom: -8px; right: 8px; }
+
+  .dont-row {
+    margin-top: 14px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  .dont {
+    position: relative;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 12px;
+    padding: 14px 10px;
+    text-align: center;
+    min-height: 76px;
+    display: grid; place-items: center;
+  }
+  .dont .wmx { font-family: 'Space Grotesk',sans-serif; font-weight: 500; font-size: 20px; color: #1A1A1A; letter-spacing: -0.04em; }
+  .dont::before {
+    content: '✕';
+    position: absolute;
+    top: 6px; right: 8px;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: #D66060;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    display: grid; place-items: center;
+  }
+  .dont .lbl {
+    position: absolute;
+    bottom: -14px; left: 50%;
+    transform: translateX(-50%);
+    font-family: 'SF Mono',Menlo,monospace;
+    font-size: 9px;
+    color: #888;
+    white-space: nowrap;
+  }
+  .dont.stretch .wmx { transform: scaleX(1.6); }
+  .dont.tilt .wmx { transform: rotate(-12deg); }
+  .dont.outline .wmx { -webkit-text-stroke: 1px #1A1A1A; color: transparent; }
+  .dont.shadow { background: linear-gradient(135deg, #FF6B6B, #FFD166); }
+  .dont.shadow .wmx { color: #fff; text-shadow: 2px 2px 0 #000; }
+</style></head>
+<body><div class="card">
+  <div class="hd">
+    <span class="label">Logo · evolved</span>
+    <span class="mono" style="font-size:10px">orbital symbol · italic accent · token system</span>
+  </div>
+
+  <div class="hero">
+    <div class="logomark">
+      <div class="symbol">
+        <div class="orbit"></div>
+        <svg width="80" height="80" viewBox="0 0 80 80">
+          <defs>
+            <linearGradient id="disc" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#C8ECDA"/>
+              <stop offset="60%" stop-color="#A2DBB6"/>
+              <stop offset="100%" stop-color="#5AB87E"/>
+            </linearGradient>
+          </defs>
+          <circle cx="40" cy="40" r="36" fill="url(#disc)"/>
+          <!-- 'h' carved in negative space -->
+          <path d="M28 22 L28 58 M28 38 Q28 32 34 32 L46 32 Q52 32 52 38 L52 58"
+                stroke="#1A1A1A" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- accent dot under h -->
+          <circle cx="52" cy="64" r="3" fill="#1A1A1A"/>
+        </svg>
+      </div>
+      <div class="wordmark">hubl<em>e</em><span class="dot"></span></div>
+    </div>
+    <div class="tagline">THE CREATIVE AGENCY · EST. 2019</div>
+  </div>
+
+  <div class="grid3">
+    <div class="variant on-white">
+      <span class="tag">ON WHITE</span>
+      <div class="mini-mark">
+        <div class="mini-sym">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"><path d="M8 6v13 M8 11q0-3 3-3h2q3 0 3 3v8"/></svg>
+        </div>
+        <span class="wm">huble<span class="dot"></span></span>
+      </div>
+    </div>
+    <div class="variant on-mint">
+      <span class="tag">ON MINT</span>
+      <div class="mini-mark">
+        <div class="mini-sym">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#A2DBB6" stroke-width="3" stroke-linecap="round"><path d="M8 6v13 M8 11q0-3 3-3h2q3 0 3 3v8"/></svg>
+        </div>
+        <span class="wm">huble<span class="dot"></span></span>
+      </div>
+    </div>
+    <div class="variant on-ink">
+      <span class="tag">ON INK</span>
+      <div class="mini-mark">
+        <div class="mini-sym">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"><path d="M8 6v13 M8 11q0-3 3-3h2q3 0 3 3v8"/></svg>
+        </div>
+        <span class="wm">huble<span class="dot"></span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="construction">
+    <div class="const-block">
+      <div class="k">TYPEFACE</div>
+      <div class="v">Space Grotesk <small>· 500 medium</small></div>
+    </div>
+    <div class="const-block">
+      <div class="k">TRACKING</div>
+      <div class="v">−4% <small>· tight</small></div>
+    </div>
+    <div class="const-block">
+      <div class="k">SAFE AREA</div>
+      <div class="v">= cap-height <small>all sides</small></div>
+    </div>
+  </div>
+
+  <div class="sec-title" style="font-family:'SF Mono',Menlo,monospace;font-size:10px;color:var(--mint-darker);font-weight:600;letter-spacing:0.14em;margin:20px 0 10px">
+    DON'T
+  </div>
+
+  <div class="dont-row">
+    <div class="dont stretch"><span class="wmx">huble</span><span class="lbl">stretch</span></div>
+    <div class="dont tilt"><span class="wmx">huble</span><span class="lbl">rotate</span></div>
+    <div class="dont outline"><span class="wmx">huble</span><span class="lbl">outline</span></div>
+    <div class="dont shadow"><span class="wmx">huble</span><span class="lbl">off-brand</span></div>
+  </div>
+</div></body></html>

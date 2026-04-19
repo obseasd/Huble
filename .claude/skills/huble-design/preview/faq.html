@@ -1,0 +1,387 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_shared.css">
+<style>
+  body {
+    background:
+      radial-gradient(circle at 15% 15%, #E5F5EC 0%, transparent 55%),
+      radial-gradient(circle at 90% 85%, #C8ECDA 0%, transparent 50%),
+      #FFFFFF;
+    min-height: 100vh;
+  }
+  .hd { display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 16px; }
+
+  .faq-wrap {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 18px;
+    align-items: start;
+  }
+
+  /* Left side — editorial header */
+  .aside {
+    position: sticky; top: 20px;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(90,184,126,0.15);
+    border-radius: 20px;
+    padding: 22px;
+  }
+  .aside .eyebrow {
+    font-family:'SF Mono',Menlo,monospace;
+    font-size: 10px; font-weight:600; letter-spacing:0.14em;
+    color: var(--mint-darker); text-transform: uppercase;
+  }
+  .aside h3 {
+    font-family: var(--font-heading);
+    font-size: 26px; font-weight: 600; letter-spacing: -0.02em;
+    line-height: 1.05;
+    color: #1A1A1A;
+    margin: 10px 0 12px;
+  }
+  .aside h3 em {
+    font-style: italic; font-weight: 500;
+    background: linear-gradient(135deg,#5AB87E,#3E9A62);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .aside p {
+    font-family: var(--font-body);
+    font-size: 12px; line-height:1.55; color:#666;
+    margin-bottom: 14px;
+  }
+  .tabs { display:flex; flex-wrap:wrap; gap:5px; }
+  .tabs .t {
+    font-family: var(--font-heading);
+    font-size: 11px; font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: rgba(162,219,182,0.2);
+    border: 1px solid rgba(90,184,126,0.25);
+    color: #1A1A1A;
+    cursor: pointer;
+  }
+  .tabs .t.active {
+    background: #1A1A1A; color:#A2DBB6; border-color:#1A1A1A;
+  }
+  .aside .stat {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px dashed rgba(90,184,126,0.3);
+    font-family: 'SF Mono',Menlo,monospace;
+    font-size: 10px; color:#666;
+    display:flex; justify-content:space-between;
+  }
+  .aside .stat b { font-family: var(--font-heading); color:#1A1A1A; font-weight:600; }
+
+  /* FAQ list */
+  .list { display:flex; flex-direction: column; gap: 8px; }
+
+  .item {
+    position: relative;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(90,184,126,0.15);
+    border-radius: 18px;
+    overflow: hidden;
+    transition: box-shadow .35s ease, border-color .35s ease;
+  }
+  .item:hover { border-color: rgba(90,184,126,0.35); }
+  .item.open {
+    background: rgba(255,255,255,0.88);
+    border-color: rgba(90,184,126,0.5);
+    box-shadow: 0 20px 40px -18px rgba(90,184,126,0.35), 0 6px 14px -6px rgba(0,0,0,0.05);
+  }
+
+  /* Left accent bar — grows when open */
+  .item::before {
+    content:'';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, #A2DBB6, #5AB87E);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform .45s cubic-bezier(.2,.8,.2,1);
+  }
+  .item.open::before { transform: scaleY(1); }
+
+  summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 18px 22px 18px 28px;
+    display: grid;
+    grid-template-columns: 28px 1fr auto auto;
+    gap: 14px;
+    align-items: center;
+  }
+  summary::-webkit-details-marker { display:none; }
+
+  .num {
+    font-family: 'SF Mono',Menlo,monospace;
+    font-size: 11px; font-weight:600;
+    color: var(--mint-darker);
+    letter-spacing: 0.08em;
+  }
+
+  .q {
+    font-family: var(--font-heading);
+    font-size: 16px; font-weight: 600; letter-spacing:-0.01em;
+    color: #1A1A1A;
+    line-height: 1.3;
+  }
+
+  .tag {
+    font-family: 'SF Mono',Menlo,monospace;
+    font-size: 9px; font-weight:600; letter-spacing:0.1em;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: rgba(162,219,182,0.25);
+    color: var(--mint-darker);
+  }
+
+  /* The morphing toggle */
+  .toggle {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: rgba(229,245,236,0.9);
+    border: 1.5px solid rgba(90,184,126,0.3);
+    display: grid; place-items: center;
+    flex-shrink: 0;
+    transition: background .35s ease, transform .45s cubic-bezier(.2,.8,.2,1);
+    position: relative;
+  }
+  .item:hover .toggle { background: #A2DBB6; }
+  .item.open .toggle {
+    background: #1A1A1A;
+    transform: rotate(45deg);
+  }
+  .toggle::before, .toggle::after {
+    content:'';
+    position: absolute;
+    background: #1A1A1A;
+    border-radius: 2px;
+    transition: background .35s ease, transform .45s cubic-bezier(.2,.8,.2,1);
+  }
+  .toggle::before { width: 12px; height: 2px; } /* horizontal */
+  .toggle::after  { width: 2px; height: 12px; } /* vertical */
+  .item.open .toggle::before,
+  .item.open .toggle::after { background: #A2DBB6; }
+
+  /* Body — reveal animation via grid-rows */
+  .body-wrap {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows .45s cubic-bezier(.2,.8,.2,1);
+  }
+  .item.open .body-wrap { grid-template-rows: 1fr; }
+
+  .body-inner { overflow: hidden; }
+
+  .body {
+    padding: 0 28px 22px;
+    display: grid;
+    grid-template-columns: 1fr 160px;
+    gap: 22px;
+    align-items: start;
+  }
+
+  .body p {
+    font-family: var(--font-body);
+    font-size: 14px; line-height: 1.65;
+    color: #444;
+    margin-bottom: 12px;
+  }
+  .body p:last-of-type { margin-bottom: 0; }
+  .body b { color: #1A1A1A; font-weight: 600; }
+
+  /* side callout in answer */
+  .callout {
+    background: linear-gradient(135deg, #E5F5EC, #F4FBF6);
+    border: 1px solid rgba(90,184,126,0.25);
+    border-radius: 14px;
+    padding: 14px;
+    font-family: 'SF Mono',Menlo,monospace;
+    font-size: 10px;
+    color: #1A1A1A;
+  }
+  .callout .k { color: var(--mint-darker); font-weight: 600; letter-spacing: 0.08em; }
+  .callout .v { font-family: var(--font-heading); font-size: 16px; color: #1A1A1A; font-weight: 600; margin-top: 3px; letter-spacing:-0.01em; }
+  .callout .hint { margin-top: 8px; color:#666; font-size: 10px; line-height:1.5; font-family: var(--font-body); }
+
+  .helpful {
+    margin-top: 12px;
+    display:flex; align-items:center; gap: 10px;
+    font-family: var(--font-body);
+    font-size: 11px; color: #777;
+  }
+  .helpful button {
+    border: 1px solid rgba(90,184,126,0.3);
+    background: rgba(255,255,255,0.8);
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-family: 'SF Mono',Menlo,monospace;
+    font-size: 10px; color:#1A1A1A;
+    cursor: pointer;
+    display:inline-flex; align-items:center; gap: 4px;
+    transition: all .25s ease;
+  }
+  .helpful button:hover { background:#A2DBB6; border-color: #5AB87E; }
+
+  /* Related chips */
+  .rel {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dashed rgba(90,184,126,0.3);
+  }
+  .rel-title {
+    font-family: 'SF Mono',Menlo,monospace;
+    font-size: 9px; letter-spacing: 0.12em; font-weight: 600;
+    color: #888;
+    margin-bottom: 8px;
+  }
+  .rel-chips { display:flex; flex-wrap:wrap; gap:5px; }
+  .rel-chips a {
+    font-family: var(--font-body);
+    font-size: 11px;
+    padding: 4px 9px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid rgba(90,184,126,0.2);
+    color: #1A1A1A;
+    text-decoration: none;
+    transition: all .2s;
+  }
+  .rel-chips a:hover { background: #A2DBB6; border-color: #5AB87E; }
+
+  /* Contact prompt at bottom */
+  .prompt {
+    margin-top: 14px;
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 14px 20px;
+    border-radius: 14px;
+    background: #1A1A1A;
+    color: #fff;
+    gap: 16px;
+  }
+  .prompt .t { font-family: var(--font-heading); font-size: 13px; font-weight: 500; }
+  .prompt .t b { color:#A2DBB6; font-weight:600; }
+  .prompt a {
+    font-family: var(--font-heading);
+    font-size: 12px; font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: #A2DBB6;
+    color: #1A1A1A;
+    text-decoration: none;
+    display: inline-flex; align-items:center; gap: 6px;
+    transition: transform .2s ease, background .2s ease;
+  }
+  .prompt a:hover { background: #fff; transform: translateX(3px); }
+</style></head>
+<body><div class="card">
+  <div class="hd">
+    <span class="label">FAQ · editorial accordion</span>
+    <span class="mono" style="font-size:10px">filterable · grid-rows reveal · 45° morph toggle</span>
+  </div>
+
+  <div class="faq-wrap">
+
+    <div class="aside">
+      <div class="eyebrow">F.A.Q · 12 QUESTIONS</div>
+      <h3>Toutes vos <em>réponses</em>, sans détour.</h3>
+      <p>Filtrez par sujet ou lisez en diagonale. Pas de réponse&nbsp;? On en parle en 15&nbsp;minutes.</p>
+      <div class="tabs">
+        <span class="t active">Tous</span>
+        <span class="t">Process</span>
+        <span class="t">Tarifs</span>
+        <span class="t">Délais</span>
+        <span class="t">Tech</span>
+      </div>
+      <div class="stat">
+        <span>Mis à jour</span>
+        <b>17 / 11</b>
+      </div>
+    </div>
+
+    <div class="list">
+
+      <details class="item open">
+        <summary>
+          <span class="num">01</span>
+          <span class="q">Quels types de sites créez-vous&nbsp;?</span>
+          <span class="tag">PROCESS</span>
+          <span class="toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="body-wrap"><div class="body-inner"><div class="body">
+          <div>
+            <p>Sites vitrines, landing pages à forte conversion, e-commerce Shopify ou sur-mesure, et apps web connectées à votre CRM. <b>Chaque projet démarre par un atelier d'une journée</b> pour cadrer l'objectif business avant toute ligne de code.</p>
+            <p>Notre sweet-spot&nbsp;: refontes ambitieuses (12 à 40 pages) avec un vrai système de design, et landings techniques pour SaaS B2B.</p>
+
+            <div class="rel">
+              <div class="rel-title">VOIR AUSSI</div>
+              <div class="rel-chips">
+                <a href="#">→ Notre processus</a>
+                <a href="#">→ Études de cas</a>
+                <a href="#">→ Stack technique</a>
+              </div>
+            </div>
+
+            <div class="helpful">
+              <span>Cette réponse vous aide-t-elle&nbsp;?</span>
+              <button>👍 Oui</button>
+              <button>👎 Pas vraiment</button>
+            </div>
+          </div>
+          <div class="callout">
+            <div class="k">DÉLAI MÉDIAN</div>
+            <div class="v">6 semaines</div>
+            <div class="hint">Site vitrine complet · 8–12 sem. pour un e-commerce sur-mesure</div>
+          </div>
+        </div></div></div>
+      </details>
+
+      <details class="item">
+        <summary>
+          <span class="num">02</span>
+          <span class="q">Combien coûte un projet&nbsp;?</span>
+          <span class="tag">TARIFS</span>
+          <span class="toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="body-wrap"><div class="body-inner"><div class="body">
+          <div><p>Nos prestations démarrent à <b>4 500 €</b> pour une landing page premium, <b>12 000 €</b> pour un site vitrine complet et <b>25 000 €</b> pour un e-commerce sur-mesure. Devis précis après l'atelier de cadrage.</p></div>
+          <div class="callout"><div class="k">À PARTIR DE</div><div class="v">4&nbsp;500&nbsp;€</div><div class="hint">Devis fixe · paiement en 3 fois</div></div>
+        </div></div></div>
+      </details>
+
+      <details class="item">
+        <summary>
+          <span class="num">03</span>
+          <span class="q">Vous assurez la maintenance&nbsp;?</span>
+          <span class="tag">PROCESS</span>
+          <span class="toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="body-wrap"><div class="body-inner"><div class="body">
+          <div><p>Oui — forfait mensuel à partir de <b>290 €/mois</b>&nbsp;: hébergement, mises à jour, monitoring, sauvegardes, et 2h de retouches incluses.</p></div>
+          <div class="callout"><div class="k">FORFAIT</div><div class="v">290&nbsp;€ /mo</div><div class="hint">Sans engagement, résiliable chaque mois</div></div>
+        </div></div></div>
+      </details>
+
+      <details class="item">
+        <summary>
+          <span class="num">04</span>
+          <span class="q">Sur quelles technologies travaillez-vous&nbsp;?</span>
+          <span class="tag">TECH</span>
+          <span class="toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="body-wrap"><div class="body-inner"><div class="body">
+          <div><p>Next.js + Tailwind pour le sur-mesure, Webflow pour l'autonomie éditoriale, Shopify (Hydrogen) pour l'e-commerce. <b>Accessibilité AA garantie</b> sur chaque livraison.</p></div>
+          <div class="callout"><div class="k">LIGHTHOUSE</div><div class="v">98/100</div><div class="hint">Moyenne sur nos 20 derniers projets</div></div>
+        </div></div></div>
+      </details>
+
+    </div>
+  </div>
+
+  <div class="prompt">
+    <div class="t">Pas trouvé votre réponse&nbsp;? <b>On échange 15&nbsp;min</b> pour y voir clair.</div>
+    <a href="#">Réserver un appel →</a>
+  </div>
+</div></body></html>

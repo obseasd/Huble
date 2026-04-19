@@ -48,22 +48,6 @@
   --radius-lg: 24px;
   --radius-xl: 32px;
   --radius-full: 9999px;
-
-  /* Easing */
-  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
-
-  /* Gradients */
-  --grad-mint: linear-gradient(135deg, var(--mint) 0%, var(--mint-dark) 100%);
-  --grad-mint-soft: linear-gradient(135deg, var(--mint-light), var(--mint));
-  --grad-wash-1: linear-gradient(160deg, var(--white) 0%, var(--mint-lighter) 30%, var(--white) 55%, rgba(162,219,182,0.15) 80%, var(--white) 100%);
-  --grad-wash-2: linear-gradient(180deg, var(--white) 0%, var(--mint-lighter) 50%, var(--white) 100%);
-  --grad-footer: linear-gradient(135deg, var(--mint) 0%, var(--mint-dark) 100%);
-
-  /* Mint shadows */
-  --shadow-mint-sm: 0 4px 12px var(--mint-glow);
-  --shadow-mint-md: 0 8px 24px var(--mint-glow);
-  --shadow-mint-lg: 0 20px 50px var(--mint-glow-strong);
-  --shadow-glass-hover: 0 20px 50px rgba(162, 219, 182, 0.2), 0 8px 20px rgba(0, 0, 0, 0.04);
 }
 
 /* Reset */
@@ -244,7 +228,7 @@ input, textarea, select {
 }
 
 .btn-primary {
-  background: var(--grad-mint);
+  background: linear-gradient(135deg, var(--mint) 0%, var(--mint-dark) 100%);
   color: var(--black);
   box-shadow: 0 4px 15px var(--mint-glow);
 }

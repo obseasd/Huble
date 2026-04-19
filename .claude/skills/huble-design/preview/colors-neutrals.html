@@ -1,0 +1,303 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_shared.css">
+<style>
+  body {
+    background:
+      radial-gradient(circle at 20% 10%, #F4FBF6 0%, transparent 55%),
+      radial-gradient(circle at 85% 90%, #E5F5EC 0%, transparent 50%),
+      #FFFFFF;
+    min-height: 100vh;
+  }
+  .hd { display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 14px; }
+
+  /* Section label */
+  .sec-title {
+    font-family: 'SF Mono',Menlo,monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: var(--mint-darker);
+    margin: 18px 0 10px;
+    display:flex; justify-content:space-between; align-items:baseline;
+  }
+  .sec-title span:last-child { color:#888; letter-spacing:0.04em; font-weight:500; }
+
+  /* Neutral ramp: 9 stops */
+  .ramp {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 6px;
+  }
+  .stop {
+    position: relative;
+    height: 110px;
+    border-radius: 14px;
+    padding: 12px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: var(--font-heading);
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    transition: transform .25s cubic-bezier(.2,.8,.2,1);
+  }
+  .stop:hover { transform: translateY(-3px); }
+  .stop .num  { font-family:'SF Mono',Menlo,monospace; font-size:10px; font-weight:600; letter-spacing:0.08em; opacity:.7; }
+  .stop .name { font-size: 12px; font-weight: 700; letter-spacing:-0.01em; }
+  .stop .hex  { font-family:'SF Mono',Menlo,monospace; font-size:9px; font-weight:500; opacity:.75; }
+  .stop.anchor::after {
+    content:'★'; position:absolute; top:8px; right:10px;
+    font-size: 10px; font-weight:700;
+  }
+
+  /* Semantic row: pairs (bg + accent) with icon */
+  .sem-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  .sem {
+    position: relative;
+    border-radius: 16px;
+    padding: 16px 14px 14px;
+    display: flex; flex-direction: column; gap: 10px;
+    border: 1px solid;
+    overflow: hidden;
+  }
+  .sem .top { display:flex; justify-content:space-between; align-items:center; }
+  .sem .ico {
+    width: 32px; height: 32px;
+    border-radius: 10px;
+    display: grid; place-items: center;
+  }
+  .sem .tag {
+    font-family:'SF Mono',Menlo,monospace;
+    font-size: 9px; font-weight:600; letter-spacing:0.1em;
+    padding: 3px 7px; border-radius: 999px;
+  }
+  .sem .name { font-family: var(--font-heading); font-size: 14px; font-weight: 600; color:#1A1A1A; letter-spacing:-0.01em; }
+  .sem .hex  { font-family:'SF Mono',Menlo,monospace; font-size: 10px; opacity: .65; color:#1A1A1A; }
+  .sem .dot-row { display:flex; gap: 4px; margin-top: 2px; }
+  .sem .dot-row i {
+    width: 14px; height: 14px; border-radius: 4px;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .s-success { background: linear-gradient(135deg, #E5F5EC, #C8ECDA); border-color: rgba(90,184,126,0.3); }
+  .s-success .ico { background:#5AB87E; color:#fff; }
+  .s-success .tag { background: rgba(62,154,98,0.15); color: #3E9A62; }
+
+  .s-info    { background: linear-gradient(135deg, #E8EFF5, #D6E4F2); border-color: rgba(63,118,170,0.25); }
+  .s-info .ico { background:#3F76AA; color:#fff; }
+  .s-info .tag { background: rgba(63,118,170,0.15); color: #2E5A82; }
+
+  .s-warning { background: linear-gradient(135deg, #FBF3E0, #F7E6B8); border-color: rgba(201,149,32,0.3); }
+  .s-warning .ico { background:#D99E2B; color:#fff; }
+  .s-warning .tag { background: rgba(201,149,32,0.15); color: #8B6614; }
+
+  .s-danger  { background: linear-gradient(135deg, #F8E4E0, #F1CDC5); border-color: rgba(196,82,65,0.3); }
+  .s-danger .ico { background:#C45241; color:#fff; }
+  .s-danger .tag { background: rgba(196,82,65,0.15); color: #8E2F22; }
+
+  /* Text-on-bg matrix */
+  .matrix {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 6px;
+    margin-top: 6px;
+  }
+  .m-cell {
+    border-radius: 12px;
+    padding: 12px 14px;
+    min-height: 62px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    font-family: var(--font-body);
+    font-size: 12px;
+    line-height: 1.4;
+    position: relative;
+  }
+  .m-cell .t { font-family: var(--font-heading); font-weight: 600; }
+  .m-cell .r {
+    font-family:'SF Mono',Menlo,monospace;
+    font-size: 9px; opacity: .65;
+    display:flex; justify-content:space-between;
+  }
+  .m-cell .ok {
+    display: inline-block;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 8px;
+    font-weight: 700;
+  }
+
+  /* Footer meta */
+  .foot {
+    margin-top: 14px;
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.6);
+    border: 1px dashed rgba(90,184,126,0.3);
+    border-radius: 10px;
+    font-family:'SF Mono',Menlo,monospace;
+    font-size: 10px;
+    color: #555;
+    display:flex; justify-content:space-between;
+  }
+  .foot b { font-family: var(--font-heading); color:#1A1A1A; font-weight: 600; }
+</style></head>
+<body><div class="card">
+  <div class="hd">
+    <span class="label">Neutrals &amp; semantic</span>
+    <span class="mono" style="font-size:10px">9-stop ramp · 4 semantic pairs · a11y matrix</span>
+  </div>
+
+  <div class="sec-title"><span>NEUTRAL RAMP · 50 → 900</span><span>oklch-tuned · warm-cool balanced</span></div>
+
+  <div class="ramp">
+    <div class="stop" style="background:#FFFFFF;color:#1A1A1A;border:1px solid rgba(0,0,0,0.08)">
+      <div class="num">00</div>
+      <div><div class="name">Paper</div><div class="hex">#FFFFFF</div></div>
+    </div>
+    <div class="stop" style="background:#FAFAFB;color:#1A1A1A">
+      <div class="num">50</div>
+      <div><div class="name">Fog</div><div class="hex">#FAFAFB</div></div>
+    </div>
+    <div class="stop" style="background:#F3F4F6;color:#1A1A1A">
+      <div class="num">100</div>
+      <div><div class="name">Mist</div><div class="hex">#F3F4F6</div></div>
+    </div>
+    <div class="stop" style="background:#E5E7EB;color:#1A1A1A">
+      <div class="num">200</div>
+      <div><div class="name">Stone</div><div class="hex">#E5E7EB</div></div>
+    </div>
+    <div class="stop" style="background:#C8CCD1;color:#1A1A1A">
+      <div class="num">300</div>
+      <div><div class="name">Pebble</div><div class="hex">#C8CCD1</div></div>
+    </div>
+    <div class="stop" style="background:#9AA0A6;color:#fff">
+      <div class="num">400</div>
+      <div><div class="name">Graphite</div><div class="hex">#9AA0A6</div></div>
+    </div>
+    <div class="stop" style="background:#6B7280;color:#fff">
+      <div class="num">500</div>
+      <div><div class="name">Ash</div><div class="hex">#6B7280</div></div>
+    </div>
+    <div class="stop" style="background:#2D2D2D;color:#fff">
+      <div class="num">700</div>
+      <div><div class="name">Slate</div><div class="hex">#2D2D2D</div></div>
+    </div>
+    <div class="stop anchor" style="background:#1A1A1A;color:#fff">
+      <div class="num">900</div>
+      <div><div class="name">Ink</div><div class="hex">#1A1A1A</div></div>
+    </div>
+  </div>
+
+  <div class="sec-title"><span>SEMANTIC · 4 STATES</span><span>bg tint · icon · accent · borders</span></div>
+
+  <div class="sem-grid">
+    <div class="sem s-success">
+      <div class="top">
+        <div class="ico">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </div>
+        <span class="tag">SUCCESS</span>
+      </div>
+      <div>
+        <div class="name">Validé</div>
+        <div class="hex">#3E9A62</div>
+      </div>
+      <div class="dot-row">
+        <i style="background:#E5F5EC"></i><i style="background:#A2DBB6"></i><i style="background:#5AB87E"></i><i style="background:#3E9A62"></i>
+      </div>
+    </div>
+
+    <div class="sem s-info">
+      <div class="top">
+        <div class="ico">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        </div>
+        <span class="tag">INFO</span>
+      </div>
+      <div>
+        <div class="name">Information</div>
+        <div class="hex">#3F76AA</div>
+      </div>
+      <div class="dot-row">
+        <i style="background:#E8EFF5"></i><i style="background:#BCD2E7"></i><i style="background:#6B9BC7"></i><i style="background:#2E5A82"></i>
+      </div>
+    </div>
+
+    <div class="sem s-warning">
+      <div class="top">
+        <div class="ico">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <span class="tag">WARNING</span>
+      </div>
+      <div>
+        <div class="name">Attention</div>
+        <div class="hex">#D99E2B</div>
+      </div>
+      <div class="dot-row">
+        <i style="background:#FBF3E0"></i><i style="background:#F2D78A"></i><i style="background:#D99E2B"></i><i style="background:#8B6614"></i>
+      </div>
+    </div>
+
+    <div class="sem s-danger">
+      <div class="top">
+        <div class="ico">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+        </div>
+        <span class="tag">DANGER</span>
+      </div>
+      <div>
+        <div class="name">Erreur</div>
+        <div class="hex">#C45241</div>
+      </div>
+      <div class="dot-row">
+        <i style="background:#F8E4E0"></i><i style="background:#E89C8E"></i><i style="background:#C45241"></i><i style="background:#8E2F22"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-title"><span>TEXT · BACKGROUND MATRIX</span><span>WCAG 2.1</span></div>
+
+  <div class="matrix">
+    <div class="m-cell" style="background:#FFFFFF;color:#1A1A1A;border:1px solid #E5E7EB">
+      <div class="t">Ink on Paper</div>
+      <div class="r"><span>19.1:1</span><span class="ok" style="background:#3E9A62;color:#fff">AAA</span></div>
+    </div>
+    <div class="m-cell" style="background:#F3F4F6;color:#2D2D2D">
+      <div class="t">Slate on Mist</div>
+      <div class="r"><span>12.8:1</span><span class="ok" style="background:#3E9A62;color:#fff">AAA</span></div>
+    </div>
+    <div class="m-cell" style="background:#1A1A1A;color:#FFFFFF">
+      <div class="t">Paper on Ink</div>
+      <div class="r"><span>19.1:1</span><span class="ok" style="background:#A2DBB6;color:#1A1A1A">AAA</span></div>
+    </div>
+    <div class="m-cell" style="background:#A2DBB6;color:#1A1A1A">
+      <div class="t">Ink on Mint</div>
+      <div class="r"><span>11.4:1</span><span class="ok" style="background:#3E9A62;color:#fff">AAA</span></div>
+    </div>
+
+    <div class="m-cell" style="background:#6B7280;color:#FFFFFF">
+      <div class="t">Paper on Ash</div>
+      <div class="r"><span>4.8:1</span><span class="ok" style="background:#3E9A62;color:#fff">AA</span></div>
+    </div>
+    <div class="m-cell" style="background:#9AA0A6;color:#FFFFFF">
+      <div class="t">Paper on Graphite</div>
+      <div class="r"><span>2.9:1</span><span class="ok" style="background:#D99E2B;color:#fff">AA large</span></div>
+    </div>
+    <div class="m-cell" style="background:#E5F5EC;color:#3E9A62">
+      <div class="t">Forest on Mint 100</div>
+      <div class="r"><span>6.2:1</span><span class="ok" style="background:#3E9A62;color:#fff">AA</span></div>
+    </div>
+    <div class="m-cell" style="background:#F8E4E0;color:#8E2F22">
+      <div class="t">Danger on Danger 50</div>
+      <div class="r"><span>7.9:1</span><span class="ok" style="background:#3E9A62;color:#fff">AAA</span></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span><b>Rule</b> · body text ≥ AA (4.5:1) · large &amp; decorative ≥ AA large (3:1)</span>
+    <span>9 neutrals · 4 semantic · 8 combos tested</span>
+  </div>
+</div></body></html>
