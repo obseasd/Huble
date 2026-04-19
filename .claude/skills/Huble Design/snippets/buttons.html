@@ -1,0 +1,43 @@
+<!-- HUBLE — Button snippets ready to paste into your HTML -->
+
+<!-- 1. LIQUID — CTA principal (hero + sections clés) -->
+<a href="#contact" class="btn-liquid">
+  Discutons de votre projet
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+</a>
+
+<!-- 2. FLIP — "Nous contacter" dans la nav (remplace .btn.btn-primary.nav-cta) -->
+<a href="#contact" class="btn-flip" data-hover="Nous contacter">
+  <span>Nous contacter</span>
+</a>
+
+<!-- 3. LOADING — remplace le bouton submit pendant l'envoi (JS requis) -->
+<button type="button" class="btn-loading">Envoi en cours…</button>
+
+<!-- 4. SUCCESS — après envoi réussi -->
+<button type="button" class="btn-success">Message envoyé</button>
+
+
+<!-- JS pour gérer les états du bouton submit contact :
+     à ajouter dans js/contact-form.js, dans le handler de submit -->
+<script>
+// Pseudo-code à intégrer dans ton contact-form.js existant
+async function handleSubmit(e) {
+  e.preventDefault();
+  const btn = document.querySelector('.form-submit');
+  const originalClass = btn.className;
+  const originalText = btn.textContent;
+
+  btn.className = 'btn btn-loading';
+  btn.textContent = 'Envoi en cours…';
+
+  try {
+    await fetch(/* Formspree URL */);
+    btn.className = 'btn btn-success';
+    btn.textContent = 'Message envoyé';
+  } catch (err) {
+    btn.className = originalClass;
+    btn.textContent = originalText;
+  }
+}
+</script>

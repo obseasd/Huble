@@ -1,0 +1,105 @@
+/* ============================================================
+   HUBLE — SNIPPETS — Composants production-ready
+   Import ce fichier dans css/main.css :   @import url('./buttons.css');
+   ============================================================ */
+
+/* ---------- BUTTONS ---------- */
+
+/* LIQUID — CTA principal (remplace .btn-primary sur les hero CTAs) */
+.btn-liquid {
+  position: relative;
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  padding: 0.95rem 2.2rem;
+  border-radius: 9999px;
+  font-family: var(--font-heading);
+  font-weight: 600; font-size: 0.95rem;
+  color: #1A1A1A;
+  background: linear-gradient(135deg, #C8ECDA 0%, #A2DBB6 100%);
+  border: 1px solid rgba(90,184,126,0.3);
+  box-shadow: 0 6px 20px rgba(90,184,126,0.35), inset 0 1px 0 rgba(255,255,255,0.7);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .3s var(--ease-smooth), box-shadow .3s var(--ease-smooth);
+}
+.btn-liquid::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,0.6), transparent 40%);
+  opacity: 0; transition: opacity .3s ease;
+}
+.btn-liquid:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(90,184,126,0.5), inset 0 1px 0 rgba(255,255,255,0.7); }
+.btn-liquid:hover::before { opacity: 1; }
+
+/* FLIP — "Nous contacter" dans la nav */
+.btn-flip {
+  position: relative;
+  display: inline-block;
+  padding: 0.6rem 1.6rem;
+  border-radius: 9999px;
+  font-family: var(--font-heading);
+  font-weight: 600; font-size: 0.85rem;
+  color: #1A1A1A;
+  background: #fff;
+  border: 1.5px solid #1A1A1A;
+  overflow: hidden;
+  cursor: pointer;
+  perspective: 400px;
+  transition: background .3s var(--ease-smooth), color .3s var(--ease-smooth);
+}
+.btn-flip span { display: inline-block; transition: transform .45s var(--ease-smooth); }
+.btn-flip:hover { background: #1A1A1A; color: var(--mint); }
+.btn-flip:hover span { transform: translateY(-100%); }
+.btn-flip::after {
+  content: attr(data-hover);
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  transform: translateY(100%);
+  transition: transform .45s var(--ease-smooth);
+  color: var(--mint);
+}
+.btn-flip:hover::after { transform: translateY(0); }
+
+/* LOADING — état bouton submit pendant envoi formulaire */
+.btn-loading {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  padding: 1rem 2.2rem;
+  border-radius: 9999px;
+  font-family: var(--font-heading);
+  font-weight: 600; font-size: 0.95rem;
+  color: #1A1A1A;
+  background: linear-gradient(135deg, var(--mint), var(--mint-dark));
+  border: none; cursor: progress;
+  box-shadow: 0 4px 15px var(--mint-glow);
+  pointer-events: none;
+}
+.btn-loading::before {
+  content: '';
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  border: 2px solid rgba(26,26,26,0.25);
+  border-top-color: #1A1A1A;
+  animation: btn-spin .7s linear infinite;
+}
+@keyframes btn-spin { to { transform: rotate(360deg); } }
+
+/* SUCCESS — état après envoi réussi */
+.btn-success {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  padding: 1rem 2.2rem;
+  border-radius: 9999px;
+  font-family: var(--font-heading);
+  font-weight: 600; font-size: 0.95rem;
+  color: #1A1A1A;
+  background: var(--mint-lighter);
+  border: 1.5px solid var(--mint);
+  pointer-events: none;
+}
+.btn-success::before {
+  content: '✓';
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--mint);
+  color: #1A1A1A;
+  display: grid; place-items: center;
+  font-size: 12px; font-weight: 700;
+}

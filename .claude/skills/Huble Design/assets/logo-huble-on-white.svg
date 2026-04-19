@@ -10,13 +10,13 @@
       <stop offset="100%" stop-color="#3E9A62"></stop>
     </linearGradient>
   </defs>
-
+  
   <g transform="translate(4,4)">
     <circle cx="36" cy="36" r="32" fill="url(#huble-disc)"></circle>
     <path d="M26 22 L26 54 M26 36 Q26 30 32 30 L42 30 Q48 30 48 36 L48 54" stroke="#1A1A1A" stroke-width="5.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
     <circle cx="48" cy="60" r="2.5" fill="#1A1A1A"></circle>
   </g>
-
+  
   <g font-family="&#39;Space Grotesk&#39;, sans-serif" font-size="52" font-weight="500" letter-spacing="-2">
     <text x="88" y="56" fill="#1A1A1A">hubl</text>
     <text x="192" y="56" fill="url(#huble-accent)" font-style="italic" font-weight="400">e</text>

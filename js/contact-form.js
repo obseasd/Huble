@@ -99,8 +99,12 @@ function initFormValidation() {
 
     if (!isValid) return;
 
+    const originalClass = submitBtn.className;
     const originalText = submitBtn.textContent;
-    submitBtn.innerHTML = '<span class="loading-spinner"></span>Envoi en cours...';
+
+    // Loading state
+    submitBtn.className = 'btn-loading';
+    submitBtn.textContent = 'Envoi en cours…';
     submitBtn.disabled = true;
 
     try {
@@ -112,22 +116,18 @@ function initFormValidation() {
       });
 
       if (response.ok) {
-        form.innerHTML = `
-          <div class="success-msg">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#5AB87E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin: 0 auto 1rem; display: block;">
-              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-              <polyline points="22 4 12 14.01 9 11.01"/>
-            </svg>
-            <p>Merci pour votre message !</p>
-            <p>On revient vers vous très vite.</p>
-          </div>
-        `;
+        // Success state
+        submitBtn.className = 'btn-success';
+        submitBtn.textContent = 'Message envoyé';
       } else {
         throw new Error('fail');
       }
     } catch {
+      // Error — reset to initial state
+      submitBtn.className = originalClass;
       submitBtn.textContent = originalText;
       submitBtn.disabled = false;
+
       let errorEl = form.querySelector('.form-error');
       if (!errorEl) {
         errorEl = document.createElement('p');
