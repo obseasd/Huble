@@ -73,13 +73,22 @@ export function initScrollAnimations() {
     });
   });
 
-  // Service cards
-  const serviceCards = document.querySelectorAll('.service-card');
+  // Service cards (svc)
+  const serviceCards = document.querySelectorAll('.services .svc');
   if (serviceCards.length) {
     gsap.from(serviceCards, {
       scrollTrigger: { trigger: '.services-grid', start: 'top 90%', toggleActions: 'play none none none' },
       opacity: 0, y: 50, duration: 0.7, stagger: 0.15, ease: 'power2.out',
       onComplete: () => gsap.set(serviceCards, { clearProps: 'all' })
+    });
+
+    // Cursor-tracking spotlight
+    serviceCards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--x', (e.clientX - rect.left) + 'px');
+        card.style.setProperty('--y', (e.clientY - rect.top) + 'px');
+      });
     });
   }
 

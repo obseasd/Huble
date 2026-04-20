@@ -94,21 +94,56 @@
     font-size: 0.72rem;
   }
 
-  .service-card {
-    padding: 1.75rem 1.5rem;
+  /* Services — compact mobile card */
+  .svc-inner {
+    padding: 1.25rem;
   }
-
-  .service-card h3 {
-    font-size: 1.05rem;
-    min-height: auto;
+  .icon-frame {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
   }
-
-  .service-card p {
-    font-size: 0.82rem;
+  .icon-frame svg {
+    width: 24px;
+    height: 24px;
   }
-
-  .service-features li {
-    font-size: 0.78rem;
+  .svc-title {
+    font-size: 1.15rem;
+  }
+  .svc-lede {
+    font-size: 0.8rem;
+  }
+  .svc-eyebrow {
+    font-size: 0.64rem;
+  }
+  .svc-chip {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.55rem;
+  }
+  .svc-stat .num {
+    font-size: 1rem;
+  }
+  .svc-stat .num .unit {
+    font-size: 0.62rem;
+  }
+  .svc-stat .lbl {
+    font-size: 0.6rem;
+  }
+  .svc-stat {
+    padding: 0 0.35rem;
+  }
+  .svc-price {
+    font-size: 0.72rem;
+  }
+  .svc-price b {
+    font-size: 0.85rem;
+  }
+  .svc-cta {
+    padding: 0.55rem 0.9rem;
+    font-size: 0.74rem;
+  }
+  .svc-badges .svc-badge {
+    font-size: 0.55rem;
   }
 
   /* Process orbs — compact mobile */
