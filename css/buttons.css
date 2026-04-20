@@ -30,7 +30,9 @@
 .btn-liquid:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(90,184,126,0.5), inset 0 1px 0 rgba(255,255,255,0.7); }
 .btn-liquid:hover::before { opacity: 1; }
 
-/* FLIP — "Nous contacter" dans la nav */
+/* FLIP — "Nous contacter" dans la nav
+   Inverts colors on hover: black bg + mint text → mint bg + black text.
+   Single label sliding up: the original span lifts out, a duplicate slides in below. */
 .btn-flip {
   position: relative;
   display: inline-block;
@@ -38,25 +40,37 @@
   border-radius: 9999px;
   font-family: var(--font-heading);
   font-weight: 600; font-size: 0.85rem;
-  color: #1A1A1A;
-  background: #fff;
+  color: var(--mint);
+  background: #1A1A1A;
   border: 1.5px solid #1A1A1A;
   overflow: hidden;
   cursor: pointer;
-  perspective: 400px;
-  transition: background .3s var(--ease-smooth), color .3s var(--ease-smooth);
+  transition: background .35s var(--ease-smooth), color .35s var(--ease-smooth), border-color .35s var(--ease-smooth);
 }
-.btn-flip span { display: inline-block; transition: transform .45s var(--ease-smooth); }
-.btn-flip:hover { background: #1A1A1A; color: var(--mint); }
-.btn-flip:hover span { transform: translateY(-100%); }
+
+.btn-flip span {
+  display: inline-block;
+  position: relative;
+  transition: transform .45s var(--ease-smooth);
+}
+
 .btn-flip::after {
   content: attr(data-hover);
-  position: absolute; inset: 0;
-  display: grid; place-items: center;
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
   transform: translateY(100%);
   transition: transform .45s var(--ease-smooth);
-  color: var(--mint);
+  color: #1A1A1A;
 }
+
+.btn-flip:hover {
+  background: var(--mint);
+  color: #1A1A1A;
+  border-color: var(--mint);
+}
+.btn-flip:hover span { transform: translateY(-120%); }
 .btn-flip:hover::after { transform: translateY(0); }
 
 /* LOADING — état bouton submit pendant envoi formulaire */

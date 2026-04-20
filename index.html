@@ -179,48 +179,6 @@
       </div>
     </section>
 
-    <!-- ======== STATS ======== -->
-    <section id="stats" class="section stats">
-      <div class="container">
-        <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-            </div>
-            <div class="stat-number" data-target="150">0</div>
-            <div class="stat-suffix">%</div>
-            <p class="stat-label">Croissance moyenne des clients accompagnés</p>
-          </div>
-
-          <div class="stat-card">
-            <div class="stat-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
-            </div>
-            <div class="stat-number" data-target="40">0</div>
-            <div class="stat-suffix">+</div>
-            <p class="stat-label">Projets livrés dans les temps</p>
-          </div>
-
-          <div class="stat-card">
-            <div class="stat-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            </div>
-            <div class="stat-number" data-target="15">0</div>
-            <div class="stat-suffix">h/sem</div>
-            <p class="stat-label">Temps gagné grâce aux automatisations</p>
-          </div>
-
-          <div class="stat-card">
-            <div class="stat-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-            </div>
-            <div class="stat-number" data-target="98">0</div>
-            <div class="stat-suffix">%</div>
-            <p class="stat-label">De clients satisfaits et qui nous recommandent</p>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- ======== PROCESS ======== -->
     <section id="process" class="section process">
@@ -231,27 +189,69 @@
           <p class="section-subtitle centered">Un processus simple et transparent, du premier échange à la livraison.</p>
         </div>
 
-        <div class="process-steps">
-          <div class="process-step">
-            <div class="process-number">1</div>
-            <h4>Découverte</h4>
-            <p>On échange pour comprendre votre entreprise, vos objectifs et vos besoins spécifiques.</p>
+        <div class="process-inner">
+          <!-- Animated connecting path -->
+          <div class="process-track" aria-hidden="true">
+            <svg viewBox="0 0 600 60" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="flow" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#5AB87E"/>
+                  <stop offset="50%" stop-color="#A2DBB6"/>
+                  <stop offset="100%" stop-color="#C8ECDA"/>
+                </linearGradient>
+              </defs>
+              <path d="M 0 30 C 100 -10, 200 70, 300 30 S 500 -10, 600 30"/>
+            </svg>
           </div>
-          <div class="process-step">
-            <div class="process-number">2</div>
-            <h4>Proposition</h4>
-            <p>On vous présente une solution personnalisée avec un devis clair et détaillé.</p>
+
+          <div class="process-steps">
+            <div class="step done">
+              <div class="orb">
+                <div class="ring"><div><div class="num">01</div></div></div>
+                <div class="sat"></div>
+              </div>
+              <div class="step-eyebrow">01 · Kickoff</div>
+              <h3>Découverte</h3>
+              <p>On échange pour comprendre votre entreprise, vos objectifs et vos besoins spécifiques.</p>
+              <span class="dur">1 semaine</span>
+            </div>
+
+            <div class="step active">
+              <div class="orb">
+                <div class="ring"><div><div class="num">02</div></div></div>
+                <div class="sat"></div>
+              </div>
+              <div class="step-eyebrow">02 · En cours</div>
+              <h3>Proposition</h3>
+              <p>On vous présente une solution personnalisée avec un devis clair et détaillé.</p>
+              <span class="dur">1 semaine</span>
+            </div>
+
+            <div class="step">
+              <div class="orb">
+                <div class="ring"><div><div class="num">03</div></div></div>
+              </div>
+              <div class="step-eyebrow">03 · À venir</div>
+              <h3>Création</h3>
+              <p>On conçoit et développe votre projet en vous tenant informé à chaque étape.</p>
+              <span class="dur">4 semaines</span>
+            </div>
+
+            <div class="step">
+              <div class="orb">
+                <div class="ring"><div><div class="num">04</div></div></div>
+              </div>
+              <div class="step-eyebrow">04 · À venir</div>
+              <h3>Livraison</h3>
+              <p>On livre, on forme, et on reste disponible pour le suivi et les ajustements.</p>
+              <span class="dur">2 semaines</span>
+            </div>
           </div>
-          <div class="process-step">
-            <div class="process-number">3</div>
-            <h4>Création</h4>
-            <p>On conçoit et développe votre projet en vous tenant informé à chaque étape.</p>
-          </div>
-          <div class="process-step">
-            <div class="process-number">4</div>
-            <h4>Livraison</h4>
-            <p>On livre, on forme, et on reste disponible pour le suivi et les ajustements.</p>
-          </div>
+        </div>
+
+        <div class="process-foot">
+          <span>Progression · <b>25%</b> · semaine 3 / 8</span>
+          <span>Prochaine revue → <b>jeudi 14h</b></span>
         </div>
       </div>
     </section>
@@ -514,7 +514,10 @@
               <span class="error-msg">Votre message doit contenir au moins 10 caractères.</span>
             </div>
 
-            <button type="submit" class="btn btn-primary form-submit">Envoyer le message</button>
+            <button type="submit" class="btn-liquid form-submit">
+              Envoyer le message
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </button>
           </form>
         </div>
       </div>
