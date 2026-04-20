@@ -8,31 +8,26 @@ export function initScrollAnimations() {
   // Hero load animation
   const heroTl = gsap.timeline({ delay: 0.3 });
 
-  const heroTitle = document.querySelector('.hero-title');
-  if (heroTitle) {
-    const words = heroTitle.textContent.split(' ');
-    heroTitle.innerHTML = words.map(word =>
-      `<span style="display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:0.1em;"><span class="hero-word" style="display:inline-block;transform:translateY(110%)">${word}</span></span>`
-    ).join(' ');
+  // Hero content entrance
+  heroTl.from('.hero-eyebrow', {
+    opacity: 0, y: 20, duration: 0.6, ease: 'power2.out'
+  });
 
-    heroTl.to('.hero-word', {
-      y: '0%',
-      duration: 0.9,
-      stagger: 0.12,
-      ease: 'power3.out'
-    });
-  }
+  heroTl.from('.hero-title', {
+    opacity: 0, y: 40, duration: 0.9, ease: 'power3.out'
+  }, '-=0.3');
 
   heroTl.from('.hero-subtitle', {
     opacity: 0, y: 25, duration: 0.7, ease: 'power2.out'
-  }, '-=0.4');
+  }, '-=0.5');
 
   heroTl.from('.hero-ctas', {
     opacity: 0, y: 20, duration: 0.6, ease: 'power2.out'
-  }, '-=0.3');
+  }, '-=0.4');
 
-  heroTl.from('.hero-glass-shape', {
-    opacity: 0, scale: 0.5, duration: 0.8, stagger: 0.1, ease: 'back.out(1.5)'
+  // Decorative elements fade in
+  heroTl.from('.hero-chip-card, .hero-avatar-card, .hero-disc-mint, .hero-mini-tag, .hero-ring', {
+    opacity: 0, scale: 0.7, duration: 0.8, stagger: 0.08, ease: 'back.out(1.3)'
   }, '-=0.6');
 
   // Helper: safe scroll animation that always resolves to final state

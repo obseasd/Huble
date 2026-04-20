@@ -17,14 +17,58 @@
 
 /* ---- MOBILE (< 768px) ---- */
 @media (max-width: 767px) {
-  .hero-title {
-    white-space: normal;
+  /* Hero compact mobile */
+  .hero-content {
+    max-width: 100%;
+    text-align: center;
+    padding: 0 1.25rem;
   }
 
-  .hero-glass-1 { width: 70px; height: 70px; }
-  .hero-glass-2 { width: 50px; height: 50px; }
-  .hero-glass-4 { width: 60px; height: 60px; }
-  .hero-glass-3, .hero-glass-5 { display: none; }
+  .hero-content .hero-eyebrow {
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-flex;
+  }
+
+  .hero-title {
+    font-size: clamp(2.2rem, 9vw, 3rem);
+    max-width: none;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: none;
+  }
+
+  .hero-ctas {
+    justify-content: center;
+  }
+
+  /* Hide most decorative elements on mobile */
+  .hero-ring,
+  .hero-chip-card,
+  .hero-avatar-card,
+  .hero-disc-mint,
+  .hero-mini-tag {
+    display: none;
+  }
+
+  .hero-grid {
+    background-size: 28px 28px;
+  }
+
+  .hero-blob-3 { display: none; }
+
+  .hero-marquee {
+    height: 30px;
+  }
+
+  .hero-marquee span {
+    font-size: 0.62rem;
+  }
 
   /* Disable min-height — let content dictate */
   .section {
@@ -398,11 +442,6 @@
     display: none !important;
   }
 
-  .hero-title {
-    white-space: nowrap;
-  }
-
-  .hero-glass-3, .hero-glass-5 { display: block; }
 
   .services-grid {
     grid-template-columns: repeat(3, 1fr);
