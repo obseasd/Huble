@@ -149,12 +149,22 @@
   min-height: 100vh;
   display: flex;
   align-items: center;
+  justify-content: center;
   overflow: hidden;
   isolation: isolate;
   background:
     radial-gradient(ellipse at 20% 30%, var(--mint-lighter) 0%, transparent 50%),
     radial-gradient(ellipse at 85% 70%, var(--mint-light) 0%, transparent 50%),
     linear-gradient(180deg, var(--white) 0%, #F4FBF6 100%);
+}
+
+/* Inner container — bounds decorative elements on wide screens */
+.hero-inner {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 4vw, 3rem);
 }
 
 /* Grid backdrop (with radial mask) */
@@ -218,7 +228,8 @@
 /* Dashed orbital ring */
 .hero-ring {
   position: absolute;
-  top: 8rem; right: 5rem;
+  top: 0;
+  right: 0;
   width: 180px; height: 180px;
   border: 1.5px dashed rgba(90,184,126,0.45);
   border-radius: 50%;
@@ -262,8 +273,8 @@
 
 /* Lighthouse stat chip */
 .hero-chip-card {
-  top: 5rem;
-  right: 4rem;
+  top: 0.5rem;
+  right: 0;
   width: 190px;
   padding: 0.9rem 1rem;
   animation: heroFloat1 9s ease-in-out infinite;
@@ -309,8 +320,8 @@
 
 /* Avatar card */
 .hero-avatar-card {
-  bottom: 6rem;
-  right: 5rem;
+  bottom: 0;
+  right: 0;
   width: 210px;
   padding: 0.75rem 0.9rem;
   animation: heroFloat2 11s ease-in-out infinite;
@@ -358,7 +369,7 @@
 .hero-disc-mint {
   position: absolute;
   top: 50%;
-  right: 22%;
+  right: 18%;
   transform: translateY(-50%);
   width: 120px; height: 120px;
   border-radius: 50%;
@@ -378,41 +389,6 @@
   color: var(--black);
 }
 
-/* Top row — eyebrow + mini tag aligned */
-.hero-top-row {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin-bottom: 1.1rem;
-  flex-wrap: wrap;
-}
-.hero-top-row .hero-eyebrow {
-  margin-bottom: 0;
-}
-
-/* Mini tag — inline, aligned with eyebrow */
-.hero-mini-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.35rem 0.8rem;
-  border-radius: var(--radius-full);
-  background: var(--black);
-  color: var(--mint);
-  font-family: var(--font-heading);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-.hero-mini-tag::before {
-  content: '';
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--mint-darker);
-  box-shadow: 0 0 0 3px rgba(90,184,126,0.3);
-}
-
 @keyframes heroFloat1 { 0%,100%{transform:translateY(0) rotate(0)} 50%{transform:translateY(-14px) rotate(4deg)} }
 @keyframes heroFloat2 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(10px)} }
 
@@ -420,8 +396,8 @@
 .hero-content {
   position: relative;
   z-index: 5;
-  max-width: 55%;
-  padding: 0 clamp(2rem, 6vw, 5rem);
+  max-width: 52%;
+  padding: 0;
   text-align: left;
 }
 
@@ -513,9 +489,10 @@
 .hero-marquee .marquee-track {
   display: flex;
   gap: 2.75rem;
-  animation: heroMarquee 28s linear infinite;
+  padding-right: 2.75rem;
+  animation: heroMarquee 40s linear infinite;
   white-space: nowrap;
-  padding-left: 2.75rem;
+  width: max-content;
 }
 @keyframes heroMarquee { to { transform: translateX(-50%); } }
 .hero-marquee span {
