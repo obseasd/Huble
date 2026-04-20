@@ -30,45 +30,66 @@
 .btn-liquid:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(90,184,126,0.5), inset 0 1px 0 rgba(255,255,255,0.7); }
 .btn-liquid:hover::before { opacity: 1; }
 
-/* FLIP — "Nous contacter" dans la nav
-   Inverts colors on hover: black bg + mint text → mint bg + black text.
-   Single label sliding up: the original span lifts out, a duplicate slides in below. */
+/* FLIP — SHIMMER03 pattern (mint base, dark on hover)
+   Mint gradient background + animated shimmer overlay + label-flip on hover */
 .btn-flip {
   position: relative;
   display: inline-block;
-  padding: 0.6rem 1.6rem;
+  padding: 0.7rem 1.8rem;
   border-radius: 9999px;
   font-family: var(--font-heading);
   font-weight: 600; font-size: 0.85rem;
-  color: var(--mint);
-  background: #1A1A1A;
-  border: 1.5px solid #1A1A1A;
+  color: #1A1A1A;
+  background: linear-gradient(90deg, #A2DBB6, #7BC99A, #A2DBB6);
+  background-size: 200% 100%;
+  border: 0;
   overflow: hidden;
+  isolation: isolate;
   cursor: pointer;
-  transition: background .35s var(--ease-smooth), color .35s var(--ease-smooth), border-color .35s var(--ease-smooth);
+  box-shadow: 0 4px 14px rgba(90,184,126,0.35);
+  transition: background .35s var(--ease-smooth), color .35s var(--ease-smooth), box-shadow .35s var(--ease-smooth);
 }
 
+/* Shimmer sweep */
+.btn-flip::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.55) 50%, transparent 70%);
+  transform: translateX(-100%);
+  animation: btnShimmer 2.6s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+@keyframes btnShimmer { to { transform: translateX(100%); } }
+
 .btn-flip span {
-  display: inline-block;
   position: relative;
+  z-index: 2;
+  display: inline-block;
   transition: transform .45s var(--ease-smooth);
 }
 
+/* Hover label — appears on the inverted dark bg */
 .btn-flip::after {
   content: attr(data-hover);
   position: absolute;
   inset: 0;
+  z-index: 2;
   display: grid;
   place-items: center;
-  transform: translateY(100%);
+  transform: translateY(120%);
   transition: transform .45s var(--ease-smooth);
-  color: #1A1A1A;
+  color: var(--mint);
 }
 
 .btn-flip:hover {
-  background: var(--mint);
-  color: #1A1A1A;
-  border-color: var(--mint);
+  background: linear-gradient(90deg, #1A1A1A, #2D2D2D, #1A1A1A);
+  color: var(--mint);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+.btn-flip:hover::before {
+  background: linear-gradient(120deg, transparent 30%, rgba(162,219,182,0.5) 50%, transparent 70%);
 }
 .btn-flip:hover span { transform: translateY(-120%); }
 .btn-flip:hover::after { transform: translateY(0); }

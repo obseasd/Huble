@@ -809,7 +809,9 @@
   font-weight: 600;
   font-size: 0.95rem;
 }
+/* Service CTA — SHIMMER03 inverted (mint base, dark on hover) */
 .svc-cta {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -817,17 +819,39 @@
   font-size: 0.8rem;
   font-weight: 600;
   text-decoration: none;
-  padding: 0.65rem 1.1rem;
+  padding: 0.7rem 1.2rem;
   border-radius: var(--radius-full);
-  background: var(--black);
-  color: var(--white);
-  transition: background .3s ease, transform .3s ease, box-shadow .3s ease;
+  background: linear-gradient(90deg, #A2DBB6, #7BC99A, #A2DBB6);
+  background-size: 200% 100%;
+  color: var(--black);
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow: 0 4px 14px rgba(90,184,126,0.35);
+  transition: background .3s ease, color .3s ease, transform .3s ease, box-shadow .3s ease;
   white-space: nowrap;
 }
+.svc-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.5) 50%, transparent 70%);
+  transform: translateX(-100%);
+  animation: btnShimmer 2.6s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+.svc-cta > * {
+  position: relative;
+  z-index: 2;
+}
 .svc-cta:hover {
-  background: var(--dark);
+  background: linear-gradient(90deg, #1A1A1A, #2D2D2D, #1A1A1A);
+  color: var(--mint);
   transform: translateY(-2px);
-  box-shadow: 0 10px 24px -8px rgba(0,0,0,0.3);
+  box-shadow: 0 10px 24px -8px rgba(0,0,0,0.35);
+}
+.svc-cta:hover::before {
+  background: linear-gradient(120deg, transparent 30%, rgba(162,219,182,0.55) 50%, transparent 70%);
 }
 .svc-cta .cta-arrow {
   transition: transform .3s ease;
@@ -1201,16 +1225,15 @@
   align-items: start;
 }
 
-/* ---- Aside (sticky left) ---- */
+/* ---- Aside (sticky left) — Garden mesh ---- */
 .faq-aside {
   position: sticky;
   top: 100px;
-  background: rgba(255,255,255,0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(90,184,126,0.15);
+  background: var(--grad-garden-mesh);
+  border: 1px solid rgba(255,255,255,0.6);
   border-radius: 20px;
   padding: 1.5rem;
+  box-shadow: 0 8px 28px -12px rgba(90,184,126,0.25);
 }
 
 .faq-aside-eyebrow {
@@ -1274,21 +1297,6 @@
   border-color: var(--black);
 }
 
-.faq-aside-stat {
-  margin-top: 1.1rem;
-  padding-top: 0.85rem;
-  border-top: 1px dashed rgba(90,184,126,0.3);
-  font-family: var(--font-heading);
-  font-size: 0.7rem;
-  color: var(--gray);
-  display: flex;
-  justify-content: space-between;
-}
-.faq-aside-stat b {
-  color: var(--black);
-  font-weight: 600;
-}
-
 /* ---- FAQ list ---- */
 .faq-list {
   display: flex;
@@ -1300,17 +1308,15 @@
 
 .faq-item {
   position: relative;
-  background: rgba(255,255,255,0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: var(--grad-atmosphere);
   border: 1px solid rgba(90,184,126,0.15);
   border-radius: 18px;
   overflow: hidden;
-  transition: box-shadow .35s ease, border-color .35s ease;
+  transition: box-shadow .35s ease, border-color .35s ease, background .35s ease;
 }
 .faq-item:hover { border-color: rgba(90,184,126,0.35); }
 .faq-item[open] {
-  background: rgba(255,255,255,0.88);
+  background: rgba(255,255,255,0.95);
   border-color: rgba(90,184,126,0.5);
   box-shadow: 0 20px 40px -18px rgba(90,184,126,0.35), 0 6px 14px -6px rgba(0,0,0,0.05);
 }
@@ -1495,7 +1501,7 @@
   border-color: var(--mint-darker);
 }
 
-/* Contact prompt at bottom */
+/* Contact prompt at bottom — Midnight mint */
 .faq-prompt {
   margin-top: 1.25rem;
   display: flex;
@@ -1503,9 +1509,10 @@
   justify-content: space-between;
   padding: 1rem 1.4rem;
   border-radius: 14px;
-  background: var(--black);
+  background: var(--grad-midnight-mint);
   color: var(--white);
   gap: 1rem;
+  box-shadow: 0 12px 30px -12px rgba(62,154,98,0.4);
 }
 .faq-prompt .prompt-t {
   font-family: var(--font-heading);

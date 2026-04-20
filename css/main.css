@@ -61,6 +61,16 @@
   --grad-wash-2: linear-gradient(180deg, var(--white) 0%, var(--mint-lighter) 50%, var(--white) 100%);
   --grad-footer: linear-gradient(135deg, var(--mint) 0%, var(--mint-dark) 100%);
 
+  /* Signature gradients (from skill) */
+  --grad-atmosphere: linear-gradient(160deg, #FFFFFF 0%, #E5F5EC 30%, #FFFFFF 55%, rgba(162,219,182,0.25) 80%, #FFFFFF 100%);
+  --grad-midnight-mint: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 50%, #3E9A62 100%);
+  --grad-garden-mesh:
+    radial-gradient(at 20% 20%, rgba(162,219,182,0.9) 0%, transparent 50%),
+    radial-gradient(at 80% 10%, rgba(200,236,218,0.9) 0%, transparent 50%),
+    radial-gradient(at 70% 80%, rgba(90,184,126,0.8) 0%, transparent 55%),
+    radial-gradient(at 15% 85%, rgba(229,245,236,1) 0%, transparent 50%),
+    #FFFFFF;
+
   /* Mint shadows */
   --shadow-mint-sm: 0 4px 12px var(--mint-glow);
   --shadow-mint-md: 0 8px 24px var(--mint-glow);
