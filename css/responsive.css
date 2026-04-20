@@ -185,15 +185,47 @@
     font-size: 0.7rem;
   }
 
-  .faq-question {
-    font-size: 0.88rem;
-    padding: 1rem 1.25rem;
+  /* FAQ — stack aside + list on mobile */
+  .faq-wrap {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
+  .faq-aside {
+    position: static;
+    padding: 1.1rem;
+  }
+  .faq-aside-title { font-size: 1.3rem; }
+  .faq-aside p { font-size: 0.8rem; }
+  .faq-tab { font-size: 0.68rem; padding: 0.3rem 0.6rem; }
 
-  .faq-answer p {
-    font-size: 0.82rem;
-    padding: 0 1.25rem 1rem;
+  .faq-item summary {
+    padding: 0.95rem 1rem 0.95rem 1.4rem;
+    grid-template-columns: auto 1fr auto auto;
+    gap: 0.5rem;
   }
+  .faq-num { font-size: 0.68rem; }
+  .faq-q { font-size: 0.88rem; }
+  .faq-tag { display: none; } /* hide tag on mobile to save space */
+  .faq-toggle {
+    width: 28px;
+    height: 28px;
+  }
+  .faq-toggle::before { width: 10px; }
+  .faq-toggle::after { height: 10px; }
+
+  .faq-body {
+    padding: 0 1.4rem 1rem;
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+  .faq-body p { font-size: 0.84rem; }
+
+  .faq-prompt {
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem;
+  }
+  .faq-prompt .prompt-t { font-size: 0.8rem; }
 
   .services-grid {
     grid-template-columns: 1fr;
@@ -278,37 +310,53 @@
   }
 
   .contact-form {
-    padding: 1.25rem;
+    padding: 1.1rem;
+  }
+  .form-hd-t { font-size: 1rem; }
+  .form-hd-step { font-size: 0.58rem; }
+
+  .form-row2 {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+    margin-bottom: 0.6rem;
   }
 
-  .form-row {
-    grid-template-columns: 1fr 1fr;
-    gap: 0.75rem;
+  .field {
+    padding: 1rem 0.85rem 0.5rem;
   }
-
-  .form-group {
-    margin-bottom: 0.75rem;
-  }
-
-  .form-group label {
-    font-size: 0.78rem;
-    margin-bottom: 0.25rem;
-  }
-
-  .form-group .optional {
-    font-size: 0.68rem;
-  }
-
-  .form-group input,
-  .form-group textarea,
-  .form-group select,
-  .custom-select-trigger {
-    padding: 0.6rem 0.75rem;
+  .field label {
     font-size: 0.82rem;
+    left: 2.5rem;
+    top: 1rem;
+  }
+  .field input,
+  .field textarea {
+    font-size: 0.85rem;
+    padding-left: 1.75rem;
+  }
+  .lead-icon {
+    width: 18px;
+    height: 18px;
+    left: 0.85rem;
   }
 
-  .form-group textarea {
-    min-height: 70px;
+  .chip-label {
+    font-size: 0.62rem;
+    margin: 0.75rem 0 0.5rem;
+  }
+  .chip-choice {
+    font-size: 0.72rem;
+    padding: 0.35rem 0.65rem;
+  }
+
+  .form-foot {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: stretch;
+  }
+  .form-foot .form-submit {
+    width: 100%;
+    justify-content: center;
   }
 
   .form-submit {
@@ -437,10 +485,10 @@
   }
 
   .contact-form {
-    padding: 2rem;
+    padding: 1.5rem;
   }
 
-  .form-row {
+  .form-row2 {
     grid-template-columns: 1fr 1fr;
   }
 

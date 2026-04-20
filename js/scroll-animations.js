@@ -161,41 +161,38 @@ export function initScrollAnimations() {
     });
   }
 
-  // FAQ accordion
+  // FAQ accordion + filter tabs
   initFaqAccordion();
 }
 
 function initFaqAccordion() {
   const faqItems = document.querySelectorAll('.faq-item');
 
+  // Close others when opening one (exclusive accordion)
   faqItems.forEach(item => {
-    const question = item.querySelector('.faq-question');
-    const answer = item.querySelector('.faq-answer');
-
-    question?.addEventListener('click', () => {
-      const isOpen = item.classList.contains('active');
-
-      faqItems.forEach(other => {
-        if (other !== item && other.classList.contains('active')) {
-          other.classList.remove('active');
-          gsap.to(other.querySelector('.faq-answer'), {
-            height: 0, duration: 0.3, ease: 'power2.inOut'
-          });
-          other.querySelector('.faq-question')?.setAttribute('aria-expanded', 'false');
-        }
-      });
-
-      if (isOpen) {
-        item.classList.remove('active');
-        gsap.to(answer, { height: 0, duration: 0.3, ease: 'power2.inOut' });
-        question.setAttribute('aria-expanded', 'false');
-      } else {
-        item.classList.add('active');
-        gsap.set(answer, { height: 'auto' });
-        const h = answer.offsetHeight;
-        gsap.fromTo(answer, { height: 0 }, { height: h, duration: 0.4, ease: 'power2.out' });
-        question.setAttribute('aria-expanded', 'true');
+    item.addEventListener('toggle', () => {
+      if (item.open) {
+        faqItems.forEach(other => {
+          if (other !== item && other.open) other.open = false;
+        });
       }
+    });
+  });
+
+  // Filter tabs
+  const tabs = document.querySelectorAll('.faq-tab');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const filter = tab.dataset.filter;
+
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      faqItems.forEach(item => {
+        const cat = item.dataset.cat;
+        const show = filter === 'all' || cat === filter;
+        item.classList.toggle('filtered-out', !show);
+      });
     });
   });
 }

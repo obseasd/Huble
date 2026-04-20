@@ -486,72 +486,157 @@
     <!-- ======== FAQ ======== -->
     <section id="faq" class="section faq">
       <div class="container">
-        <div class="section-header">
-          <span class="section-label">FAQ</span>
-          <h2 class="section-title">Questions fréquentes</h2>
-          <p class="section-subtitle centered">Tout ce que vous devez savoir avant de travailler avec nous.</p>
+        <div class="faq-wrap">
+
+          <aside class="faq-aside">
+            <div class="faq-aside-eyebrow">F.A.Q · 06 questions</div>
+            <h2 class="faq-aside-title">Toutes vos <em>réponses</em>, sans détour.</h2>
+            <p>Filtrez par sujet ou lisez en diagonale. Pas de réponse ? On en parle en 15 minutes.</p>
+            <div class="faq-tabs">
+              <button class="faq-tab active" data-filter="all">Tous</button>
+              <button class="faq-tab" data-filter="process">Process</button>
+              <button class="faq-tab" data-filter="tarifs">Tarifs</button>
+              <button class="faq-tab" data-filter="delais">Délais</button>
+              <button class="faq-tab" data-filter="tech">Tech</button>
+            </div>
+            <div class="faq-aside-stat">
+              <span>Mis à jour</span>
+              <b>20 / 04</b>
+            </div>
+          </aside>
+
+          <div class="faq-list">
+
+            <details class="faq-item" data-cat="process" open>
+              <summary>
+                <span class="faq-num">01</span>
+                <span class="faq-q">Quels types de sites créez-vous ?</span>
+                <span class="faq-tag">PROCESS</span>
+                <span class="faq-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="faq-body-wrap"><div class="faq-body-inner"><div class="faq-body">
+                <div>
+                  <p>Sites vitrines, landing pages à forte conversion, e-commerce et applications web connectées à votre CRM. <b>Chaque projet démarre par un atelier de cadrage</b> pour aligner l'objectif business avant la première maquette.</p>
+                  <p>Notre sweet-spot : refontes ambitieuses avec un vrai système de design, et landings techniques pour startups et SaaS.</p>
+                  <div class="faq-rel">
+                    <div class="faq-rel-title">VOIR AUSSI</div>
+                    <div class="faq-rel-chips">
+                      <a href="#process">→ Notre processus</a>
+                      <a href="realisations.html">→ Réalisations</a>
+                      <a href="#services">→ Nos services</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="faq-callout">
+                  <div class="k">DÉLAI MÉDIAN</div>
+                  <div class="v">6 semaines</div>
+                  <div class="hint">Site vitrine complet · 8–12 sem. pour un e-commerce sur-mesure</div>
+                </div>
+              </div></div></div>
+            </details>
+
+            <details class="faq-item" data-cat="tarifs">
+              <summary>
+                <span class="faq-num">02</span>
+                <span class="faq-q">Combien coûte un projet avec Huble ?</span>
+                <span class="faq-tag">TARIFS</span>
+                <span class="faq-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="faq-body-wrap"><div class="faq-body-inner"><div class="faq-body">
+                <div>
+                  <p>Landing page premium à partir de <b>1 800 €</b>, site vitrine complet à partir de <b>2 500 €</b>, identité réseaux sociaux à partir de <b>1 800 €</b>, automatisations sur devis. Chaque projet est unique — on propose un devis gratuit et personnalisé après un premier échange.</p>
+                  <p><b>Pas de surprise</b> : tout est transparent dès le départ. Paiement possible en 3 fois sans frais.</p>
+                </div>
+                <div class="faq-callout">
+                  <div class="k">À PARTIR DE</div>
+                  <div class="v">1 800 €</div>
+                  <div class="hint">Devis fixe · paiement en 3 fois</div>
+                </div>
+              </div></div></div>
+            </details>
+
+            <details class="faq-item" data-cat="delais">
+              <summary>
+                <span class="faq-num">03</span>
+                <span class="faq-q">Quels sont vos délais de réalisation ?</span>
+                <span class="faq-tag">DÉLAIS</span>
+                <span class="faq-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="faq-body-wrap"><div class="faq-body-inner"><div class="faq-body">
+                <div>
+                  <p>Entre <b>2 et 6 semaines</b> selon la complexité du projet. On tient informé à chaque étape et on respecte les deadlines fixées ensemble au brief.</p>
+                </div>
+                <div class="faq-callout">
+                  <div class="k">LIVRAISON</div>
+                  <div class="v">2 à 6 sem.</div>
+                  <div class="hint">Itératif · revues hebdomadaires</div>
+                </div>
+              </div></div></div>
+            </details>
+
+            <details class="faq-item" data-cat="process">
+              <summary>
+                <span class="faq-num">04</span>
+                <span class="faq-q">C'est quoi exactement vos automatisations ?</span>
+                <span class="faq-tag">PROCESS</span>
+                <span class="faq-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="faq-body-wrap"><div class="faq-body-inner"><div class="faq-body">
+                <div>
+                  <p>On analyse vos processus pour repérer les tâches répétitives, puis on met en place des outils (IA, workflows, intégrations) qui les font à votre place. Résultat : <b>vous gagnez du temps</b> et vous vous concentrez sur ce qui compte vraiment.</p>
+                </div>
+                <div class="faq-callout">
+                  <div class="k">TEMPS LIBÉRÉ</div>
+                  <div class="v">15 h / sem</div>
+                  <div class="hint">Moyenne sur nos clients</div>
+                </div>
+              </div></div></div>
+            </details>
+
+            <details class="faq-item" data-cat="process">
+              <summary>
+                <span class="faq-num">05</span>
+                <span class="faq-q">Comment se passe la collaboration ?</span>
+                <span class="faq-tag">PROCESS</span>
+                <span class="faq-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="faq-body-wrap"><div class="faq-body-inner"><div class="faq-body">
+                <div>
+                  <p>Tout commence par un appel découverte gratuit. Ensuite : <b>brief, proposition, création, retours, livraison</b>. Simple et transparent. On reste disponible à chaque étape.</p>
+                </div>
+                <div class="faq-callout">
+                  <div class="k">KICK-OFF</div>
+                  <div class="v">Appel 15 min</div>
+                  <div class="hint">Gratuit · sans engagement</div>
+                </div>
+              </div></div></div>
+            </details>
+
+            <details class="faq-item" data-cat="tech">
+              <summary>
+                <span class="faq-num">06</span>
+                <span class="faq-q">Sur quelles technologies travaillez-vous ?</span>
+                <span class="faq-tag">TECH</span>
+                <span class="faq-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="faq-body-wrap"><div class="faq-body-inner"><div class="faq-body">
+                <div>
+                  <p><b>Next.js + Tailwind</b> pour le sur-mesure, <b>Webflow</b> pour l'autonomie éditoriale, <b>Shopify</b> pour l'e-commerce. Côté automatisations : n8n, Zapier, Make, GPT-4. <b>Accessibilité AA garantie</b> sur chaque livraison.</p>
+                </div>
+                <div class="faq-callout">
+                  <div class="k">LIGHTHOUSE</div>
+                  <div class="v">98 / 100</div>
+                  <div class="hint">Moyenne sur 20 derniers projets</div>
+                </div>
+              </div></div></div>
+            </details>
+
+          </div>
         </div>
 
-        <div class="faq-list">
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              Quels types de sites web créez-vous ?
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer" role="region">
-              <p>Sites vitrines, landing pages, e-commerce, applications web… On s'adapte à votre besoin, qu'il soit simple ou complexe. Chaque site est pensé sur-mesure pour refléter votre identité et atteindre vos objectifs.</p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              Combien coûte un projet avec Huble ?
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer" role="region">
-              <p>Chaque projet est unique. On propose un devis gratuit et personnalisé après un premier échange pour bien comprendre vos objectifs. Pas de surprise, tout est transparent dès le départ.</p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              Quels sont vos délais de réalisation ?
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer" role="region">
-              <p>En général, entre 2 et 6 semaines selon la complexité du projet. On vous tient informé à chaque étape et on s'assure de respecter les deadlines fixées ensemble.</p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              C'est quoi exactement vos automatisations ?
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer" role="region">
-              <p>On analyse vos processus quotidiens pour repérer les tâches répétitives, puis on met en place des outils (IA, workflows, intégrations) qui les font à votre place. Résultat : vous gagnez du temps et vous vous concentrez sur ce qui compte vraiment.</p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              Comment se passe la collaboration ?
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer" role="region">
-              <p>Tout commence par un appel découverte gratuit. Ensuite : brief, proposition, création, retours, livraison. Simple et transparent. On reste disponible à chaque étape pour s'assurer que tout vous convient.</p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              Vous travaillez avec des entreprises de quelle taille ?
-              <span class="faq-icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-answer" role="region">
-              <p>TPE, PME, freelances, startups… On accompagne toute structure qui veut se digitaliser intelligemment. Que vous soyez seul ou une équipe de 50, on adapte nos solutions à votre réalité.</p>
-            </div>
-          </div>
+        <div class="faq-prompt">
+          <div class="prompt-t">Pas trouvé votre réponse ? <b>On échange 15 min</b> pour y voir clair.</div>
+          <a href="#contact" class="prompt-cta">Réserver un appel →</a>
         </div>
       </div>
     </section>
@@ -579,74 +664,94 @@
           </div>
 
           <form id="contact-form" class="contact-form" action="https://formspree.io/f/xpwdjqkl" method="POST">
-            <div class="form-row">
-              <div class="form-group">
+            <div class="form-hd">
+              <div class="form-hd-t">Parlons de votre <em>projet</em></div>
+              <div class="form-hd-step">ÉTAPE 01 / 02</div>
+            </div>
+
+            <div class="form-row2">
+              <div class="field" data-field>
+                <svg class="lead-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                 <label for="contact-name">Nom complet</label>
-                <input type="text" id="contact-name" name="name" required placeholder="Votre nom">
-                <span class="error-msg">Ce champ est requis.</span>
+                <input type="text" id="contact-name" name="name" required>
+                <div class="tail"></div>
               </div>
-              <div class="form-group">
-                <label for="contact-company">Entreprise <span class="optional">(facultatif)</span></label>
-                <input type="text" id="contact-company" name="company" placeholder="Nom de votre entreprise">
+
+              <div class="field" data-field>
+                <svg class="lead-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <label for="contact-email">Email professionnel</label>
+                <input type="email" id="contact-email" name="email" required>
+                <div class="tail"></div>
               </div>
             </div>
 
-            <div class="form-row">
-              <div class="form-group">
-                <label for="contact-email">Email</label>
-                <input type="email" id="contact-email" name="email" required placeholder="votre@email.com">
-                <span class="error-msg">Veuillez entrer une adresse email valide.</span>
+            <div class="form-row2">
+              <div class="field" data-field>
+                <svg class="lead-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <label for="contact-phone">Téléphone <span class="opt">(facultatif)</span></label>
+                <input type="tel" id="contact-phone" name="phone">
+                <div class="tail"></div>
               </div>
-              <div class="form-group">
-                <label for="contact-phone">Téléphone <span class="optional">(facultatif)</span></label>
-                <input type="tel" id="contact-phone" name="phone" placeholder="06 12 34 56 78">
+
+              <div class="field" data-field>
+                <svg class="lead-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 9h1M9 13h1M14 9h1M14 13h1M9 17h1M14 17h1"/></svg>
+                <label for="contact-company">Entreprise <span class="opt">(facultatif)</span></label>
+                <input type="text" id="contact-company" name="company">
+                <div class="tail"></div>
               </div>
             </div>
 
-            <div class="form-group">
-              <label>Service concerné</label>
-              <input type="hidden" id="contact-service" name="service" required>
-              <div class="custom-select" id="customSelect">
-                <div class="custom-select-trigger" tabindex="0" role="combobox" aria-expanded="false" aria-haspopup="listbox">
-                  <span class="custom-select-value">Choisissez un service</span>
-                  <svg class="custom-select-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </div>
-                <div class="custom-select-options" role="listbox">
-                  <div class="custom-select-option" data-value="site-web" role="option">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-                    Création / amélioration de site web
-                  </div>
-                  <div class="custom-select-option" data-value="reseaux-sociaux" role="option">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
-                    Identité réseaux sociaux
-                  </div>
-                  <div class="custom-select-option" data-value="automatisations-ia" role="option">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
-                    Automatisations & IA
-                  </div>
-                  <div class="custom-select-option" data-value="plusieurs" role="option">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect></svg>
-                    Plusieurs services
-                  </div>
-                  <div class="custom-select-option" data-value="autre" role="option">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-                    Autre / Je ne sais pas encore
-                  </div>
-                </div>
+            <div class="chip-label">
+              <span>TYPE DE PROJET</span>
+              <span class="muted">choix multiple</span>
+            </div>
+            <div class="chip-group">
+              <label class="chip-choice">
+                <input type="checkbox" name="services[]" value="site-web">
+                <span class="dot"></span><span>Site web</span>
+              </label>
+              <label class="chip-choice">
+                <input type="checkbox" name="services[]" value="reseaux-sociaux">
+                <span class="dot"></span><span>Réseaux sociaux</span>
+              </label>
+              <label class="chip-choice">
+                <input type="checkbox" name="services[]" value="automatisations-ia">
+                <span class="dot"></span><span>Automatisations & IA</span>
+              </label>
+              <label class="chip-choice">
+                <input type="checkbox" name="services[]" value="branding">
+                <span class="dot"></span><span>Branding</span>
+              </label>
+              <label class="chip-choice">
+                <input type="checkbox" name="services[]" value="refonte">
+                <span class="dot"></span><span>Refonte</span>
+              </label>
+              <label class="chip-choice">
+                <input type="checkbox" name="services[]" value="autre">
+                <span class="dot"></span><span>Autre</span>
+              </label>
+            </div>
+
+            <div class="field textarea-field" data-field>
+              <svg class="lead-icon textarea-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <label for="contact-message">Décrivez votre projet</label>
+              <textarea id="contact-message" name="message" required></textarea>
+            </div>
+            <div class="hint" id="message-hint">
+              <span class="hint-text">Minimum 10 caractères pour un premier brief</span>
+              <span class="hint-count"><span id="msg-count">0</span> / 400</span>
+            </div>
+
+            <div class="form-foot">
+              <div class="form-note">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                Vos données restent chiffrées & confidentielles
               </div>
-              <span class="error-msg">Veuillez sélectionner un service.</span>
+              <button type="submit" class="btn-liquid form-submit">
+                Envoyer le message
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              </button>
             </div>
-
-            <div class="form-group">
-              <label for="contact-message">Message</label>
-              <textarea id="contact-message" name="message" required placeholder="Décrivez votre projet en quelques mots..."></textarea>
-              <span class="error-msg">Votre message doit contenir au moins 10 caractères.</span>
-            </div>
-
-            <button type="submit" class="btn-liquid form-submit">
-              Envoyer le message
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-            </button>
           </form>
         </div>
       </div>

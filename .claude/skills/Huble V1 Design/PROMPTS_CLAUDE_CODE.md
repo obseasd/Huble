@@ -52,7 +52,25 @@ Ne touche à rien d'autre. Confirme chaque modification.
 
 ---
 
-## 4. Refais la section process avec la timeline animée
+## 4. Refais la section Services avec la card signature (spotlight + aurora)
+
+```
+Lis .claude/skills/huble-design/preview/card-service.html — c'est la version cible des cards de la section "Nos services".
+
+Dans index.html, section .services :
+- Garde les 3 services actuels (Sites web, Réseaux sociaux, Automatisations & IA) avec leurs textes, icônes et listes de features existantes
+- Remplace la structure .service-card par la structure du preview (wrapper .svc avec gradient border animé, .svc-inner, .spotlight cursor-tracked, .aurora avec 3 blobs, .icon-frame avec glassmorphism inner, badges Disponible + numéro, eyebrow, titre avec mot accent italique/gradient, chips deliverables, stats row avec dashed borders, cta-row prix + bouton ink)
+- Extrais les styles depuis le <style> du preview vers css/sections.css (remplace le bloc /* ---- SERVICES ---- */)
+- Ajoute le mousemove handler JS inline OU déporte-le dans js/main.js pour mettre à jour --x et --y sur chaque .svc
+- Pour chaque card, adapte : le mot accent du titre, les chips (technos/livrables pertinents au service), les 3 stats, le prix "À partir de"
+- Garde l'eyebrow de section "CE QU'ON FAIT"
+
+Ne touche pas aux autres sections.
+```
+
+---
+
+## 5. Refais la section process avec la timeline animée
 
 ```
 Lis .claude/skills/huble-design/preview/card-process.html — c'est la version cible de la section "Notre approche".
@@ -68,7 +86,7 @@ Ne touche pas aux autres sections.
 
 ---
 
-## 5. Refais le hero avec la composition signature
+## 6. Refais le hero avec la composition signature
 
 ```
 Lis .claude/skills/huble-design/preview/hero-bg.html — c'est la version cible du hero.
@@ -84,7 +102,7 @@ Le texte principal reste aligné à gauche comme dans le preview, pas centré.
 
 ---
 
-## 6. Supprime la section stats inutile
+## 7. Supprime la section stats inutile
 
 ```
 Claude Code a ajouté une section "stats" avec 4 cards (150%, 40+, 15h/sem, 98%) qui n'était pas demandée.

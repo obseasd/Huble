@@ -1,69 +1,46 @@
 /* =============================================
    HUBLE — Contact Form
-   Custom select, validation, Formspree
+   Floating labels, chips, validation, Formspree
    ============================================= */
 
 export function initContactForm() {
-  initCustomSelect();
+  initFloatingFields();
   initFormValidation();
 }
 
-function initCustomSelect() {
-  const select = document.getElementById('customSelect');
-  const hidden = document.getElementById('contact-service');
-  if (!select || !hidden) return;
+function initFloatingFields() {
+  const fields = document.querySelectorAll('.field[data-field]');
+  fields.forEach(field => {
+    const input = field.querySelector('input, textarea');
+    if (!input) return;
 
-  const trigger = select.querySelector('.custom-select-trigger');
-  const valueSpan = select.querySelector('.custom-select-value');
-  const options = select.querySelectorAll('.custom-select-option');
+    const updateState = () => {
+      const hasValue = input.value.trim().length > 0;
+      field.classList.toggle('has-value', hasValue);
+    };
 
-  valueSpan.classList.add('placeholder');
-
-  // Toggle
-  trigger.addEventListener('click', (e) => {
-    e.stopPropagation();
-    select.classList.toggle('open');
-    trigger.setAttribute('aria-expanded', select.classList.contains('open'));
-  });
-
-  // Keyboard
-  trigger.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      select.classList.toggle('open');
-    } else if (e.key === 'Escape') {
-      select.classList.remove('open');
-    }
-  });
-
-  // Select option
-  options.forEach(option => {
-    option.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const value = option.dataset.value;
-      const text = option.textContent.trim();
-
-      hidden.value = value;
-      valueSpan.textContent = text;
-      valueSpan.classList.remove('placeholder');
-
-      options.forEach(o => o.classList.remove('selected'));
-      option.classList.add('selected');
-
-      select.classList.remove('open', 'error');
-      trigger.setAttribute('aria-expanded', 'false');
-
-      // Clear error if present
-      const errorMsg = select.closest('.form-group')?.querySelector('.error-msg');
-      if (errorMsg) errorMsg.style.display = 'none';
+    input.addEventListener('focus', () => field.classList.add('focus'));
+    input.addEventListener('blur', () => {
+      field.classList.remove('focus');
+      updateState();
     });
+    input.addEventListener('input', updateState);
+
+    updateState();
   });
 
-  // Close on outside click
-  document.addEventListener('click', () => {
-    select.classList.remove('open');
-    trigger.setAttribute('aria-expanded', 'false');
-  });
+  // Message char counter
+  const message = document.getElementById('contact-message');
+  const count = document.getElementById('msg-count');
+  const hint = document.getElementById('message-hint');
+  if (message && count && hint) {
+    message.addEventListener('input', () => {
+      const len = message.value.length;
+      count.textContent = len;
+      hint.classList.toggle('ok', len >= 10 && len <= 400);
+      hint.classList.toggle('err', len > 400);
+    });
+  }
 }
 
 function initFormValidation() {
@@ -73,19 +50,18 @@ function initFormValidation() {
   const fields = {
     name: form.querySelector('#contact-name'),
     email: form.querySelector('#contact-email'),
-    service: form.querySelector('#contact-service'),
     message: form.querySelector('#contact-message')
   };
 
   const submitBtn = form.querySelector('button[type="submit"]');
 
-  // Blur validation for text inputs
   ['name', 'email', 'message'].forEach(key => {
-    const field = fields[key];
-    if (!field) return;
-    field.addEventListener('blur', () => validateField(field));
-    field.addEventListener('input', () => {
-      if (field.classList.contains('error')) validateField(field);
+    const input = fields[key];
+    if (!input) return;
+    const field = input.closest('.field');
+    input.addEventListener('blur', () => validateField(input, field));
+    input.addEventListener('input', () => {
+      if (field?.classList.contains('error')) validateField(input, field);
     });
   });
 
@@ -93,16 +69,16 @@ function initFormValidation() {
     e.preventDefault();
 
     let isValid = true;
-    Object.values(fields).forEach(field => {
-      if (!validateField(field)) isValid = false;
+    Object.values(fields).forEach(input => {
+      const field = input?.closest('.field');
+      if (!validateField(input, field)) isValid = false;
     });
 
     if (!isValid) return;
 
     const originalClass = submitBtn.className;
-    const originalText = submitBtn.textContent;
+    const originalHTML = submitBtn.innerHTML;
 
-    // Loading state
     submitBtn.className = 'btn-loading';
     submitBtn.textContent = 'Envoi en cours…';
     submitBtn.disabled = true;
@@ -116,77 +92,42 @@ function initFormValidation() {
       });
 
       if (response.ok) {
-        // Success state
         submitBtn.className = 'btn-success';
         submitBtn.textContent = 'Message envoyé';
       } else {
         throw new Error('fail');
       }
     } catch {
-      // Error — reset to initial state
       submitBtn.className = originalClass;
-      submitBtn.textContent = originalText;
+      submitBtn.innerHTML = originalHTML;
       submitBtn.disabled = false;
-
       let errorEl = form.querySelector('.form-error');
       if (!errorEl) {
         errorEl = document.createElement('p');
         errorEl.className = 'form-error';
-        errorEl.style.cssText = 'color: #E74C3C; font-size: 0.9rem; text-align: center; margin-top: 1rem;';
-        submitBtn.parentNode.appendChild(errorEl);
+        errorEl.style.cssText = 'color: #E74C3C; font-size: 0.82rem; text-align: right; margin-top: 0.5rem;';
+        form.querySelector('.form-foot')?.appendChild(errorEl);
       }
       errorEl.textContent = 'Une erreur est survenue. Réessayez ou contactez-nous par email.';
     }
   });
 }
 
-function validateField(field) {
-  if (!field) return true;
+function validateField(input, field) {
+  if (!input || !field) return true;
 
-  const value = field.value.trim();
+  const value = input.value.trim();
   let isValid = true;
-  let message = '';
 
-  // Hidden select field
-  if (field.id === 'contact-service') {
-    if (!value) {
-      isValid = false;
-      message = 'Veuillez sélectionner un service.';
-      document.getElementById('customSelect')?.classList.add('error');
-    } else {
-      document.getElementById('customSelect')?.classList.remove('error');
-    }
-    const errorMsg = field.closest('.form-group')?.querySelector('.error-msg');
-    if (errorMsg) {
-      errorMsg.textContent = message;
-      errorMsg.style.display = isValid ? 'none' : 'block';
-    }
-    return isValid;
-  }
-
-  if (field.required && !value) {
+  if (input.required && !value) {
     isValid = false;
-    message = 'Ce champ est requis.';
-  } else if (field.type === 'email' && value) {
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-      isValid = false;
-      message = 'Veuillez entrer une adresse email valide.';
-    }
-  } else if (field.id === 'contact-message' && value && value.length < 10) {
+  } else if (input.type === 'email' && value) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) isValid = false;
+  } else if (input.id === 'contact-message' && value && value.length < 10) {
     isValid = false;
-    message = 'Votre message doit contenir au moins 10 caractères.';
   }
 
-  const errorMsg = field.parentElement?.querySelector('.error-msg');
-  if (isValid) {
-    field.classList.remove('error');
-    if (errorMsg) errorMsg.style.display = 'none';
-  } else {
-    field.classList.add('error');
-    if (errorMsg) {
-      errorMsg.textContent = message;
-      errorMsg.style.display = 'block';
-    }
-  }
+  field.classList.toggle('error', !isValid);
+  field.classList.toggle('valid', isValid && value.length > 0);
   return isValid;
 }
