@@ -354,15 +354,16 @@
   font-weight: 600;
 }
 
-/* Floating mint disc with sparkle */
+/* Floating mint disc with sparkle — center-right, larger */
 .hero-disc-mint {
   position: absolute;
-  top: 42%;
-  left: 4rem;
-  width: 60px; height: 60px;
+  top: 50%;
+  right: 22%;
+  transform: translateY(-50%);
+  width: 120px; height: 120px;
   border-radius: 50%;
   background: radial-gradient(circle at 30% 30%, #fff 0%, var(--mint) 45%, var(--mint-darker) 100%);
-  box-shadow: 0 12px 24px -6px rgba(90,184,126,0.5), inset 0 2px 4px rgba(255,255,255,0.7);
+  box-shadow: 0 20px 40px -8px rgba(90,184,126,0.55), inset 0 2px 6px rgba(255,255,255,0.7);
   animation: heroFloat1 7s ease-in-out infinite;
   z-index: 2;
   pointer-events: none;
@@ -373,30 +374,36 @@
   inset: 0;
   display: grid;
   place-items: center;
-  font-size: 1.2rem;
+  font-size: 2.4rem;
   color: var(--black);
 }
 
-/* Mini tag (bottom-left) */
+/* Top row — eyebrow + mini tag aligned */
+.hero-top-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.1rem;
+  flex-wrap: wrap;
+}
+.hero-top-row .hero-eyebrow {
+  margin-bottom: 0;
+}
+
+/* Mini tag — inline, aligned with eyebrow */
 .hero-mini-tag {
-  position: absolute;
-  bottom: 6rem;
-  left: 3rem;
-  padding: 0.4rem 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.8rem;
   border-radius: var(--radius-full);
   background: var(--black);
   color: var(--mint);
   font-family: var(--font-heading);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  z-index: 3;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  animation: heroFloat2 10s ease-in-out infinite;
-  pointer-events: none;
 }
 .hero-mini-tag::before {
   content: '';
@@ -413,7 +420,7 @@
 .hero-content {
   position: relative;
   z-index: 5;
-  max-width: 60%;
+  max-width: 55%;
   padding: 0 clamp(2rem, 6vw, 5rem);
   text-align: left;
 }
@@ -562,6 +569,12 @@
     radial-gradient(circle at 85% 85%, var(--mint) 0%, transparent 45%),
     #F4FBF6;
   position: relative;
+  padding-top: clamp(3rem, 5vw, 4rem);
+  padding-bottom: clamp(3rem, 5vw, 4rem);
+}
+
+.services .section-header {
+  margin-bottom: 2rem;
 }
 
 .services-grid {
